@@ -18,11 +18,11 @@ a {
 .container {
   /* 미디어쿼리 써야함 */
   width: 1200px;
+  margin: 0 auto;
 }
 
 .header__topbar {
   display: flex;
-  justify-content: center;
   background-color: #f5f5f5;
 }
 
