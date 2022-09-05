@@ -29,14 +29,14 @@ function Signup() {
       <div className="signup__container">
         <div className="signup__info">비밀번호확인<span className="signup__required__itemsymbol">*</span></div>
         <div className="signup__inputbox__space">
-          <input type="password" placeholder="비밀번호를 한 번 더 입력해주세요"  />
+          <input type="password" placeholder="비밀번호를 한 번 더 입력해주세요" />
         </div>
         <div className="signup__button__space"></div>
       </div>
       <div className="signup__container">
         <div className="signup__info">닉네임<span className="signup__required__itemsymbol">*</span></div>
         <div className="signup__inputbox__space">
-          <input placeholder="닉네임을 입력해주세요"  />
+          <input placeholder="닉네임을 입력해주세요" />
         </div>
         <div className="signup__button__space">
           <button type="button">중복확인</button>
@@ -45,7 +45,7 @@ function Signup() {
       <div className="signup__container">
         <div className="signup__info">핸드폰<span className="signup__required__itemsymbol">*</span></div>
         <div className="signup__inputbox__space">
-          <input placeholder="숫자만 입력해주세요"  />
+          <input placeholder="숫자만 입력해주세요" />
         </div>
         <div className="signup__button__space">
           <button type="button">인증번호 받기</button>
@@ -54,7 +54,7 @@ function Signup() {
       <div className="signup__container">
         <div className="signup__info">이메일</div>
         <div className="signup__inputbox__space">
-          <input placeholder="ex)sourcing@sourcing.com"  />
+          <input placeholder="ex)sourcing@sourcing.com" />
         </div>
         <div className="signup__button__space">
           <button type="button">인증번호 받기</button>
