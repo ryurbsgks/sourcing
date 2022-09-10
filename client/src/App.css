@@ -187,7 +187,7 @@ ul {
   text-align: center;
 }
 
-.signup__subtitle {
+.signup__comment {
   display: flex;
   justify-content: flex-end;
   font-size: 12px;
@@ -195,7 +195,7 @@ ul {
   border-bottom: black 2px solid;
 }
 
-.signup__required__itemsymbol {
+.signup__comment__mark {
   color: red;
 }
 
@@ -204,25 +204,25 @@ ul {
   padding: 5% 5% 0;
 }
 
-.signup__info {
+.signup__container__info {
   flex: 2.5;
   margin: auto 0;
   font-size: 16px;
 }
 
-.signup__inputbox__space {
+.signup__container__inp {
   flex: 5.5;
   height: 45px;
 }
 
-.signup__inputbox__space > input {
+.signup__container__inp input {
   width: 100%;
   height: 100%;
   font-size: 18px;
   padding: 0 3%;
 }
 
-.signup__inputbox__space > button {
+.signup__container__inp button {
   width: 100%;
   height: 100%;
   color: green;
@@ -232,16 +232,16 @@ ul {
   cursor: pointer;
 }
 
-.signup__inputbox__space svg {
+.signup__container__inp svg {
   margin-right: 2%;
 }
 
-.signup__button__space {
+.signup__container__btn {
   margin-left: 10px;
   flex: 2;
 }
 
-.signup__button__space > button{
+.signup__container__btn button{
   width: 100%;
   height: 100%;
   color: green;
@@ -251,12 +251,12 @@ ul {
   cursor: pointer;
 }
 
-.signup__button {
+.signup__btn {
   text-align: center;
   margin: 5% 0 0;
 }
 
-.signup__button > button {
+.signup__btn button {
   width: 30%;
   height: 50px;
   color: green;
