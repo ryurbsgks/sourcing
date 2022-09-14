@@ -78,12 +78,12 @@ ul {
 /* header searchbar css 설정 start */
 
 .header__searchbar {
-  height: 97px;
+  height: 100px;
 }
 
 .header__searchbar__logo {
   flex: 1;
-  line-height: 97px;
+  line-height: 100px;
 }
 
 .header__searchbar__logo img {
@@ -141,7 +141,8 @@ ul {
 }
 
 .header__searchbar__searchbox__droplist {
-  display: block;
+  display: none;
+  background-color: white;
   position: absolute;
   top: 46px;
   left: -2px;
@@ -267,3 +268,34 @@ ul {
 }
 
 /* signup css 설정 finish */
+
+/* navbar css 설정 start */
+
+.header__navbar {
+  box-shadow: 0px 3px 4px 0px rgba(0, 0, 0, 0.07);
+}
+
+.header__navbar__menu {
+  margin: 0 10%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 16px;
+  height: 50px;
+}
+
+.header__navbar__menu li {
+  width: 100%;
+  text-align: center;
+}
+
+.header__navbar__menu a {
+  display: block;
+}
+
+.header__navbar__menu a:hover {
+  color: #7fad39;
+  text-decoration: underline;
+}
+
+/* navbar css 설정 finish */
