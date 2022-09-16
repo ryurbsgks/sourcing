@@ -299,3 +299,53 @@ ul {
 }
 
 /* navbar css 설정 finish */
+
+/* banner css 설정 start */
+
+.banner {
+  overflow: hidden;
+  position: relative;
+}
+
+.banner button {
+  height: 50px;
+  width: 50px;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.15);
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.banner__container {
+  width: 300vw;
+  display: flex;
+  transition: transform 0.5s;
+}
+
+.banner__container__inner {
+  width: 100%;
+}
+
+.banner__container__inner img {
+  width: 100%;
+  height: 100%;
+}
+
+.banner__leftbtn {
+  position: absolute;
+  top: 50%;
+  left: 10%;
+  transform: translate(0, -50%);
+  z-index: 1;
+}
+
+.banner__rightbtn {
+  position: absolute;
+  top: 50%;
+  right: 10%;
+  transform: translate(0, -50%);
+  z-index: 1;
+}
+
+/* banner css 설정 finish */
