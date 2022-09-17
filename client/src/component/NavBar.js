@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 function NavBar() {
   return (
-    <div className="header__navbar">
+    <nav className="header__navbar">
       <div className="container">
         <ul className="header__navbar__menu row">
           <li><Link to="/">야채</Link></li>
@@ -13,7 +13,7 @@ function NavBar() {
           <li><Link to="/">예약</Link></li>
         </ul>
       </div>
-    </div>
+    </nav>
   );
 }
 
