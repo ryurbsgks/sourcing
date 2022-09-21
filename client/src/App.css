@@ -349,3 +349,27 @@ ul {
 }
 
 /* banner css 설정 finish */
+
+/* ---------- ProductRecommend start ---------- */
+
+.product-recommend {
+  margin-top: 40px;
+}
+
+.product-recommend__subtitle {
+  color: #7fad39;
+  font-size: 20px;
+}
+
+.product-recommend__title {
+  font-size: 30px;
+  line-height: 100%;
+  margin-bottom: 10px;
+}
+
+.product-recommend__title > span{
+  color: red;
+  font-size: 30px;
+}
+
+/* ---------- ProductRecommend finish ---------- */
