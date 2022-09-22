@@ -28,7 +28,6 @@ ul {
 /* container(width) css 설정 start */
 
 .container {
-  /* 미디어쿼리 써야함 */
   width: 1200px;
   margin: 0 auto;
 }
@@ -373,3 +372,48 @@ ul {
 }
 
 /* ---------- ProductRecommend finish ---------- */
+
+/* ---------- ProductGroup start ---------- */
+
+.product-group {
+  margin-bottom: 30px;
+}
+
+.product-group__title {
+  text-align: center;
+  letter-spacing: 10px;
+  font-size: 30px;
+  margin-top: 10px;
+}
+
+.product-group__title--color-green {
+  color: #7fad39;
+  border-top: #7fad39 2px solid;
+}
+
+.product-group__title--color-red {
+  color: red;
+  border-top: red 2px solid;
+}
+
+.product-group__title--color-blue {
+  color: blue;
+  border-top: blue 2px solid;
+}
+
+.product-group__product-more {
+  text-align: end;
+  font-size: 14px;
+}
+
+.product-group__product-more > a {
+ color: gray;
+}
+
+.product-group__product-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+/* ---------- ProductGroup finish ---------- */
