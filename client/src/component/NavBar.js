@@ -3,9 +3,9 @@ import { Link } from "react-router-dom";
 
 function NavBar() {
   return (
-    <nav className="header__navbar">
+    <nav className="navbar">
       <div className="container">
-        <ul className="header__navbar__menu row">
+        <ul className="navbar__menu">
           <li><Link to="/">야채</Link></li>
           <li><Link to="/">청과</Link></li>
           <li><Link to="/">수산</Link></li>
