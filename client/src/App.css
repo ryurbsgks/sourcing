@@ -1,9 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Cairo&display=swap');
 
-/* 전역 css 설정 start */
+/* --------------------
+  default css
+-------------------- */
 
 * {
   box-sizing: border-box;
+  font-size: 16px;
 }
 
 body {
@@ -23,298 +26,352 @@ ul {
   list-style: none;
 }
 
-/* 전역 css 설정 finish */
-
-/* container(width) css 설정 start */
-
 .container {
   width: 1200px;
   margin: 0 auto;
 }
 
-.container__sub {
-  width: 650px;
-  margin: 0 auto;
+/* ---------- fontawesome icon size ---------- */
+
+.icon__size14 {
+  font-size: 14px;
 }
-
-/* container(width) css 설정 finish */
-
-/* flex 설정으로 행(row) 설정 start */
-
-.row {
-  display: flex;
-}
-
-/* flex 설정으로 행(row) 설정 finish */
-
-/* fontawesome icon size 설정 start */
 
 .icon__size28 {
   font-size: 28px;
 }
 
-/* fontawesome icon size 설정 finish */
+/* --------------------
+  header css
+-------------------- */
 
-/* header topbar css 설정 start */
+/* ---------- TopBar ---------- */
 
-.header__topbar {
-  display: flex;
+.topbar {
   background-color: #f5f5f5;
 }
 
-.header__topbar__menu {
+.topbar__menu {
   display: flex;
   justify-content: flex-end;
-  font-size: 12px;
 }
 
-.header__topbar__menu li {
+.topbar__menu > li {
   padding: 10px 12px;
 }
 
-/* header topbar css 설정 finish */
-
-/* header searchbar css 설정 start */
-
-.header__searchbar {
-  height: 100px;
+.topbar__menu a {
+  font-size: 12px;
 }
 
-.header__searchbar__logo {
-  flex: 1;
+/* ---------- SearchBar ---------- */
+
+.searchbar {
+  width: 1200px;
+  height: 100px;
+  display: flex;
+  justify-content: space-between;
+  margin: 0 auto;
+}
+
+.searchbar__logo {
   line-height: 100px;
 }
 
-.header__searchbar__logo img {
+.searchbar__logo img {
   vertical-align: middle;
-  padding: 0 10px;
+  padding-left: 10px;
 }
 
-.header__searchbar__searchbox {
-  flex: auto;
-  margin: auto 0;
-  display: flex;
-  font-size: 16px;
-  border: 2px solid #7fad39;
+.searchbar__searchbox {
+  width: 650px;
   height: 50px;
+  display: flex;
+  border: #7fad39 2px solid ;
   position: relative;
+  margin: auto 0;
 }
 
-.header__searchbar__searchbox input {
+.searchbar__searchbox > input {
+  width: 55%;
   border: none;
   outline: none;
-  font-size: 16px;
-  flex: auto;
   padding: 0 20px;
 }
 
-.header__searchbar__searchbox button {
-  background-color: #7fad39;
+.searchbar__searchbox > button {
+  width: 23%;
   color: white;
+  background-color: #7fad39;
   border: none;
+  font-size: 14px;
   cursor: pointer;
-  flex: 1;
 }
 
-.header__searchbar__searchbox button svg {
+.searchbar__searchbox svg {
   padding-right: 10px;
 }
 
-.header__searchbar__searchbox__dropmenu {
-  border-right: 2px solid #ebebeb;
-  line-height: 46px;
-  flex: 1;
+.searchbar__searchbox__menu {
+  width: 22%;
   display: flex;
+  border-right: 2px solid #ebebeb;
+  cursor: pointer;
+  margin: auto 0;
+  padding-left: 15px;
 }
 
-.header__searchbar__searchbox__dropmenu a {
-  flex-grow: 1;
-  padding-left: 20px;
-  position: relative;
+.searchbar__searchbox__menu__text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-right: 5px;
 }
 
-.header__searchbar__searchbox__dropmenu a svg {
-  position: absolute;
-  right: 20px;
-  top: 15px;
+.searchbar__searchbox__menu__icon {
+  margin-left: auto;
+  margin-right: 5px;
 }
 
-.header__searchbar__searchbox__droplist {
+.searchbar__searchbox__menu-list {
   display: none;
+  width: 144.117px;
   background-color: white;
+  border: #ebebeb 2px solid ;
+  box-shadow: 0 4px 5px rgba(0, 0, 0, 0.3);
   position: absolute;
   top: 46px;
   left: -2px;
   z-index: 1;
-  border: 2px solid #ebebeb;
-  width: 139.817px;
-  box-shadow: 0 4px 5px rgba(0, 0, 0, 0.3);
 }
 
-.header__searchbar__searchbox__droplist ul {
-  padding: 8px 0;
+.searchbar__searchbox__menu-list li {
+  cursor: pointer;
+  padding-left: 15px;
 }
 
-.header__searchbar__searchbox__droplist a {
-  display: flex;
-  width: 100%;
-  padding-left: 20px;
+.searchbar__searchbox__menu-list li:hover {
+  color: #7fad39;
 }
 
-.header__searchbar__searchbox__droplist a:hover {
-  color: blue;
-  text-decoration: underline;
-}
-
-.header__searchbar__menu {
-  flex: 1;
+.searchbar__menu {
   display: flex;
   justify-content: flex-end;
   margin: auto 0;
 }
 
-.header__searchbar__menu li {
+.searchbar__menu > li {
   padding: 10px 12px;
 }
 
-/* header searchbar css 설정 finish */
+.searchbar__menu svg {
+  vertical-align: middle;
+}
 
-/* signup css 설정 start */
+/* ---------- NavBar ---------- */
 
-.signup__title {
-  font-size: 30px;
-  margin: 10% 0 5%;
+.navbar {
+  box-shadow: 0px 3px 4px 0px rgba(0, 0, 0, 0.07);
+}
+
+.navbar__menu {
+  height: 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 10%;
+}
+
+.navbar__menu li {
+  width: 100%;
   text-align: center;
 }
 
-.signup__comment {
-  display: flex;
-  justify-content: flex-end;
-  font-size: 12px;
-  color: rgb(102, 102, 102);
-  border-bottom: black 2px solid;
+.navbar__menu a {
+  display: block;
 }
 
-.signup__comment__mark {
+.navbar__menu a:hover {
+  color: #7fad39;
+}
+
+/* --------------------
+  login css
+-------------------- */
+
+.login {
+  width: 350px;
+  margin: 100px auto;
+}
+
+.login > input {
+  width: 100%;
+  height: 45px;
+  font-size: 18px;
+  margin-top: 20px;
+  padding: 0 10px;
+}
+
+.login > button {
+  width: 100%;
+  height: 50px;
+  color: green;
+  background-color: white;
+  border: green 1px solid;
+  border-radius: 3px;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+.login__title {
+  text-align: center;
+  font-size: 30px;
+  padding-bottom: 10px;
+}
+
+.login__container {
+  display: flex;
+  margin-top: 10px;
+}
+
+.login__container__auto-login {
+  margin-right: auto;
+}
+
+.login__container__auto-login > label  {
+  display: block;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.login__container__auto-login input {
+  cursor: pointer;
+}
+
+.login__container__find-link {
+  display: flex;
+}
+
+.login__container__find-link > a {
+  font-size: 14px;
+}
+
+.login__container__find-link > hr {
+  height: 14px;
+  margin: auto 6px;
+}
+
+.login__signup {
+  text-align: center;
+  margin-top: 15px;
+}
+
+.login__signup svg {
+  color: gray;
+}
+
+/* --------------------
+  signup css
+-------------------- */
+
+.signup {
+  width: 650px;
+  margin: 100px auto;
+}
+
+.signup span {
   color: red;
+}
+
+.signup button {
+  width: 100%;
+  height: 100%;
+  color: green;
+  background-color: white;
+  border: green 1px solid;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.signup__title {
+  text-align: center;
+  font-size: 30px;
+}
+
+.signup__require {
+  text-align: end;
+  color: gray;
+  border-bottom: black 2px solid;
+  font-size: 12px;
 }
 
 .signup__container {
   display: flex;
-  padding: 5% 5% 0;
-}
+  padding: 30px 30px 0;
+}        
 
-.signup__container__info {
+.signup__container__space-01 {
   flex: 2.5;
   margin: auto 0;
-  font-size: 16px;
 }
 
-.signup__container__inp {
+.signup__container__space-02 {
   flex: 5.5;
   height: 45px;
 }
 
-.signup__container__inp input {
+.signup__container__space-02 > input {
   width: 100%;
   height: 100%;
   font-size: 18px;
-  padding: 0 3%;
+  padding: 0 10px;
 }
 
-.signup__container__inp button {
-  width: 100%;
-  height: 100%;
-  color: green;
-  background-color: white;
-  border: green 1px solid;
-  border-radius: 3px;
-  cursor: pointer;
+.signup__container__space-02 svg {
+  margin-right: 6px;
 }
 
-.signup__container__inp svg {
-  margin-right: 2%;
-}
-
-.signup__container__btn {
-  margin-left: 10px;
+.signup__container__space-03 {
   flex: 2;
-}
-
-.signup__container__btn button{
-  width: 100%;
-  height: 100%;
-  color: green;
-  background-color: white;
-  border: green 1px solid;
-  border-radius: 3px;
-  cursor: pointer;
+  margin-left: 10px;
 }
 
 .signup__btn {
-  text-align: center;
-  margin: 5% 0 0;
-}
-
-.signup__btn button {
-  width: 30%;
+  width: 200px;
   height: 50px;
-  color: green;
-  background-color: white;
-  border: green 1px solid;
-  border-radius: 3px;
-  cursor: pointer;
+  margin: 30px auto 0;
 }
 
-/* signup css 설정 finish */
-
-/* navbar css 설정 start */
-
-.header__navbar {
-  box-shadow: 0px 3px 4px 0px rgba(0, 0, 0, 0.07);
-}
-
-.header__navbar__menu {
-  margin: 0 10%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 16px;
-  height: 50px;
-}
-
-.header__navbar__menu li {
-  width: 100%;
-  text-align: center;
-}
-
-.header__navbar__menu a {
-  display: block;
-}
-
-.header__navbar__menu a:hover {
-  color: #7fad39;
-  text-decoration: underline;
-}
-
-/* navbar css 설정 finish */
-
-/* banner css 설정 start */
+/* --------------------
+  banner css
+-------------------- */
 
 .banner {
   overflow: hidden;
   position: relative;
 }
 
-.banner button {
-  height: 50px;
+.banner > button {
   width: 50px;
+  height: 50px;
   color: white;
   background-color: rgba(0, 0, 0, 0.15);
   border: none;
   border-radius: 50%;
   cursor: pointer;
+  position: absolute;
+  top: 50%;
+  transform: translate(0, -50%);
+  z-index: 1;
 }
+
+.banner__left-btn {
+  left: 10%;
+}
+
+.banner__right-btn {
+  right: 10%;
+} 
 
 .banner__container {
   width: 300vw;
@@ -322,106 +379,18 @@ ul {
   transition: transform 0.5s;
 }
 
-.banner__container__inner {
-  width: 100%;
-}
-
-.banner__container__inner img {
-  width: 100%;
+.banner__container img {
+  width: 100vw;
   height: 100%;
 }
 
-.banner__leftbtn {
-  position: absolute;
-  top: 50%;
-  left: 10%;
-  transform: translate(0, -50%);
-  z-index: 1;
-}
-
-.banner__rightbtn {
-  position: absolute;
-  top: 50%;
-  right: 10%;
-  transform: translate(0, -50%);
-  z-index: 1;
-}
-
-/* banner css 설정 finish */
-
-/* ---------- ProductRecommend start ---------- */
-
-.product-recommend {
-  margin-top: 40px;
-}
-
-.product-recommend__subtitle {
-  color: #7fad39;
-  font-size: 20px;
-}
-
-.product-recommend__title {
-  font-size: 30px;
-  line-height: 100%;
-  margin-bottom: 10px;
-}
-
-.product-recommend__title > span{
-  color: red;
-  font-size: 30px;
-}
-
-/* ---------- ProductRecommend finish ---------- */
-
-/* ---------- ProductGroup start ---------- */
-
-.product-group {
-  margin-bottom: 30px;
-}
-
-.product-group__title {
-  text-align: center;
-  letter-spacing: 10px;
-  font-size: 30px;
-  margin-top: 10px;
-}
-
-.product-group__title--color-green {
-  color: #7fad39;
-  border-top: #7fad39 2px solid;
-}
-
-.product-group__title--color-red {
-  color: red;
-  border-top: red 2px solid;
-}
-
-.product-group__title--color-blue {
-  color: blue;
-  border-top: blue 2px solid;
-}
-
-.product-group__product-more {
-  text-align: end;
-  font-size: 14px;
-}
-
-.product-group__product-more > a {
- color: gray;
-}
-
-.product-group__product-list {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-}
-
-/* ---------- ProductGroup finish ---------- */
-
-/* ---------- Product start ---------- */
+/* --------------------
+  product css
+-------------------- */
 
 .product {
   width: 280px;
+  cursor: pointer;
   margin-top: 30px;
 }
 
@@ -474,4 +443,71 @@ ul {
   margin-right: 5px;
 }
 
-/* ---------- Product finish ---------- */
+/* ---------- ProductGroup ---------- */
+
+.product-group {
+  margin-bottom: 30px;
+}
+
+.product-group__title {
+  text-align: center;
+  letter-spacing: 10px;
+  font-size: 30px;
+  margin-top: 10px;
+}
+
+.product-group__title--color-green {
+  color: #7fad39;
+  border-top: #7fad39 2px solid;
+}
+
+.product-group__title--color-red {
+  color: red;
+  border-top: red 2px solid;
+}
+
+.product-group__title--color-blue {
+  color: blue;
+  border-top: blue 2px solid;
+}
+
+.product-group__product-more {
+  text-align: end;
+}
+
+.product-group__product-more > a {
+  color: gray;
+  font-size: 14px;
+}
+
+.product-group__product-more svg {
+  font-size: 14px;
+}
+
+.product-group__product-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+/* ---------- ProductRecommend ---------- */
+
+.product-recommend {
+  margin-top: 40px;
+}
+
+.product-recommend__subtitle {
+  color: #7fad39;
+  font-size: 20px;
+}
+
+.product-recommend__title {
+  font-size: 30px;
+  line-height: 100%;
+  margin-bottom: 10px;
+}
+
+.product-recommend__title > span{
+  color: red;
+  font-size: 30px;
+}
