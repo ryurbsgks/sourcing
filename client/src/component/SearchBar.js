@@ -1,37 +1,36 @@
-import "../App.css"
-import logo from "../images/logo.PNG"
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCaretDown, faMagnifyingGlass, faCartShopping } from '@fortawesome/free-solid-svg-icons'
-import { faHeart } from '@fortawesome/free-regular-svg-icons'
-import { Link } from "react-router-dom"
+import "../App.css";
+import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCaretDown, faMagnifyingGlass, faCartShopping } from "@fortawesome/free-solid-svg-icons";
+import { faHeart } from "@fortawesome/free-regular-svg-icons";
+import logo from "../images/logo.PNG";
 
 function SearchBar() {
   return (
-    <div className="header__searchbar">
-      <div className="container row">
-        <div className="header__searchbar__logo">
-          <img src={logo} alt="오늘의 장 logo" />
-        </div>
-        <div className="header__searchbar__searchbox">
-          <div className="header__searchbar__searchbox__dropmenu">
-            <Link to="/">전체<FontAwesomeIcon icon={faCaretDown} /></Link>
-          </div>
-          <div className="header__searchbar__searchbox__droplist">
-            <ul>
-              <li><Link to="/">전체</Link></li>
-              <li><Link to="/">야채</Link></li>
-              <li><Link to="/">과일</Link></li>
-              <li><Link to="/">수산</Link></li>
-            </ul>
-          </div>
-          <input placeholder="검색어를 입력해 주세요" />
-          <button><FontAwesomeIcon icon={faMagnifyingGlass} />SEARCH</button>
-        </div>
-        <ul className="header__searchbar__menu"> 
-          <li><Link to="/"><FontAwesomeIcon className="icon__size28" icon={faHeart} /></Link></li>
-          <li><Link to="/"><FontAwesomeIcon className="icon__size28" icon={faCartShopping} /></Link></li>
-        </ul>
+    <div className="searchbar">
+      <div className="searchbar__logo">
+        <Link to="/"><img src={logo} alt="logo" /></Link>
       </div>
+      <div className="searchbar__searchbox">
+        <div className="searchbar__searchbox__menu">
+          <div className="searchbar__searchbox__menu__text">전체</div>
+          <div className="searchbar__searchbox__menu__icon"><FontAwesomeIcon icon={faCaretDown} /></div>
+        </div>
+        <input placeholder="검색어를 입력해주세요" />
+        <button type="button"><FontAwesomeIcon className="icon__size14" icon={faMagnifyingGlass} />SEARCH</button>
+        <div className="searchbar__searchbox__menu-list">
+          <ul>
+            <li>전체</li>
+            <li>야채</li>
+            <li>과일</li>
+            <li>수산</li>
+          </ul>
+        </div>
+      </div>
+      <ul className="searchbar__menu">
+        <li><Link to="/"><FontAwesomeIcon className="icon__size28" icon={faHeart} /></Link></li>
+        <li><Link to="/"><FontAwesomeIcon className="icon__size28" icon={faCartShopping} /></Link></li>
+      </ul>
     </div>
   );
 }

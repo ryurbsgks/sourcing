@@ -1,7 +1,7 @@
-import SignupComponent from "../component/Signup";
 import TopBar from "../component/TopBar";
 import SearchBar from "../component/SearchBar";
 import NavBar from "../component/NavBar";
+import SignupComponent from "../component/Signup";
 
 function Signup() {
   return (
