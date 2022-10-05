@@ -11,6 +11,7 @@ function Login() {
     userID: "",
     pw: ""
   });
+  const [message, SetMessage] = useState("");
 
   const navigate = useNavigate();
 
@@ -23,9 +24,13 @@ function Login() {
       [name]: value
     });
 
-  }
+  };
 
   const handleLoginBtn = () => {
+    
+    if (!loginInfo.userID || !loginInfo.pw) {
+      return SetMessage("아이디, 비밀번호를 모두 입력해 주세요");
+    }
 
     axios.post(`${process.env.REACT_APP_URL}/user/login`, {
       userID: loginInfo.userID,
@@ -35,7 +40,9 @@ function Login() {
         navigate("/");
       }
     }).catch( (err) => {
-      console.log("-----err-----", err)
+      if (err.response.data.message === "아이디 또는 비밀번호가 일치하지 않습니다") {
+        SetMessage("아이디 또는 비밀번호가 일치하지 않습니다");
+      }
     });
 
   };
@@ -46,13 +53,14 @@ function Login() {
       handleLoginBtn();
     }
 
-  }
+  };
 
   return (
     <section className="login">
       <div className="login__title">로그인</div>
       <input name="userID" onChange={handleInputValue} onKeyDown={handleEnterKey} placeholder="아이디를 입력해주세요" />
       <input name="pw" onChange={handleInputValue} onKeyDown={handleEnterKey} type="password" placeholder="비밀번호를 입력해주세요" />
+      <div className="err-msg">{message}</div>
       <div className="login__container">
         <div className="login__container__auto-login">
           <label>
