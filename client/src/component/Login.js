@@ -11,7 +11,7 @@ function Login() {
     userID: "",
     pw: ""
   });
-  const [message, SetMessage] = useState("");
+  const [message, setMessage] = useState("");
 
   const navigate = useNavigate();
 
@@ -29,7 +29,7 @@ function Login() {
   const handleLoginBtn = () => {
     
     if (!loginInfo.userID || !loginInfo.pw) {
-      return SetMessage("아이디, 비밀번호를 모두 입력해 주세요");
+      return setMessage("아이디, 비밀번호를 모두 입력해 주세요");
     }
 
     axios.post(`${process.env.REACT_APP_URL}/user/login`, {
@@ -41,7 +41,7 @@ function Login() {
       }
     }).catch( (err) => {
       if (err.response.data.message === "아이디 또는 비밀번호가 일치하지 않습니다") {
-        SetMessage("아이디 또는 비밀번호가 일치하지 않습니다");
+        setMessage("아이디 또는 비밀번호가 일치하지 않습니다");
       }
     });
 
