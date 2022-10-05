@@ -31,6 +31,12 @@ ul {
   margin: 0 auto;
 }
 
+.err-msg {
+  text-align: center;
+  color: red;
+  margin-top: 10px;
+}
+
 /* ---------- fontawesome icon size ---------- */
 
 .icon__size14 {
