@@ -14,6 +14,7 @@ app.use(cors({
 
 app.post("/user/signup", controllers.signup);
 app.post("/user/login", controllers.login);
+app.post("/user/checkID", controllers.checkID);
 
 server.listen(80, () => {
   console.log("HTTP Server running on port 80")
