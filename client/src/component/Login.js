@@ -37,6 +37,7 @@ function Login() {
       pw: loginInfo.pw
     }).then( (res) => {
       if (res.data.message === "로그인 성공") {
+        setMessage("")
         navigate("/");
       }
     }).catch( (err) => {
@@ -60,7 +61,7 @@ function Login() {
       <div className="login__title">로그인</div>
       <input name="userID" onChange={handleInputValue} onKeyDown={handleEnterKey} placeholder="아이디를 입력해주세요" />
       <input name="pw" onChange={handleInputValue} onKeyDown={handleEnterKey} type="password" placeholder="비밀번호를 입력해주세요" />
-      <div className="err-msg">{message}</div>
+      {message ? <div className="login__err-msg">{message}</div> : null}
       <div className="login__container">
         <div className="login__container__auto-login">
           <label>
