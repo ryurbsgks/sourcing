@@ -17,7 +17,7 @@ module.exports = (req, res) => {
       return res.status(200).send({ message: "사용할 수 있는 닉네임입니다" });
     }
 
-    res.status(409).send({ message: "이미 사용 중인 아이디입니다" });
+    res.status(409).send({ message: "이미 사용 중인 닉네임입니다" });
   }).catch( (err) => {
     res.status(500).send({ message: err });
   });
