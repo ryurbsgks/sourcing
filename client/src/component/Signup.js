@@ -1,6 +1,6 @@
 import "../App.css";
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
@@ -15,11 +15,45 @@ function Signup() {
     tel: "",
     email: ""
   });
+  const [message, setMessage] = useState({
+    userID: "",
+    pw: "",
+    pwCheck: "",
+    nickname: ""
+  });
+
+  useEffect( () => {
+
+    if (!signupInfo.pwCheck) {
+      setMessage({
+        ...message,
+        pwCheck: ""
+      });
+    }
+
+    if (signupInfo.pwCheck) {
+      if (signupInfo.pw === signupInfo.pwCheck) {
+        return setMessage({
+          ...message,
+          pwCheck: ""
+        });
+      } 
+
+      setMessage({
+        ...message,
+        pwCheck: "비밀번호가 일치하지 않습니다"
+      });
+    }
+
+  }, [signupInfo.pw, signupInfo.pwCheck]);
 
   const navigate = useNavigate();
+  const userIDRegExp = /^[a-zA-Z0-9]{4,12}$/;
+  const spaceRegExp = /^[^\s]{4,20}$/;
+  const nicknameRegExp = /^[a-zA-Z가-힣0-9]{4,16}$/;
 
   const handleInputValue = (e) => {
-    
+
     const { name, value } = e.target;
 
     setSignupInfo({
@@ -27,7 +61,90 @@ function Signup() {
       [name]: value
     });
 
+    if (e.target.name === "pw") {
+      if (!e.target.value) {
+        setMessage({
+          ...message,
+          pw: ""
+        });
+      }
+
+      if (e.target.value) {
+        if (!spaceRegExp.test(e.target.value)) {
+          return setMessage({
+            ...message,
+            pw: "공백을 제외한 4 ~ 20자를 입력해주세요"
+          });
+        }
+
+        setMessage({
+          ...message,
+          pw: ""
+        });
+      }
+    }
+
   };
+
+  const handleCheckBtn = (id) => {
+
+    if (id === "userID") {
+      if (!userIDRegExp.test(signupInfo.userID)) {
+        return setMessage({
+          ...message,
+          userID: "4 ~ 12자의 영문, 숫자만 가능합니다"
+        });
+      }
+
+      axios.post(`${process.env.REACT_APP_URL}/user/checkID`, {
+        userID: signupInfo.userID
+      }).then( (res) => {
+        if (res.data.message === "사용할 수 있는 아이디입니다") {
+          setMessage({
+            ...message,
+            userID: ""
+          });
+        }
+      }).catch( (err) => {
+        if (err.response.data.message === "이미 사용 중인 아이디입니다") {
+          setMessage({
+            ...message,
+            userID: "이미 사용 중인 아이디입니다"
+          });
+        }
+      });
+
+    }
+
+    if (id === "nickname") {
+      if (!nicknameRegExp.test(signupInfo.nickname)) {
+        return setMessage({
+          ...message,
+          nickname: "4 ~ 16자의 영문, 한글, 숫자만 가능합니다"
+        });
+      }
+
+      axios.post(`${process.env.REACT_APP_URL}/user/checkNickname`, {
+        nickname: signupInfo.nickname
+      }).then( (res) => {
+        if (res.data.message === "사용할 수 있는 닉네임입니다") {
+          setMessage({
+            ...message,
+            nickname: ""
+          });
+        }
+      }).catch( (err) => {
+        if (err.response.data.message === "이미 사용 중인 닉네임입니다") {
+          setMessage({
+            ...message,
+            nickname: "이미 사용 중인 닉네임입니다"
+          });
+        }
+      });
+
+    }
+ 
+  }
 
   const handleSignupBtn = () => {
 
@@ -57,9 +174,10 @@ function Signup() {
           <input name="userID" onChange={handleInputValue} placeholder="아이디를 입력해주세요" />
         </div>
         <div className="signup__container__space-03">
-          <button type="button">중복확인</button>
+          <button onClick={() => handleCheckBtn("userID")} type="button">중복확인</button>
         </div>
       </div>
+      {message.userID ? <div className="signup__err-msg">{message.userID}</div> : null}
       <div className="signup__container">
         <div className="signup__container__space-01">비밀번호<span>*</span></div>
         <div className="signup__container__space-02">
@@ -67,6 +185,7 @@ function Signup() {
         </div>
         <div className="signup__container__space-03"></div>
       </div>
+      {message.pw ? <div className="signup__err-msg">{message.pw}</div> : null}
       <div className="signup__container">
         <div className="signup__container__space-01">비밀번호 확인<span>*</span></div>
         <div className="signup__container__space-02">
@@ -74,15 +193,17 @@ function Signup() {
         </div>
         <div className="signup__container__space-03"></div>
       </div>
+      {message.pwCheck ? <div className="signup__err-msg">{message.pwCheck}</div> : null}
       <div className="signup__container">
         <div className="signup__container__space-01">닉네임<span>*</span></div>
         <div className="signup__container__space-02">
           <input name="nickname" onChange={handleInputValue} placeholder="닉네임을 입력해주세요" />
         </div>
         <div className="signup__container__space-03">
-          <button type="button">중복확인</button>
+          <button onClick={() => handleCheckBtn("nickname")} type="button">중복확인</button>
         </div>
       </div>
+      {message.nickname ? <div className="signup__err-msg">{message.nickname}</div> : null}
       <div className="signup__container">
         <div className="signup__container__space-01">핸드폰<span>*</span></div>
         <div className="signup__container__space-02">
