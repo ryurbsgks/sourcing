@@ -35,6 +35,8 @@ function Login() {
     axios.post(`${process.env.REACT_APP_URL}/user/login`, {
       userID: loginInfo.userID,
       pw: loginInfo.pw
+    }, {
+      withCredentials: true
     }).then( (res) => {
       if (res.data.message === "로그인 성공") {
         setMessage("")

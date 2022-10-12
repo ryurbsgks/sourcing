@@ -9,7 +9,8 @@ const server = http.createServer(app);
 app.use(express.json());
 app.use(cors({
   origin: ["http://localhost:3000"],
-  methods: "POST"
+  methods: "POST",
+  credentials: true
 }));
 
 app.post("/user/signup", controllers.signup);
