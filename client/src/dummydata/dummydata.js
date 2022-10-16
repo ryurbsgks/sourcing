@@ -1,4 +1,4 @@
-const dummydata = {
+export const dummydata = {
   "야채": [
     {
       "id": 1,
@@ -247,4 +247,4 @@ const dummydata = {
   ] 
 }
 
-export default dummydata;
+export const bannerImage = ["MainBanner1.png", "MainBanner2.png", "MainBanner3.png"];
