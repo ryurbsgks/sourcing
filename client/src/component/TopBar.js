@@ -1,10 +1,31 @@
 import "../App.css";
+import axios from "axios";
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { setIsLogin } from "../redux/action";
+import { getCookie } from "../function";
 
 function TopBar() {
+
+  useEffect( () => {
+
+    if (isLogin) {
+
+      axios.get(`${process.env.REACT_APP_URL}/user/auth`, {
+        withCredentials: true,
+        headers: {
+          Authorization: `Bearer ${getCookie("sourcingAccess")}`
+        }
+      }).then( (res) => {
+        if (res.data.message !== "로그인 상태입니다") {
+          return dispatch(setIsLogin(false));
+        }
+      });
+
+    }
+    
+  }, []);
 
   const isLogin = useSelector( (state) => state.isLogIn );
   const dispatch = useDispatch();
