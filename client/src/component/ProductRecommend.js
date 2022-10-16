@@ -1,6 +1,6 @@
 import "../App.css";
 import ProductGroup from "./ProductGroup";
-import dummyData from "../dummydata/dummydata";
+import { dummydata } from "../dummydata/dummydata";
 
 function ProductRecommend() {
   return (
@@ -8,7 +8,7 @@ function ProductRecommend() {
       <div className="container">
         <div className="product-recommend__subtitle">오늘의 장</div>
         <div className="product-recommend__title">카테고리별 <span>추천</span> 상품</div>
-        {Object.keys(dummyData).map( (el, index) => {
+        {Object.keys(dummydata).map( (el, index) => {
           return <ProductGroup key={index} category={el} />
         })}
       </div>
