@@ -4,12 +4,19 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { CookiesProvider } from "react-cookie";
+import { Provider } from "react-redux";
+import { legacy_createStore as createStore } from "redux";
+import reducer from "./redux/reducer";
+
+const store = createStore(reducer);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <CookiesProvider>
-      <App />
+      <Provider store={store}>
+        <App />
+      </Provider>
     </CookiesProvider>
   </React.StrictMode>
 );
