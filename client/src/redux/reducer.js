@@ -1,3 +1,6 @@
+import { persistReducer } from "redux-persist";
+import storage from "redux-persist/lib/storage";
+
 const initialState = {
   isLogIn: false
 };
@@ -14,4 +17,11 @@ const reducer = (state = initialState, action) => {
   }
 };
 
-export default reducer;
+const persistConfig = {
+  key: "root",
+  storage
+};
+
+const persiReducer = persistReducer(persistConfig, reducer);
+
+export default persiReducer;
