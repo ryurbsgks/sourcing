@@ -2,8 +2,10 @@ import "../App.css";
 import axios from "axios";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
+import { setIsLogin } from "../redux/action";
 
 function Login() {
 
@@ -14,6 +16,7 @@ function Login() {
   const [message, setMessage] = useState("");
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleInputValue = (e) => {
 
@@ -39,6 +42,7 @@ function Login() {
       withCredentials: true
     }).then( (res) => {
       if (res.data.message === "로그인 성공") {
+        dispatch(setIsLogin(true));
         setMessage("")
         navigate("/");
       }
