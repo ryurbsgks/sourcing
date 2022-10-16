@@ -4,6 +4,6 @@ module.exports = {
   login: require("./user/login"),
   checkID: require("./user/checkID"),
   checkNickname: require("./user/checkNickname"),
-  checkLogin: require("./user/checkLogin")
+  auth: require("./user/auth")
   
 };
