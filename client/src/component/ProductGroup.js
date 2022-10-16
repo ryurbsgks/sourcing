@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
 import Product from "./Product";
-import dummyData from "../dummydata/dummydata";
+import { dummydata } from "../dummydata/dummydata";
 
 function ProductGroup( { category } ) {
 
@@ -32,7 +32,7 @@ function ProductGroup( { category } ) {
           <Link to="/">전체 상품 보기 <FontAwesomeIcon icon={faAngleRight} /></Link>
         </div>
         <div className="product-group__product-list">
-          {dummyData[category].map( (el) => {
+          {dummydata[category].map( (el) => {
             return <Product key={el.id} image={el.image} title={el.title} sale={el.sale} price={el.price} originprice={el.originprice} reviewscore={el.reviewscore} reviewcount={el.reviewcount} />
           })}
         </div>
