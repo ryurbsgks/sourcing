@@ -425,7 +425,6 @@ ul {
 
 .banner__container {
   display: flex;
-  transition: transform 1.0s;
 }
 
 .banner__container img {
