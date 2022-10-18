@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
-import SignupCheck from "../modal/SignupCheck";
+import Check from "../modal/Check";
 
 function Signup() {
 
@@ -209,7 +209,7 @@ function Signup() {
         </div>
       </div>
       {message.userID ? <div className="signup__err-msg">{message.userID}</div> : null}
-      {modalOpen.userID ? <SignupCheck content={"아이디"} close={() => handleModalClose("userID")} /> : null}
+      {modalOpen.userID ? <Check content={"사용할 수 있는 아이디입니다"} handler={() => handleModalClose("userID")} /> : null}
       <div className="signup__container">
         <div className="signup__container__space-01">비밀번호<span>*</span></div>
         <div className="signup__container__space-02">
@@ -236,7 +236,7 @@ function Signup() {
         </div>
       </div>
       {message.nickname ? <div className="signup__err-msg">{message.nickname}</div> : null}
-      {modalOpen.nickname ? <SignupCheck content={"닉네임"} close={() => handleModalClose("nickname")} /> : null}
+      {modalOpen.nickname ? <Check content={"사용할 수 있는 닉네임입니다"} handler={() => handleModalClose("nickname")} /> : null}
       <div className="signup__container">
         <div className="signup__container__space-01">핸드폰<span>*</span></div>
         <div className="signup__container__space-02">
