@@ -11,7 +11,8 @@ function Login() {
 
   const [loginInfo, setLoginInfo] = useState({
     userID: "",
-    pw: ""
+    pw: "",
+    auto: false
   });
   const [message, setMessage] = useState("");
 
@@ -37,7 +38,8 @@ function Login() {
 
     axios.post(`${process.env.REACT_APP_URL}/user/login`, {
       userID: loginInfo.userID,
-      pw: loginInfo.pw
+      pw: loginInfo.pw,
+      auto: loginInfo.auto
     }, {
       withCredentials: true
     }).then( (res) => {
@@ -62,6 +64,13 @@ function Login() {
 
   };
 
+  const handleAutoLogin = (e) => {
+    setLoginInfo({
+      ...loginInfo,
+      auto: e.target.checked
+    });
+  };
+
   return (
     <section className="login">
       <div className="login__title">로그인</div>
@@ -71,7 +80,7 @@ function Login() {
       <div className="login__container">
         <div className="login__container__auto-login">
           <label>
-            <input type="checkbox" />
+            <input type="checkbox" onChange={handleAutoLogin} />
             자동 로그인
           </label>
         </div>
