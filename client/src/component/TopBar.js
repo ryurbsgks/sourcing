@@ -1,10 +1,10 @@
 import "../App.css";
 import axios from "axios";
 import { useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { setIsLogin } from "../redux/action";
-import { getCookie } from "../function";
+import { getCookie, removeCookie } from "../function";
 
 function TopBar() {
 
@@ -28,10 +28,13 @@ function TopBar() {
   }, []);
 
   const isLogin = useSelector( (state) => state.isLogIn );
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const handleLogoutBtn = () => {
     dispatch(setIsLogin(false));
+    removeCookie("sourcingAccess");
+    navigate("/");
   };
 
   return (
