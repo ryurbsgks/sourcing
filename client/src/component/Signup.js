@@ -14,17 +14,27 @@ function Signup() {
     pwCheck: "",
     nickname: "",
     tel: "",
-    email: ""
+    email: "",
+    verifyTel: "",
+    verifyEmail: ""
   });
   const [message, setMessage] = useState({
     userID: "",
     pw: "",
     pwCheck: "",
-    nickname: ""
+    nickname: "",
+    tel: "",
+    email: "",
+    verifyTel: "",
+    verifyEmail: ""
   });
   const [modalOpen, setModalOpen] = useState({
     userID: false,
     nickname: false
+  });
+  const [openUI, setOpenUI] = useState({
+    tel: false,
+    email: false
   });
 
   useEffect( () => {
@@ -56,6 +66,8 @@ function Signup() {
   const userIDRegExp = /^[a-zA-Z0-9]{4,12}$/;
   const spaceRegExp = /^[^\s]{4,20}$/;
   const nicknameRegExp = /^[a-zA-Z가-힣0-9]{4,16}$/;
+  const phoneRegExp = /^010[0-9]{8}$/;
+  const emailRegExp = /^[a-zA-Z0-9]([a-zA-Z0-9-_])*@[a-z]+\.(kr|com|net)$/;
 
   const handleInputValue = (e) => {
 
@@ -156,6 +168,50 @@ function Signup() {
       });
 
     }
+
+    if (id === "tel") {
+      if (!phoneRegExp.test(signupInfo.tel)) {
+        setOpenUI({
+          ...openUI,
+          tel: false
+        });
+        return setMessage({
+          ...message,
+          tel: "핸드폰 번호를 확인해주세요"
+        });
+      }
+      
+      setOpenUI({
+        ...openUI,
+        tel: true
+      });
+      setMessage({
+        ...message,
+        tel: ""
+      });
+    }
+
+    if (id === "email") {
+      if (!emailRegExp.test(signupInfo.email)) {
+        setOpenUI({
+          ...openUI,
+          email: false
+        });
+        return setMessage({
+          ...message,
+          email: "이메일을 확인해주세요"
+        });
+      }
+
+      setOpenUI({
+        ...openUI,
+        email: true
+      });
+      setMessage({
+        ...message,
+        email: ""
+      });
+    }
  
   };
 
@@ -243,18 +299,44 @@ function Signup() {
           <input name="tel" onChange={handleInputValue} placeholder="숫자만 입력해주세요" />
         </div>
         <div className="signup__container__space-03">
-          <button type="button">인증번호 받기</button>
+          <button onClick={() => handleCheckBtn("tel")} type="button">인증번호 받기</button>
         </div>
       </div>
+      {message.tel ? <div className="signup__err-msg">{message.tel}</div> : null}
+      {openUI.tel 
+      ? <div className="signup__container">
+          <div className="signup__container__space-01"></div>
+          <div className="signup__container__space-02">
+            <input name="verifyTel" onChange={handleInputValue} placeholder="인증번호를 입력해주세요" />
+          </div>
+          <div className="signup__container__space-03">
+            <button type="button">인증번호 확인</button>
+          </div>
+        </div>
+      : null
+      }
       <div className="signup__container">
         <div className="signup__container__space-01">이메일</div>
         <div className="signup__container__space-02">
           <input name="email" onChange={handleInputValue} placeholder="ex)sourcing@sourcing.com" />
         </div>
         <div className="signup__container__space-03">
-          <button type="button">인증번호 받기</button>
+          <button onClick={() => handleCheckBtn("email")} type="button">인증번호 받기</button>
         </div>
       </div>
+      {message.email ? <div className="signup__err-msg">{message.email}</div> : null}
+      {openUI.email 
+      ? <div className="signup__container">
+          <div className="signup__container__space-01"></div>
+          <div className="signup__container__space-02">
+            <input name="verifyEmail" onChange={handleInputValue} placeholder="인증번호를 입력해주세요" />
+          </div>
+          <div className="signup__container__space-03">
+            <button type="button">인증번호 확인</button>
+          </div>
+        </div>
+      : null
+      }
       <div className="signup__container">
         <div className="signup__container__space-01">주소</div>
         <div className="signup__container__space-02">
