@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import Check from "../modal/Check";
+import { getCookie } from "../function"
 
 function Signup() {
 
@@ -30,11 +31,16 @@ function Signup() {
   });
   const [modalOpen, setModalOpen] = useState({
     userID: false,
-    nickname: false
+    nickname: false,
+    tel: false,
+    verifyTel: false
   });
   const [openUI, setOpenUI] = useState({
     tel: false,
     email: false
+  });
+  const [disable, setDisable] = useState({
+    tel: false
   });
 
   useEffect( () => {
@@ -180,15 +186,71 @@ function Signup() {
           tel: "핸드폰 번호를 확인해주세요"
         });
       }
-      
-      setOpenUI({
-        ...openUI,
-        tel: true
+
+      axios.get(`${process.env.REACT_APP_URL}/user/signup/sms/${signupInfo.tel}`, {
+        withCredentials: true
+      }).then( (res) => {
+        if (res.data.message === "인증번호 전송 성공") {
+          setOpenUI({
+            ...openUI,
+            tel: true
+          });
+          setMessage({
+            ...message,
+            tel: ""
+          });
+          setDisable({
+            ...disable,
+            tel: true
+          });
+          setModalOpen({
+            ...modalOpen,
+            tel: true
+          });
+        }
       });
-      setMessage({
-        ...message,
-        tel: ""
+
+    }
+
+    if (id === "verifyTel") {
+      if (!signupInfo.verifyTel) {
+        return setMessage({
+          ...message,
+          verifyTel: "인증번호를 입력해주세요"
+        });
+      }
+
+      axios.post(`${process.env.REACT_APP_URL}/user/signup/verify`, {
+        verifyTel: signupInfo.verifyTel
+      }, {
+        withCredentials: true,
+        headers: {
+          Authorization: `Bearer ${getCookie("TelAuthNumber")}`
+        }
+      }).then( (res) => {
+        if (res.data.message === "인증번호가 일치합니다") {
+          setMessage({
+            ...message,
+            verifyTel: ""
+          });
+          setOpenUI({
+            ...openUI,
+            tel: false
+          });
+          setModalOpen({
+            ...modalOpen,
+            verifyTel: true
+          });
+        }
+      }).catch( (err) => {
+        if (err.response.data.message === "인증번호가 일치하지 않습니다") {
+          setMessage({
+            ...message,
+            verifyTel: "인증번호가 일치하지 않습니다"
+          });
+        }
       });
+
     }
 
     if (id === "email") {
@@ -212,7 +274,7 @@ function Signup() {
         email: ""
       });
     }
- 
+
   };
 
   const handleModalClose = (id) => {
@@ -228,6 +290,20 @@ function Signup() {
       setModalOpen({
         ...modalOpen,
         nickname: false
+      });
+    }
+
+    if (id === "tel") {
+      setModalOpen({
+        ...modalOpen,
+        tel: false
+      });
+    }
+
+    if (id === "verifyTel") {
+      setModalOpen({
+        ...modalOpen,
+        verifyTel: false
       });
     }
 
@@ -296,13 +372,14 @@ function Signup() {
       <div className="signup__container">
         <div className="signup__container__space-01">핸드폰<span>*</span></div>
         <div className="signup__container__space-02">
-          <input name="tel" onChange={handleInputValue} placeholder="숫자만 입력해주세요" />
+          <input name="tel" onChange={handleInputValue} readOnly={disable.tel} placeholder="숫자만 입력해주세요" />
         </div>
         <div className="signup__container__space-03">
-          <button onClick={() => handleCheckBtn("tel")} type="button">인증번호 받기</button>
+          <button onClick={() => handleCheckBtn("tel")} disabled={disable.tel} type="button">인증번호 받기</button>
         </div>
       </div>
       {message.tel ? <div className="signup__err-msg">{message.tel}</div> : null}
+      {modalOpen.tel ? <Check content={"인증번호가 발송되었습니다"} handler={() => handleModalClose("tel")} /> : null}
       {openUI.tel 
       ? <div className="signup__container">
           <div className="signup__container__space-01"></div>
@@ -310,11 +387,13 @@ function Signup() {
             <input name="verifyTel" onChange={handleInputValue} placeholder="인증번호를 입력해주세요" />
           </div>
           <div className="signup__container__space-03">
-            <button type="button">인증번호 확인</button>
+            <button onClick={() => handleCheckBtn("verifyTel")} type="button">인증번호 확인</button>
           </div>
         </div>
       : null
       }
+      {message.verifyTel ? <div className="signup__err-msg">{message.verifyTel}</div> : null}
+      {modalOpen.verifyTel ? <Check content={"인증이 완료되었습니다"} handler={() => handleModalClose("verifyTel")} /> : null}
       <div className="signup__container">
         <div className="signup__container__space-01">이메일</div>
         <div className="signup__container__space-02">
