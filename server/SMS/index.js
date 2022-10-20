@@ -1,10 +1,9 @@
 const CryptoJS = require("crypto-js");
 const request = require("request");
-const { authNumberCreate } = require("../function");
 
 module.exports = {
 
-  send: (tel) => {
+  send: (tel, authNumber) => {
 
     const phone = tel;
     const date = Date.now().toString();
@@ -12,7 +11,6 @@ module.exports = {
     const accessKey = process.env.NCP_ACCESS_KEY;
     const secretKey = process.env.NCP_SECRET_KEY;
     const myNumber = process.env.MY_NUMBER;
-    const authNumber = authNumberCreate();
     const method = "POST";
     const space = " ";
     const newLine = "\n";
