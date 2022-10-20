@@ -19,7 +19,7 @@ module.exports = {
       // return res.cookie("sourcingAccess", token, { maxAge: 60*60*24*30, httpOnly: true });
       return res.cookie("sourcingAccess", token, { maxAge: 60*60*24*30 });
     }
-    // res.cookie("sourcingAccess", token, { httpOnly: true });
+    // return res.cookie("sourcingAccess", token, { httpOnly: true });
     return res.cookie("sourcingAccess", token);
   },
   verifyToken: (req) => {
@@ -36,6 +36,13 @@ module.exports = {
       return null;
     }
 
+  },
+  authNumberTokenSign: (payload) => {
+    return jwt.sign(payload, process.env.ACCESS_SECRET_KEY, { expiresIn: "3m" });
+  },
+  authNumberTokenSend: (res, token) => {
+    // return res.cookie("TelAuthNumber", token, { httpOnly: true });
+    return res.cookie("TelAuthNumber", token);
   }
   
 };
