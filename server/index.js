@@ -18,6 +18,7 @@ app.post("/user/login", controllers.login);
 app.post("/user/checkID", controllers.checkID);
 app.post("/user/checkNickname", controllers.checkNickname);
 app.get("/user/auth", controllers.auth);
+app.get("/user/signup/sms/:tel", controllers.signupSMS);
 
 server.listen(80, () => {
   console.log("HTTP Server running on port 80")

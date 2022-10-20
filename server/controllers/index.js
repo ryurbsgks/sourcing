@@ -4,6 +4,7 @@ module.exports = {
   login: require("./user/login"),
   checkID: require("./user/checkID"),
   checkNickname: require("./user/checkNickname"),
-  auth: require("./user/auth")
+  auth: require("./user/auth"),
+  signupSMS: require("./user/signupSMS")
   
 };
