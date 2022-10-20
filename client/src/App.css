@@ -342,6 +342,12 @@ ul {
   margin-left: 10px;
 }
 
+.signup__container__space-03 > button:disabled {
+  color: rgb(221, 221, 221);
+  border-color: rgb(221, 221, 221);
+  cursor: default;
+}
+
 .signup__err-msg {
   text-align: center;
   color: red;
