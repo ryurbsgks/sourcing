@@ -9,7 +9,7 @@ module.exports = (req, res) => {
   const payload = { authNumber: authNumber };
   const authNumberToken = authNumberTokenSign(payload);
 
-  authNumberTokenSend(res, authNumberToken);
+  authNumberTokenSend(res, authNumberToken, "TelAuthNumber");
   send(tel, authNumber);
   res.status(200).send({ message: "인증번호 전송 성공" });
 };
