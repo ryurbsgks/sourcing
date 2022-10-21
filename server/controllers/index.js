@@ -6,6 +6,7 @@ module.exports = {
   checkNickname: require("./user/checkNickname"),
   auth: require("./user/auth"),
   signupSMS: require("./user/signupSMS"),
-  verify: require("./user/verify")
+  verify: require("./user/verify"),
+  signupEmail: require("./user/signupEmail")
   
 };
