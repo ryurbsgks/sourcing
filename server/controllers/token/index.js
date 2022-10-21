@@ -40,9 +40,9 @@ module.exports = {
   authNumberTokenSign: (payload) => {
     return jwt.sign(payload, process.env.ACCESS_SECRET_KEY, { expiresIn: "3m" });
   },
-  authNumberTokenSend: (res, token) => {
-    // return res.cookie("TelAuthNumber", token, { httpOnly: true });
-    return res.cookie("TelAuthNumber", token);
+  authNumberTokenSend: (res, token, name) => {
+    // return res.cookie(name, token, { httpOnly: true });
+    return res.cookie(name, token);
   }
   
 };
