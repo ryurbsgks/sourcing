@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import Check from "../modal/Check";
-import { getCookie } from "../function"
+import { getCookie, removeCookie } from "../function"
 
 function Signup() {
 
@@ -33,14 +33,17 @@ function Signup() {
     userID: false,
     nickname: false,
     tel: false,
-    verifyTel: false
+    email: false,
+    verifyTel: false,
+    verifyEmail: false
   });
   const [openUI, setOpenUI] = useState({
     tel: false,
     email: false
   });
   const [disable, setDisable] = useState({
-    tel: false
+    tel: false,
+    email: false
   });
 
   useEffect( () => {
@@ -229,6 +232,7 @@ function Signup() {
         }
       }).then( (res) => {
         if (res.data.message === "인증번호가 일치합니다") {
+          removeCookie("TelAuthNumber");
           setMessage({
             ...message,
             verifyTel: ""
@@ -249,6 +253,18 @@ function Signup() {
             verifyTel: "인증번호가 일치하지 않습니다"
           });
         }
+
+        if (err.response.data.message === "인증 유효 시간이 만료되었습니다") {
+          removeCookie("TelAuthNumber");
+          setDisable({
+            ...disable,
+            tel: false
+          });
+          return setMessage({
+            ...message,
+            verifyTel: "인증 유효 시간이 만료되었습니다"
+          });
+        }
       });
 
     }
@@ -265,14 +281,85 @@ function Signup() {
         });
       }
 
-      setOpenUI({
-        ...openUI,
-        email: true
+      axios.post(`${process.env.REACT_APP_URL}/user/signup/email`, {
+        email: signupInfo.email
+      }, {
+        withCredentials: true
+      }).then( (res) => {
+        if (res.data.message === "인증번호 전송 성공") {
+          setOpenUI({
+            ...openUI,
+            email: true
+          });
+          setMessage({
+            ...message,
+            email: ""
+          });
+          setDisable({
+            ...disable,
+            email: true
+          });
+          setModalOpen({
+            ...modalOpen,
+            email: true
+          });
+        }
       });
-      setMessage({
-        ...message,
-        email: ""
+      
+    }
+
+    if (id === "verifyEmail") {
+      if (!signupInfo.verifyEmail) {
+        return setMessage({
+          ...message,
+          verifyEmail: "인증번호를 입력해주세요"
+        });
+      }
+
+      axios.post(`${process.env.REACT_APP_URL}/user/signup/verify`, {
+        verifyEmail: signupInfo.verifyEmail
+      }, {
+        withCredentials: true,
+        headers: {
+          Authorization: `Bearer ${getCookie("EmailAuthNumber")}`
+        }
+      }).then( (res) => {
+        if (res.data.message === "인증번호가 일치합니다") {
+          removeCookie("EmailAuthNumber");
+          setMessage({
+            ...message,
+            verifyEmail: ""
+          });
+          setOpenUI({
+            ...openUI,
+            email: false
+          });
+          setModalOpen({
+            ...modalOpen,
+            verifyEmail: true
+          });
+        }
+      }).catch( (err) => {
+        if (err.response.data.message === "인증번호가 일치하지 않습니다") {
+          return setMessage({
+            ...message,
+            verifyEmail: "인증번호가 일치하지 않습니다"
+          });
+        }
+
+        if (err.response.data.message === "인증 유효 시간이 만료되었습니다") {
+          removeCookie("EmailAuthNumber");
+          setDisable({
+            ...disable,
+            email: false
+          });
+          return setMessage({
+            ...message,
+            verifyEmail: "인증 유효 시간이 만료되었습니다"
+          });
+        }
       });
+      
     }
 
   };
@@ -304,6 +391,20 @@ function Signup() {
       setModalOpen({
         ...modalOpen,
         verifyTel: false
+      });
+    }
+
+    if (id === "email") {
+      setModalOpen({
+        ...modalOpen,
+        email: false
+      });
+    }
+
+    if (id === "verifyEmail") {
+      setModalOpen({
+        ...modalOpen,
+        verifyEmail: false
       });
     }
 
@@ -397,13 +498,14 @@ function Signup() {
       <div className="signup__container">
         <div className="signup__container__space-01">이메일</div>
         <div className="signup__container__space-02">
-          <input name="email" onChange={handleInputValue} placeholder="ex)sourcing@sourcing.com" />
+          <input name="email" onChange={handleInputValue} readOnly={disable.email} placeholder="ex)sourcing@sourcing.com" />
         </div>
         <div className="signup__container__space-03">
-          <button onClick={() => handleCheckBtn("email")} type="button">인증번호 받기</button>
+          <button onClick={() => handleCheckBtn("email")} disabled={disable.email} type="button">인증번호 받기</button>
         </div>
       </div>
       {message.email ? <div className="signup__err-msg">{message.email}</div> : null}
+      {modalOpen.email ? <Check content={"인증번호가 발송되었습니다"} handler={() => handleModalClose("email")} /> : null}
       {openUI.email 
       ? <div className="signup__container">
           <div className="signup__container__space-01"></div>
@@ -411,11 +513,13 @@ function Signup() {
             <input name="verifyEmail" onChange={handleInputValue} placeholder="인증번호를 입력해주세요" />
           </div>
           <div className="signup__container__space-03">
-            <button type="button">인증번호 확인</button>
+            <button onClick={() => handleCheckBtn("verifyEmail")} type="button">인증번호 확인</button>
           </div>
         </div>
       : null
       }
+      {message.verifyEmail ? <div className="signup__err-msg">{message.verifyEmail}</div> : null}
+      {modalOpen.verifyEmail ? <Check content={"인증이 완료되었습니다"} handler={() => handleModalClose("verifyEmail")} /> : null}
       <div className="signup__container">
         <div className="signup__container__space-01">주소</div>
         <div className="signup__container__space-02">
