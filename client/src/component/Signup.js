@@ -2,6 +2,7 @@ import "../App.css";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useDaumPostcodePopup } from "react-daum-postcode";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import Check from "../modal/Check";
@@ -17,7 +18,9 @@ function Signup() {
     tel: "",
     email: "",
     verifyTel: "",
-    verifyEmail: ""
+    verifyEmail: "",
+    address: "",
+    addressDetail: ""
   });
   const [message, setMessage] = useState({
     userID: "",
@@ -72,6 +75,8 @@ function Signup() {
   }, [signupInfo.pw, signupInfo.pwCheck]);
 
   const navigate = useNavigate();
+  const scriptUrl = "https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js";
+  const open = useDaumPostcodePopup(scriptUrl);
   const userIDRegExp = /^[a-zA-Z0-9]{4,12}$/;
   const spaceRegExp = /^[^\s]{4,20}$/;
   const nicknameRegExp = /^[a-zA-Z가-힣0-9]{4,16}$/;
@@ -428,6 +433,33 @@ function Signup() {
 
   };
 
+  const handleComplete = (data) => {
+
+    let fullAddress = data.address;
+    let extraAddress = "";
+
+    if (data.addressType === "R") {
+      if (data.bname !== "") {
+        extraAddress += data.bname;
+      }
+
+      if (data.buildingName !== "") {
+        extraAddress += extraAddress !== "" ? `, ${data.buildingName}` : data.buildingName;
+      }
+
+      fullAddress += extraAddress !== "" ? ` (${extraAddress})` : "";
+    }
+
+    setSignupInfo({
+      ...signupInfo,
+      address: fullAddress
+    });
+  };
+
+  const handleClick = () => {
+    open({ onComplete: handleComplete });
+  };
+
   return (
     <section className="signup">
       <div className="signup__title">회원가입</div>
@@ -523,10 +555,23 @@ function Signup() {
       <div className="signup__container">
         <div className="signup__container__space-01">주소</div>
         <div className="signup__container__space-02">
-          <button type="button"><FontAwesomeIcon icon={faMagnifyingGlass} />주소 검색</button>
+          {signupInfo.address 
+          ? <input readOnly={true} value={signupInfo.address} />
+          : <button onClick={handleClick} type="button"><FontAwesomeIcon icon={faMagnifyingGlass} />주소 검색</button>
+          }
         </div>
         <div className="signup__container__space-03"></div>
       </div>
+      {signupInfo.address 
+      ? <div className="signup__container">
+          <div className="signup__container__space-01"></div>
+          <div className="signup__container__space-02">
+            <input name="addressDetail" onChange={handleInputValue} placeholder="상세 주소를 입력해주세요" />
+          </div>
+          <div className="signup__container__space-03"></div>
+        </div>
+      : null
+      }
       <div className="signup__btn">
         <button onClick={handleSignupBtn} type="button">회원가입</button>
       </div>  
