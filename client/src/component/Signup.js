@@ -504,7 +504,7 @@ function Signup() {
     if (signupInfo.tel !== checkSignupInfo.tel) {
       return setMessage({
         ...message,
-        signup: "휴대폰 인증을 해주세요"
+        signup: "핸드폰 인증을 해주세요"
       });
     }
 
