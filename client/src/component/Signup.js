@@ -30,7 +30,8 @@ function Signup() {
     tel: "",
     email: "",
     verifyTel: "",
-    verifyEmail: ""
+    verifyEmail: "",
+    signup: ""
   });
   const [modalOpen, setModalOpen] = useState({
     userID: false,
@@ -48,10 +49,22 @@ function Signup() {
     tel: false,
     email: false
   });
+  const [checkSignupInfo, setCheckSignupInfo] = useState({
+    userID: "",
+    pw: false,
+    pwCheck: false,
+    nickname: "",
+    tel: "",
+    email: ""
+  });
 
   useEffect( () => {
 
     if (!signupInfo.pwCheck) {
+      setCheckSignupInfo({
+        ...checkSignupInfo,
+        pwCheck: false
+      });
       setMessage({
         ...message,
         pwCheck: ""
@@ -60,12 +73,20 @@ function Signup() {
 
     if (signupInfo.pwCheck) {
       if (signupInfo.pw === signupInfo.pwCheck) {
+        setCheckSignupInfo({
+          ...checkSignupInfo,
+          pwCheck: true
+        });
         return setMessage({
           ...message,
           pwCheck: ""
         });
       } 
 
+      setCheckSignupInfo({
+        ...checkSignupInfo,
+        pwCheck: false
+      });
       setMessage({
         ...message,
         pwCheck: "비밀번호가 일치하지 않습니다"
@@ -94,6 +115,10 @@ function Signup() {
 
     if (e.target.name === "pw") {
       if (!e.target.value) {
+        setCheckSignupInfo({
+          ...checkSignupInfo,
+          pw: false
+        });
         setMessage({
           ...message,
           pw: ""
@@ -102,12 +127,20 @@ function Signup() {
 
       if (e.target.value) {
         if (!spaceRegExp.test(e.target.value)) {
+          setCheckSignupInfo({
+            ...checkSignupInfo,
+            pw: false
+          });
           return setMessage({
             ...message,
             pw: "공백을 제외한 4 ~ 20자를 입력해주세요"
           });
         }
 
+        setCheckSignupInfo({
+          ...checkSignupInfo,
+          pw: true
+        });
         setMessage({
           ...message,
           pw: ""
@@ -131,6 +164,10 @@ function Signup() {
         userID: signupInfo.userID
       }).then( (res) => {
         if (res.data.message === "사용할 수 있는 아이디입니다") {
+          setCheckSignupInfo({
+            ...checkSignupInfo,
+            userID: signupInfo.userID
+          });
           setMessage({
             ...message,
             userID: ""
@@ -163,6 +200,10 @@ function Signup() {
         nickname: signupInfo.nickname
       }).then( (res) => {
         if (res.data.message === "사용할 수 있는 닉네임입니다") {
+          setCheckSignupInfo({
+            ...checkSignupInfo,
+            nickname: signupInfo.nickname
+          });
           setMessage({
             ...message,
             nickname: ""
@@ -238,6 +279,10 @@ function Signup() {
       }).then( (res) => {
         if (res.data.message === "인증번호가 일치합니다") {
           removeCookie("TelAuthNumber");
+          setCheckSignupInfo({
+            ...checkSignupInfo,
+            tel: signupInfo.tel
+          });
           setMessage({
             ...message,
             verifyTel: ""
@@ -331,6 +376,10 @@ function Signup() {
       }).then( (res) => {
         if (res.data.message === "인증번호가 일치합니다") {
           removeCookie("EmailAuthNumber");
+          setCheckSignupInfo({
+            ...checkSignupInfo,
+            email: signupInfo.email
+          });
           setMessage({
             ...message,
             verifyEmail: ""
@@ -417,18 +466,78 @@ function Signup() {
 
   const handleSignupBtn = () => {
 
+    if (!signupInfo.userID || !signupInfo.pw || !signupInfo.pwCheck || !signupInfo.nickname || !signupInfo.tel) {
+      return setMessage({
+        ...message,
+        signup: "필수 항목을 모두 입력해주세요"
+      });
+    }
+
+    if (signupInfo.userID !== checkSignupInfo.userID) {
+      return setMessage({
+        ...message,
+        signup: "아이디 중복확인을 해주세요"
+      });
+    }
+
+    if (!checkSignupInfo.pw) {
+      return setMessage({
+        ...message,
+        signup: "비밀번호를 확인해주세요"
+      });
+    }
+
+    if (!checkSignupInfo.pwCheck) {
+      return setMessage({
+        ...message,
+        signup: "동일한 비밀번호를 입력해주세요"
+      });
+    }
+
+    if (signupInfo.nickname !== checkSignupInfo.nickname) {
+      return setMessage({
+        ...message,
+        signup: "닉네임 중복확인을 해주세요"
+      });
+    }
+
+    if (signupInfo.tel !== checkSignupInfo.tel) {
+      return setMessage({
+        ...message,
+        signup: "휴대폰 인증을 해주세요"
+      });
+    }
+
+    if (signupInfo.email) {
+      if (signupInfo.email !== checkSignupInfo.email) {
+        return setMessage({
+          ...message,
+          signup: "이메일 인증을 해주세요"
+        });
+      }
+    }
+    
+    if (signupInfo.address) {
+      if (!signupInfo.addressDetail) {
+        return setMessage({
+          ...message,
+          signup: "상세 주소를 입력해주세요"
+        });
+      }
+    }
+
     axios.post(`${process.env.REACT_APP_URL}/user/signup`, {
       userID: signupInfo.userID,
       pw: signupInfo.pw,
       nickname: signupInfo.nickname,
       tel: signupInfo.tel,
-      email: signupInfo.email
+      email: signupInfo.email,
+      address: signupInfo.address,
+      addressDetail: signupInfo.addressDetail
     }).then( (res) => {
       if (res.data.message === "회원가입 성공") {
         navigate("/login");
       }
-    }).catch( (err) => {
-      console.log("-----err-----", err)
     });
 
   };
@@ -572,6 +681,7 @@ function Signup() {
         </div>
       : null
       }
+      {message.signup ? <div className="signup__err-msg">{message.signup}</div> : null}
       <div className="signup__btn">
         <button onClick={handleSignupBtn} type="button">회원가입</button>
       </div>  
