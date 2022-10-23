@@ -8,6 +8,7 @@ module.exports = (req, res) => {
   const tel = req.body.tel;
   const email = req.body.email;
   const address = req.body.address;
+  const addressDetail = req.body.addressDetail;
 
   if (!userID || !pw || !nickname || !tel) {
     return res.status(400).send({ message: "잘못된 요청입니다" }); 
@@ -22,7 +23,7 @@ module.exports = (req, res) => {
       nickname: nickname,
       tel: tel,
       email: email,
-      address: address
+      address: `${address}-${addressDetail}`
     }
   }).then( ([user, created]) => {
     if (!created) {
