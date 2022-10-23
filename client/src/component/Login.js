@@ -85,9 +85,9 @@ function Login() {
           </label>
         </div>
         <div className="login__container__find-link">
-          <Link to="/">아이디 찾기</Link>
+          <Link to="/findid">아이디 찾기</Link>
           <hr />
-          <Link to="/">비밀번호 찾기</Link>
+          <Link to="/findpw">비밀번호 찾기</Link>
         </div>
       </div>
       <button onClick={handleLoginBtn} type="button">로그인</button>
