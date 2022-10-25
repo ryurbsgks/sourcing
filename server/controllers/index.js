@@ -7,6 +7,7 @@ module.exports = {
   auth: require("./user/auth"),
   signupSMS: require("./user/signupSMS"),
   verify: require("./user/verify"),
-  signupEmail: require("./user/signupEmail")
+  signupEmail: require("./user/signupEmail"),
+  findID : require("./user/findID")
   
 };
