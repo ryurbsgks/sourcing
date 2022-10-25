@@ -3,7 +3,7 @@ const request = require("request");
 
 module.exports = {
 
-  send: (tel, authNumber) => {
+  send: (tel, content) => {
 
     const phone = tel;
     const date = Date.now().toString();
@@ -40,7 +40,7 @@ module.exports = {
         type: "SMS",
         countryCode: "82",
         from: myNumber,
-        content: `[오늘의 장] 인증번호 [${authNumber}]를 입력해주세요`,
+        content: content,
         messages: [{ to: `${phone}` }]
       }
     });
