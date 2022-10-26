@@ -30,6 +30,9 @@ module.exports = {
       },
       address: {
         type: Sequelize.STRING
+      },
+      auth: {
+        type: Sequelize.INTEGER
       }
     });
   },

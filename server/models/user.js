@@ -19,7 +19,8 @@ module.exports = (sequelize, DataTypes) => {
     nickname: DataTypes.STRING,
     tel: DataTypes.STRING,
     email: DataTypes.STRING,
-    address: DataTypes.STRING
+    address: DataTypes.STRING,
+    auth: DataTypes.INTEGER
   }, {
     sequelize,
     freezeTableName: true,
