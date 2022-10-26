@@ -533,7 +533,8 @@ function Signup() {
       tel: signupInfo.tel,
       email: signupInfo.email,
       address: signupInfo.address,
-      addressDetail: signupInfo.addressDetail
+      addressDetail: signupInfo.addressDetail,
+      auth: 1
     }).then( (res) => {
       if (res.data.message === "회원가입 성공") {
         navigate("/login");
