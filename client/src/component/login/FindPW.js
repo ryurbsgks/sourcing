@@ -1,8 +1,8 @@
-import "../App.css";
+import "../../App.css";
 import { useState } from "react"
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import Check from "../modal/Check";
+import Check from "../../modal/Check";
 
 function FindPW() {
 

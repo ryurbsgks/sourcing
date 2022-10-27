@@ -1,9 +1,9 @@
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import TopBar from "../component/TopBar";
-import SearchBar from "../component/SearchBar";
-import NavBar from "../component/NavBar";
-import SellerSignupComponent from "../component/SellerSignup";
+import TopBar from "../component/header/TopBar";
+import SearchBar from "../component/header/SearchBar";
+import NavBar from "../component/header/NavBar";
+import SellerSignupComponent from "../component/login/SellerSignup";
 import Check from "../modal/Check";
 
 function SellerSignup() {

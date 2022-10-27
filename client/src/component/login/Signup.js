@@ -1,12 +1,12 @@
-import "../App.css";
+import "../../App.css";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDaumPostcodePopup } from "react-daum-postcode";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
-import Check from "../modal/Check";
-import { getCookie, removeCookie } from "../function"
+import Check from "../../modal/Check";
+import { getCookie, removeCookie } from "../../function"
 
 function Signup() {
 

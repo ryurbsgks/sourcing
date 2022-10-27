@@ -1,11 +1,11 @@
-import "../App.css";
+import "../../App.css";
 import axios from "axios";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
-import { setIsLogin } from "../redux/action";
+import { setIsLogin } from "../../redux/action";
 
 function Login() {
 
