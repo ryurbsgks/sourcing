@@ -6,6 +6,7 @@ import SellerSignup from "./pages/SellerSignup";
 import Login from "./pages/Login";
 import FindID from "./pages/FindID";
 import FindPW from "./pages/FindPW";
+import Product from "./pages/Product";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/findid" element={<FindID />} />
           <Route path="/findpw" element={<FindPW />} />
+          <Route path="/product/:category" element={<Product />} />
       </Routes>
     </BrowserRouter>
   );

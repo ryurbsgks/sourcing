@@ -1,10 +1,10 @@
-import "../App.css";
+import "../../App.css";
 import axios from "axios";
 import { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { setIsLogin } from "../redux/action";
-import { getCookie, removeCookie } from "../function";
+import { setIsLogin } from "../../redux/action";
+import { getCookie, removeCookie } from "../../function";
 
 function TopBar() {
 
