@@ -1,0 +1,167 @@
+/* --------------------
+  main css
+-------------------- */
+
+/* ---------- Banner.js ---------- */
+
+.banner {
+  overflow: hidden;
+  position: relative;
+}
+
+.banner > button {
+  width: 50px;
+  height: 50px;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.15);
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  transform: translate(0, -50%);
+  z-index: 1;
+}
+
+.banner__left-btn {
+  left: 10%;
+}
+
+.banner__right-btn {
+  right: 10%;
+} 
+
+.banner__container {
+  display: flex;
+}
+
+.banner__container img {
+  width: 100vw;
+  height: 100%;
+}
+
+/* ---------- Product.js ---------- */
+
+.product {
+  width: 280px;
+  cursor: pointer;
+  margin-top: 30px;
+}
+
+.product > img {
+  width: 100%;
+  height: 280px;
+  object-fit: cover;
+}
+
+.product > div {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.product__title {
+  font-size: 20px;
+}
+
+.product__pirce-info {
+  line-height: 110%;
+}
+
+.product__pirce-info__sale {
+  color: red;
+  font-size: 20px;
+  margin-right: 6px;
+}
+
+.product__pirce-info__price {
+  margin-right: 6px;
+}
+
+.product__pirce-info__price > b {
+  font-size: 20px;
+}
+
+.product__pirce-info__origin-price {
+  text-decoration: line-through;
+  color: gray;
+}
+
+.product__review > svg {
+  color: red;
+  margin-right: 5px;
+}
+
+.product__review > span {
+  font-size: 14px;
+  margin-right: 5px;
+}
+
+/* ---------- ProductGroup ---------- */
+
+.product-group {
+  margin-bottom: 30px;
+}
+
+.product-group__title {
+  text-align: center;
+  letter-spacing: 10px;
+  font-size: 30px;
+  margin-top: 10px;
+}
+
+.product-group__title--color-green {
+  color: #7fad39;
+  border-top: #7fad39 2px solid;
+}
+
+.product-group__title--color-red {
+  color: red;
+  border-top: red 2px solid;
+}
+
+.product-group__title--color-blue {
+  color: blue;
+  border-top: blue 2px solid;
+}
+
+.product-group__product-more {
+  text-align: end;
+}
+
+.product-group__product-more > a {
+  color: gray;
+  font-size: 14px;
+}
+
+.product-group__product-more svg {
+  font-size: 14px;
+}
+
+.product-group__product-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+/* ---------- ProductRecommend ---------- */
+
+.product-recommend {
+  margin-top: 40px;
+}
+
+.product-recommend__subtitle {
+  color: #7fad39;
+  font-size: 20px;
+}
+
+.product-recommend__title {
+  font-size: 30px;
+  line-height: 100%;
+  margin-bottom: 10px;
+}
+
+.product-recommend__title > span{
+  color: red;
+  font-size: 30px;
+}

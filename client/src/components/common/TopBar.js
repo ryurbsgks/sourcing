@@ -1,4 +1,5 @@
 import "../../App.css";
+import "./common.css";
 import axios from "axios";
 import { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
@@ -38,7 +39,7 @@ function TopBar() {
   };
 
   return (
-    <div className="topbar">
+    <article className="topbar">
       <div className="container">
         {isLogin 
         ? <ul className="topbar__menu">
@@ -46,12 +47,12 @@ function TopBar() {
             <li><Link to="/" onClick={handleLogoutBtn}>로그아웃</Link></li>
           </ul>
         : <ul className="topbar__menu">
-            <li><Link to="/login">로그인</Link></li>
-            <li><Link to="/signup">회원가입</Link></li>
+            <li><Link to="/member/login">로그인</Link></li>
+            <li><Link to="/member/signup">회원가입</Link></li>
           </ul>
         }
       </div>
-    </div>
+    </article>
   );
 }
 

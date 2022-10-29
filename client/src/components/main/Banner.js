@@ -1,9 +1,10 @@
-import "../App.css";
+import "../../App.css";
+import "./main.css";
 import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleLeft, faAngleRight } from "@fortawesome/free-solid-svg-icons";
-import { bannerImage } from "../dummydata/dummydata";
+import { bannerImage } from "../../dummydata/dummydata";
 
 function Banner() {
 
@@ -89,15 +90,15 @@ function Banner() {
         {bannerArr.map( (el, index) => {
           return (
             <Link key={index} to="/">
-              <img src={require(`../images/${el}`)} alt="BannerImage" />
+              <img src={require(`../../images/${el}`)} alt="BannerImage" />
             </Link>
           )
         })}
       </div>
-      <button onClick={() => handleSlideBtn("left")} type="button" className="banner__left-btn">
+      <button className="banner__left-btn" onClick={() => handleSlideBtn("left")} type="button">
         <FontAwesomeIcon className="icon__size28" icon={faAngleLeft} />
       </button>
-      <button onClick={() => handleSlideBtn("right")} type="button" className="banner__right-btn">
+      <button className="banner__right-btn" onClick={() => handleSlideBtn("right")} type="button">
         <FontAwesomeIcon className="icon__size28" icon={faAngleRight} />
       </button>
     </section>

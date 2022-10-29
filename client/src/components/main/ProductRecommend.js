@@ -1,6 +1,7 @@
-import "../App.css";
+import "../../App.css";
+import "./main.css";
 import ProductGroup from "./ProductGroup";
-import { dummydata } from "../dummydata/dummydata";
+import { dummydata } from "../../dummydata/dummydata";
 
 function ProductRecommend() {
   return (

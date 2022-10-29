@@ -1,14 +1,14 @@
-import TopBar from "../component/header/TopBar";
-import SearchBar from "../component/header/SearchBar";
-import NavBar from "../component/header/NavBar";
-import Banner from "../component/Banner";
-import ProductRecommend from "../component/ProductRecommend";
+import TopBar from "../components/common/TopBar";
+import SearchBar from "../components/common/SearchBar";
+import NavBar from "../components/common/NavBar";
+import Banner from "../components/main/Banner";
+import ProductRecommend from "../components/main/ProductRecommend";
 
 function Main() {
   return (
     <>
+      <TopBar />
       <header>
-        <TopBar />
         <SearchBar />
         <NavBar />
       </header>

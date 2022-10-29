@@ -1,4 +1,5 @@
 import "../../App.css";
+import "./member.css";
 import axios from "axios";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
@@ -85,14 +86,14 @@ function Login() {
           </label>
         </div>
         <div className="login__container__find-link">
-          <Link to="/findid">아이디 찾기</Link>
+          <Link to="/find/id">아이디 찾기</Link>
           <hr />
-          <Link to="/findpw">비밀번호 찾기</Link>
+          <Link to="/find/pw">비밀번호 찾기</Link>
         </div>
       </div>
       <button onClick={handleLoginBtn} type="button">로그인</button>
       <div className="login__signup">
-        <Link to="/signup">회원가입 <FontAwesomeIcon icon={faAngleRight} /></Link>
+        <Link to="/member/signup">회원가입 <FontAwesomeIcon icon={faAngleRight} /></Link>
       </div>
     </section>
   );
