@@ -1,0 +1,153 @@
+/* --------------------
+  common css
+-------------------- */
+
+/* ---------- TopBar.js ---------- */
+
+.topbar {
+  background-color: #f5f5f5;
+}
+
+.topbar__menu {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.topbar__menu > li {
+  padding: 10px 12px;
+}
+
+.topbar__menu a {
+  font-size: 12px;
+}
+
+/* ---------- SearchBar.js ---------- */
+
+.searchbar {
+  width: 1200px;
+  height: 100px;
+  display: flex;
+  justify-content: space-between;
+  margin: 0 auto;
+}
+
+.searchbar__logo {
+  line-height: 100px;
+}
+
+.searchbar__logo img {
+  vertical-align: middle;
+  padding-left: 10px;
+}
+
+.searchbar__searchbox {
+  width: 650px;
+  height: 50px;
+  display: flex;
+  border: #7fad39 2px solid ;
+  position: relative;
+  margin: auto 0;
+}
+
+.searchbar__searchbox > input {
+  width: 55%;
+  border: none;
+  outline: none;
+  padding: 0 20px;
+}
+
+.searchbar__searchbox > button {
+  width: 23%;
+  color: white;
+  background-color: #7fad39;
+  border: none;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.searchbar__searchbox svg {
+  padding-right: 10px;
+}
+
+.searchbar__searchbox__menu {
+  width: 22%;
+  display: flex;
+  border-right: 2px solid #ebebeb;
+  cursor: pointer;
+  margin: auto 0;
+  padding-left: 15px;
+}
+
+.searchbar__searchbox__menu__text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-right: 5px;
+}
+
+.searchbar__searchbox__menu__icon {
+  margin-left: auto;
+  margin-right: 5px;
+}
+
+.searchbar__searchbox__menu-list {
+  display: none;
+  width: 144.117px;
+  background-color: white;
+  border: #ebebeb 2px solid ;
+  box-shadow: 0 4px 5px rgba(0, 0, 0, 0.3);
+  position: absolute;
+  top: 46px;
+  left: -2px;
+  z-index: 1;
+}
+
+.searchbar__searchbox__menu-list li {
+  cursor: pointer;
+  padding-left: 15px;
+}
+
+.searchbar__searchbox__menu-list li:hover {
+  color: #7fad39;
+}
+
+.searchbar__menu {
+  display: flex;
+  justify-content: flex-end;
+  margin: auto 0;
+}
+
+.searchbar__menu > li {
+  padding: 10px 12px;
+}
+
+.searchbar__menu svg {
+  vertical-align: middle;
+}
+
+/* ---------- NavBar.js ---------- */
+
+.navbar {
+  box-shadow: 0px 3px 4px 0px rgba(0, 0, 0, 0.07);
+}
+
+.navbar__menu {
+  height: 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 10%;
+}
+
+.navbar__menu > li {
+  width: 100%;
+  text-align: center;
+}
+
+.navbar__menu a {
+  display: block;
+}
+
+.navbar__menu a:hover {
+  color: #7fad39;
+}

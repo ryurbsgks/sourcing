@@ -1,10 +1,11 @@
-import "../App.css";
+import "../../App.css";
+import "./main.css";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
 import Product from "./Product";
-import { dummydata } from "../dummydata/dummydata";
+import { dummydata } from "../../dummydata/dummydata";
 
 function ProductGroup( { category } ) {
 
