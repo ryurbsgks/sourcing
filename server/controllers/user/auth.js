@@ -8,6 +8,6 @@ module.exports = (req, res) => {
     return res.status(200).send({ message: "Guest 상태입니다" });
   }
 
-  res.status(200).send({ message: "로그인 상태입니다"});
+  res.status(200).send({ data: payload, message: "로그인 상태입니다" });
 
 };
