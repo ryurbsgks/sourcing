@@ -7,9 +7,9 @@ function NavBar() {
     <nav className="navbar">
       <div className="container">
         <ul className="navbar__menu">
-          <li><Link to="/">야채</Link></li>
-          <li><Link to="/">청과</Link></li>
-          <li><Link to="/">수산</Link></li>
+          <li><Link to="/category/vegetable">야채</Link></li>
+          <li><Link to="/category/fruit">과일</Link></li>
+          <li><Link to="/category/seafood">수산물</Link></li>
           <li><Link to="/">오늘의 시세</Link></li>
           <li><Link to="/">예약</Link></li>
         </ul>
