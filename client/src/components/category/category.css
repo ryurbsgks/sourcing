@@ -37,7 +37,6 @@
 }
 
 .header__menu__sortbox-list {
-  display: none;
   width: 104px;
   border: #ebebeb 2px solid ;
   box-shadow: 0 4px 5px rgba(0, 0, 0, 0.3);
@@ -45,4 +44,8 @@
   top: 30px;
   right: -2px;
   z-index: 1;
+}
+
+.header__menu__sortbox-list li {
+  cursor: pointer;
 }
