@@ -31,6 +31,10 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: normal;
 }
 
+p {
+  margin: 0;
+}
+
 .container {
   width: 1200px;
   margin: 0 auto;
@@ -44,4 +48,12 @@ h1, h2, h3, h4, h5, h6 {
 
 .icon__size28 {
   font-size: 28px;
+}
+
+.icon__size100 {
+  font-size: 100px;
+}
+
+.icon__size150 {
+  font-size: 150px;
 }
