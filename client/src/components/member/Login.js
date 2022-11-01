@@ -3,10 +3,8 @@ import "./member.css";
 import axios from "axios";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
-import { setIsLogin } from "../../redux/action";
 
 function Login() {
 
@@ -18,7 +16,6 @@ function Login() {
   const [message, setMessage] = useState("");
 
   const navigate = useNavigate();
-  const dispatch = useDispatch();
 
   const handleInputValue = (e) => {
 
@@ -45,9 +42,12 @@ function Login() {
       withCredentials: true
     }).then( (res) => {
       if (res.data.message === "로그인 성공") {
-        dispatch(setIsLogin(true));
-        setMessage("")
-        navigate("/");
+        setMessage("");
+        return navigate("/", {
+          state: {
+            isLogin: true
+          }
+        });
       }
     }).catch( (err) => {
       if (err.response.data.message === "아이디 또는 비밀번호가 일치하지 않습니다") {
