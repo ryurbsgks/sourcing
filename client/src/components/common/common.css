@@ -151,3 +151,46 @@
 .navbar__menu a:hover {
   color: #7fad39;
 }
+
+/* ---------- NotFound.js ---------- */
+
+.notfound__icon {
+  text-align: center;
+  position: relative;
+  margin-top: 100px;
+}
+
+.notfound__icon > svg {
+  color: #E2E2E2;
+}
+
+.notfound__icon__exclamation {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.notfound__title {
+  font-size: 32px;
+  text-align: center;
+  margin-top: 50px;
+}
+
+.notfound__content {
+  color: #666;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.notfound__btn {
+  width: 150px;
+  height: 40px;
+  display: block;
+  color: green;
+  background-color: white;
+  border: green 1px solid;
+  border-radius: 3px;
+  cursor: pointer;
+  margin: 20px auto 0;
+}
