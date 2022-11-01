@@ -6,6 +6,7 @@ import TopBar from "../components/common/TopBar";
 import SearchBar from "../components/common/SearchBar";
 import NavBar from "../components/common/NavBar";
 import Header from "../components/category/Header";
+import NotFound from "../components/common/NotFound";
 import { getCookie } from "../function";
 import { setIsLogin } from "../redux/action";
 
@@ -40,16 +41,20 @@ function Category() {
 
   return (
     <>
-      <TopBar />
-      <header>
-        <SearchBar />
-        <NavBar />
-      </header>
-      <main>
-        <section className="container">
-          <Header params={params.category} auth={auth} />
-        </section>
-      </main>
+      { params.category === "vegetable" || params.category === "fruit" || params.category === "seafood"
+      ? <>
+          <TopBar />
+          <header>
+            <SearchBar />
+            <NavBar />
+          </header>
+          <main>
+            <section className="container">
+              <Header params={params.category} auth={auth} />
+            </section>
+          </main>
+        </>
+      : <NotFound />}
     </>
   );
 }
