@@ -1,6 +1,7 @@
 import "../../App.css";
 import "./category.css";
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretDown } from "@fortawesome/free-solid-svg-icons";
 
@@ -82,7 +83,7 @@ function Header({ params, auth }) {
     <>
       <h2 className="header__title">{category}</h2>
       <div className="header__menu">
-        {auth === 2 ? <button>상품 등록</button> : null}
+        {auth === 2 ? <Link to="/product/new"><button>상품 등록</button></Link> : null}
         <div className="header__menu__sortbox" onClick={handleClickSortbox}>
           <span>{sortbox.content}</span>
           <div className="header__menu__sortbox__icon">
