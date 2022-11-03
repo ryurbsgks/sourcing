@@ -17,7 +17,7 @@
   margin-top: 50px;
 }
 
-.header__menu > button {
+.header__menu button {
   color: green;
   background-color: white;
   border: green 1px solid;
