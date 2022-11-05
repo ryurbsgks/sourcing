@@ -56,7 +56,8 @@
 
 .new__product-info__content__container__space-01 {
   width: 17%;
-  margin: auto 0;
+  height: 45px;
+  line-height: 45px;
 }
 
 .new__product-info__content__container__space-01 > input {
@@ -94,6 +95,10 @@
   color: red;
 }
 
+.new__product-info__content__container__space-06 {
+  margin-left: -20px;
+}
+
 .new__product-info__content__container__menu {
   position: relative;
   margin: auto 0;
@@ -112,6 +117,7 @@
 
 .new__product-info__content__container__menu__sortbox-list {
   width: 104px;
+  background-color: white;
   border: #ebebeb 2px solid ;
   box-shadow: 0 4px 5px rgba(0, 0, 0, 0.3);
   position: absolute;
@@ -119,3 +125,4 @@
   right: -2px;
   z-index: 1;
 }
+
