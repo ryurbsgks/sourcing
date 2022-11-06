@@ -8,6 +8,7 @@ import { faCaretDown } from "@fortawesome/free-solid-svg-icons";
 function New() {
 
   const [productInfo, setProductInfo] = useState({
+    pic: defaultImage,
     name: "",
     price: "",
     sale: "",
@@ -276,16 +277,30 @@ function New() {
     });
 
   };
+
+  const handleChangeFile = (e) => {
+
+    const reader = new FileReader();
+
+    reader.readAsDataURL(e.target.files[0]);
+    reader.onload = () => {
+      setProductInfo({
+        ...productInfo,
+        pic: reader.result
+      });
+    };
+
+  };
   
   return (
     <main>
       <section className="container">
         <div className="new__product-info">
           <div className="new__product-info__img">
-            <img src={defaultImage} alt="ProductImage" />
+            <img src={productInfo.pic} alt="ProductImage" />
             <div className="new__product-info__img__img-select">
               <label htmlFor="productImg">상품 사진 선택하기</label>
-              <input id="productImg" type="file" accept="image/*" />
+              <input id="productImg" type="file" accept="image/*" onChange={handleChangeFile} />
             </div>
           </div> 
           <div className="new__product-info__content">
