@@ -1,6 +1,6 @@
 import "../../App.css";
 import "./product.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import defaultImage from "../../images/defaultImage.jpg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretDown } from "@fortawesome/free-solid-svg-icons";
@@ -11,6 +11,7 @@ function New() {
     name: "",
     price: "",
     sale: "",
+    salePercent: "",
     unit: "",
     unitInfo: "",
     weight: "",
@@ -33,6 +34,24 @@ function New() {
     weight: "직접입력",
     origin: "직접입력"
   });
+
+  useEffect( () => {
+
+    if (productInfo.price && productInfo.sale) {
+      if (Number(productInfo.price) > Number(productInfo.sale)) {
+        return setProductInfo({
+          ...productInfo,
+          salePercent: Math.floor((Number(productInfo.price) - Number(productInfo.sale)) / Number(productInfo.price) * 100)
+        });
+      }
+    }
+
+    setProductInfo({
+      ...productInfo,
+      salePercent: ""
+    })
+
+  }, [productInfo.price, productInfo.sale]);
 
   const handleInputValue = (e) => {
 
@@ -307,7 +326,7 @@ function New() {
                   <span>원</span>
                 </div>
                 <div className="new__product-info__content__container__space-05">
-                  <p>할인율 : <span>25</span>%</p>
+                  <p>할인율 : <span>{productInfo.salePercent}</span>%</p>
                 </div>
               </div>
             : null}
