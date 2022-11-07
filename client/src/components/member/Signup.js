@@ -538,7 +538,7 @@ function Signup() {
       auth: 1
     }).then( (res) => {
       if (res.data.message === "회원가입 성공") {
-        navigate("/login");
+        navigate("/member/login");
       }
     });
 
