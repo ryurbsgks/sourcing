@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom/client';
+import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
@@ -13,8 +13,7 @@ import { PersistGate } from "redux-persist/integration/react";
 const store = createStore(persiReducer);
 const persistor = persistStore(store);
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
+ReactDOM.render(
   <React.StrictMode>
     <CookiesProvider>
       <Provider store={store}>
@@ -23,7 +22,8 @@ root.render(
         </PersistGate>
       </Provider>
     </CookiesProvider>
-  </React.StrictMode>
+  </React.StrictMode>,
+  document.getElementById('root')
 );
 
 // If you want to start measuring performance in your app, pass a function
