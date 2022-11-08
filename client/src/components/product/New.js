@@ -1,6 +1,8 @@
 import "../../App.css";
 import "./product.css";
 import { useState, useEffect } from "react";
+import "@toast-ui/editor/dist/toastui-editor.css";
+import { Editor } from "@toast-ui/react-editor";
 import defaultImage from "../../images/defaultImage.jpg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretDown } from "@fortawesome/free-solid-svg-icons";
@@ -433,6 +435,19 @@ function New() {
               </div>
             </div>
           </div>
+        </div>
+      </section>
+      <section className="container">
+        <div className="new_product-info__editor">상품 정보</div>
+        <Editor
+          height="800px"
+          previewStyle="vertical"
+          initialEditType="wysiwyg"
+          useCommandShortcut={true}
+          hideModeSwitch={true}
+        />
+        <div className="new_product-info__editor-btn">
+          <button>등록하기</button>
         </div>
       </section>
     </main>
