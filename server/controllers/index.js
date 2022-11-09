@@ -9,6 +9,7 @@ module.exports = {
   verify: require("./user/verify"),
   signupEmail: require("./user/signupEmail"),
   findID: require("./user/findID"),
-  findPW: require("./user/findPW")
+  findPW: require("./user/findPW"),
+  new: require("./product/new")
   
 };
