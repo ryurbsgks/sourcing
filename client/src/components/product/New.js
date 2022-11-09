@@ -30,12 +30,14 @@ function New() {
   const [sortbox, setSortbox] = useState({
     unit: false,
     weight: false,
-    origin: false
+    origin: false,
+    category: false
   });
   const [sortboxList, setSortboxList] = useState({
     unit: "직접입력",
     weight: "직접입력",
-    origin: "직접입력"
+    origin: "직접입력",
+    category: "야채"
   });
 
   useEffect( () => {
@@ -80,7 +82,8 @@ function New() {
       return setSortbox({
         unit: true,
         weight: false,
-        origin: false
+        origin: false,
+        category: false
       });
     }
 
@@ -95,7 +98,8 @@ function New() {
       return setSortbox({
         unit: false,
         weight: true,
-        origin: false
+        origin: false,
+        category: false
       });
     }
 
@@ -110,7 +114,24 @@ function New() {
       return setSortbox({
         unit: false,
         weight: false,
-        origin: true
+        origin: true,
+        category: false
+      });
+    }
+
+    if (id === "category") {
+      if (sortbox.category) {
+        return setSortbox({
+          ...sortbox,
+          category: false
+        });
+      }
+
+      return setSortbox({
+        unit: false,
+        weight: false,
+        origin: false,
+        category: true
       });
     }
 
@@ -257,6 +278,42 @@ function New() {
         return setSortbox({
           ...sortbox,
           origin: false
+        });
+      }
+
+    }
+
+    if (id === "category") {
+      if (e.target.value === 0) {
+        setSortboxList({
+          ...sortboxList,
+          category: "야채"
+        });
+        return setSortbox({
+          ...sortbox,
+          category: false
+        });
+      }
+
+      if (e.target.value === 1) {
+        setSortboxList({
+          ...sortboxList,
+          category: "과일"
+        });
+        return setSortbox({
+          ...sortbox,
+          category: false
+        });
+      }
+
+      if (e.target.value === 2) {
+        setSortboxList({
+          ...sortboxList,
+          category: "수산물"
+        });
+        return setSortbox({
+          ...sortbox,
+          category: false
         });
       }
 
@@ -429,6 +486,28 @@ function New() {
                       <li value={0}>직접입력</li>
                       <li value={1}>국내산</li>
                       <li value={2}>수입산</li>
+                    </ul>
+                  </div>
+                : null}
+              </div>
+            </div>
+            <div className="new__product-info__content__container">
+              <div className="new__product-info__content__container__space-01">
+                <span>카테고리</span>
+              </div>
+              <div className="new__product-info__content__container__menu">
+                <div className="new__product-info__content__container__menu__sortbox" onClick={() => handleClickSortbox("category")}>
+                  <span>{sortboxList.category}</span>
+                  <div className="new__product-info__content__container__menu__sortbox__icon">
+                    <FontAwesomeIcon icon={faCaretDown} />
+                  </div>
+                </div>
+                {sortbox.category 
+                ? <div className="new__product-info__content__container__menu__sortbox-list">
+                    <ul onClick={(e) => handleClickSortboxList("category", e)}>
+                      <li value={0}>야채</li>
+                      <li value={1}>과일</li>
+                      <li value={2}>수산물</li>
                     </ul>
                   </div>
                 : null}
