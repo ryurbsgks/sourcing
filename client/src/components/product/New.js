@@ -10,11 +10,12 @@ import { faCaretDown } from "@fortawesome/free-solid-svg-icons";
 function New() {
 
   const [productInfo, setProductInfo] = useState({
-    pic: defaultImage,
+    img: defaultImage,
+    uploadImg: "",
     name: "",
     price: "",
-    sale: "",
-    salePercent: "",
+    salePrice: "",
+    salePct: "",
     unit: "",
     unitInfo: "",
     weight: "",
@@ -42,21 +43,21 @@ function New() {
 
   useEffect( () => {
 
-    if (productInfo.price && productInfo.sale) {
-      if (Number(productInfo.price) > Number(productInfo.sale)) {
+    if (productInfo.price && productInfo.salePrice) {
+      if (Number(productInfo.price) > Number(productInfo.salePrice)) {
         return setProductInfo({
           ...productInfo,
-          salePercent: Math.floor((Number(productInfo.price) - Number(productInfo.sale)) / Number(productInfo.price) * 100)
+          salePct: Math.floor((Number(productInfo.price) - Number(productInfo.salePrice)) / Number(productInfo.price) * 100)
         });
       }
     }
 
     setProductInfo({
       ...productInfo,
-      salePercent: ""
-    })
+      salePct: ""
+    });
 
-  }, [productInfo.price, productInfo.sale]);
+  }, [productInfo.price, productInfo.salePrice]);
 
   const handleInputValue = (e) => {
 
@@ -65,6 +66,22 @@ function New() {
     setProductInfo({
       ...productInfo,
       [name]: value
+    });
+
+  };
+
+  const handleApplySale = (e) => {
+
+    if (!e.target.checked) {
+      setProductInfo({
+        ...productInfo,
+        salePrice: ""
+      });
+    }
+
+    setOpenUI({
+      ...openUI,
+      sale: e.target.checked
     });
 
   };
@@ -138,20 +155,28 @@ function New() {
   };
 
   const handleClickSortboxList = (id, e) => {
-    
+
     if (id === "unit") {
       if (e.target.value === 0) {
         setSortboxList({
           ...sortboxList,
           unit: "직접입력"
         });
-        setOpenUI({
-          ...openUI,
-          unit: true
-        });
-        return setSortbox({
+        setSortbox({
           ...sortbox,
           unit: false
+        });
+
+        if (sortboxList.unit !== "직접입력") {
+          setProductInfo({
+            ...productInfo,
+            unitInfo: ""
+          });
+        }
+
+        return setOpenUI({
+          ...openUI,
+          unit: true
         });
       }
 
@@ -160,12 +185,16 @@ function New() {
           ...sortboxList,
           unit: "개"
         });
-        setOpenUI({
-          ...openUI,
+        setSortbox({
+          ...sortbox,
           unit: false
         });
-        return setSortbox({
-          ...sortbox,
+        setProductInfo({
+          ...productInfo,
+          unitInfo: "개"
+        });
+        return setOpenUI({
+          ...openUI,
           unit: false
         });
       }
@@ -175,12 +204,16 @@ function New() {
           ...sortboxList,
           unit: "박스"
         });
-        setOpenUI({
-          ...openUI,
+        setSortbox({
+          ...sortbox,
           unit: false
         });
-        return setSortbox({
-          ...sortbox,
+        setProductInfo({
+          ...productInfo,
+          unitInfo: "박스"
+        });
+        return setOpenUI({
+          ...openUI,
           unit: false
         });
       }
@@ -193,13 +226,21 @@ function New() {
           ...sortboxList,
           weight: "직접입력"
         });
-        setOpenUI({
-          ...openUI,
-          weight: true
-        });
-        return setSortbox({
+        setSortbox({
           ...sortbox,
           weight: false
+        });
+
+        if (sortboxList.weight !== "직접입력") {
+          setProductInfo({
+            ...productInfo,
+            weightInfo: ""
+          });
+        }
+
+        return setOpenUI({
+          ...openUI,
+          weight: true
         });
       }
 
@@ -208,12 +249,16 @@ function New() {
           ...sortboxList,
           weight: "g"
         });
-        setOpenUI({
-          ...openUI,
+        setSortbox({
+          ...sortbox,
           weight: false
         });
-        return setSortbox({
-          ...sortbox,
+        setProductInfo({
+          ...productInfo,
+          weightInfo: "g"
+        });
+        return setOpenUI({
+          ...openUI,
           weight: false
         });
       }
@@ -223,12 +268,54 @@ function New() {
           ...sortboxList,
           weight: "kg"
         });
-        setOpenUI({
+        setSortbox({
+          ...sortbox,
+          weight: false
+        });
+        setProductInfo({
+          ...productInfo,
+          weightInfo: "kg"
+        });
+        return setOpenUI({
           ...openUI,
           weight: false
         });
-        return setSortbox({
+      }
+
+      if (e.target.value === 3) {
+        setSortboxList({
+          ...sortboxList,
+          weight: "ml"
+        });
+        setSortbox({
           ...sortbox,
+          weight: false
+        });
+        setProductInfo({
+          ...productInfo,
+          weightInfo: "ml"
+        });
+        return setOpenUI({
+          ...openUI,
+          weight: false
+        });
+      }
+
+      if (e.target.value === 4) {
+        setSortboxList({
+          ...sortboxList,
+          weight: "L"
+        });
+        setSortbox({
+          ...sortbox,
+          weight: false
+        });
+        setProductInfo({
+          ...productInfo,
+          weightInfo: "L"
+        });
+        return setOpenUI({
+          ...openUI,
           weight: false
         });
       }
@@ -241,13 +328,21 @@ function New() {
           ...sortboxList,
           origin: "직접입력"
         });
-        setOpenUI({
-          ...openUI,
-          origin: true
-        });
-        return setSortbox({
+        setSortbox({
           ...sortbox,
           origin: false
+        });
+
+        if (sortboxList.origin !== "직접입력") {
+          setProductInfo({
+            ...productInfo,
+            origin: ""
+          });
+        }
+
+        return setOpenUI({
+          ...openUI,
+          origin: true
         });
       }
 
@@ -256,12 +351,16 @@ function New() {
           ...sortboxList,
           origin: "국내산"
         });
-        setOpenUI({
-          ...openUI,
+        setSortbox({
+          ...sortbox,
           origin: false
         });
-        return setSortbox({
-          ...sortbox,
+        setProductInfo({
+          ...productInfo,
+          origin: "국내산"
+        });
+        return setOpenUI({
+          ...openUI,
           origin: false
         });
       }
@@ -271,12 +370,16 @@ function New() {
           ...sortboxList,
           origin: "수입산"
         });
-        setOpenUI({
-          ...openUI,
+        setSortbox({
+          ...sortbox,
           origin: false
         });
-        return setSortbox({
-          ...sortbox,
+        setProductInfo({
+          ...productInfo,
+          origin: "수입산"
+        });
+        return setOpenUI({
+          ...openUI,
           origin: false
         });
       }
@@ -321,22 +424,6 @@ function New() {
 
   };
 
-  const handleApplySale = (e) => {
-
-    if (!e.target.checked) {
-      setProductInfo({
-        ...productInfo,
-        sale: ""
-      });
-    }
-
-    setOpenUI({
-      ...openUI,
-      sale: e.target.checked
-    });
-
-  };
-
   const handleChangeFile = (e) => {
 
     const reader = new FileReader();
@@ -345,18 +432,19 @@ function New() {
     reader.onload = () => {
       setProductInfo({
         ...productInfo,
-        pic: reader.result
+        img: reader.result,
+        uploadImg: e.target.files[0]
       });
     };
 
   };
-  
+
   return (
     <main>
       <section className="container">
         <div className="new__product-info">
           <div className="new__product-info__img">
-            <img src={productInfo.pic} alt="ProductImage" />
+            <img src={productInfo.img} alt="ProductImage" />
             <div className="new__product-info__img__img-select">
               <label htmlFor="productImg">상품 사진 선택하기</label>
               <input id="productImg" type="file" accept="image/*" onChange={handleChangeFile} />
@@ -394,13 +482,13 @@ function New() {
                   <span>할인 적용가</span>
                 </div>
                 <div className="new__product-info__content__container__space-01">
-                  <input name="sale" onChange={handleInputValue} placeholder="판매 가격" />
+                  <input name="salePrice" onChange={handleInputValue} placeholder="판매 가격" />
                 </div>
                 <div className="new__product-info__content__container__space-03">
                   <span>원</span>
                 </div>
                 <div className="new__product-info__content__container__space-05">
-                  <p>할인율 : <span>{productInfo.salePercent}</span>%</p>
+                  <p>할인율 : <span>{productInfo.salePct}</span>%</p>
                 </div>
               </div>
             : null}
@@ -459,6 +547,8 @@ function New() {
                       <li value={0}>직접입력</li>
                       <li value={1}>g</li>
                       <li value={2}>kg</li>
+                      <li value={3}>ml</li>
+                      <li value={4}>L</li>
                     </ul>
                   </div>
                 : null}
