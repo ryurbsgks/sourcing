@@ -24,6 +24,7 @@ app.post("/user/signup/email", controllers.signupEmail);
 app.post("/user/find/id", controllers.findID);
 app.post("/user/find/pw", controllers.findPW);
 app.post("/product/new", controllers.new);
+app.post("/product/editor", controllers.editor);
 
 server.listen(80, () => {
   console.log("HTTP Server running on port 80")
