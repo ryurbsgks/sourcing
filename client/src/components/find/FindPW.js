@@ -193,7 +193,7 @@ function FindPW() {
         ...modalOpen,
         tel: false
       });
-      navigate("/login");
+      navigate("/member/login");
     }
 
     if (id === "email") {
@@ -201,7 +201,7 @@ function FindPW() {
         ...modalOpen,
         email: false
       });
-      navigate("/login");
+      navigate("/member/login");
     }
 
   };
