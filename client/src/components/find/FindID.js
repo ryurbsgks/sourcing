@@ -162,7 +162,7 @@ function FindID() {
         ...modalOpen,
         tel: false
       });
-      navigate("/login");
+      navigate("/member/login");
     }
 
     if (id === "email") {
@@ -170,7 +170,7 @@ function FindID() {
         ...modalOpen,
         email: false
       });
-      navigate("/login");
+      navigate("/member/login");
     }
 
   };
