@@ -2,7 +2,7 @@ const express = require("express");
 const http = require("http");
 const cors = require("cors");
 const controllers = require("./controllers");
-
+const path = require("path")
 const app = express();
 const server = http.createServer(app);
 
@@ -12,6 +12,7 @@ app.use(cors({
   methods: ["GET", "POST"],
   credentials: true
 }));
+app.use('/img/editor', express.static(path.join(__dirname, './img/editor/')));
 
 app.post("/user/signup", controllers.signup);
 app.post("/user/login", controllers.login);
