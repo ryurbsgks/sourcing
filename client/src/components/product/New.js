@@ -1,13 +1,15 @@
 import "../../App.css";
 import "./product.css";
-import { useState, useEffect } from "react";
+import axios from "axios";
+import { useState, useEffect, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import "@toast-ui/editor/dist/toastui-editor.css";
 import { Editor } from "@toast-ui/react-editor";
 import defaultImage from "../../images/defaultImage.jpg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretDown } from "@fortawesome/free-solid-svg-icons";
 
-function New() {
+function New({ props }) {
 
   const [productInfo, setProductInfo] = useState({
     img: defaultImage,
@@ -40,6 +42,7 @@ function New() {
     origin: "직접입력",
     category: "야채"
   });
+  const [errMessage, setErrMessage] = useState("");
 
   useEffect( () => {
 
@@ -58,6 +61,9 @@ function New() {
     });
 
   }, [productInfo.price, productInfo.salePrice]);
+
+  const editorRef = useRef();
+  const navigate = useNavigate();
 
   const handleInputValue = (e) => {
 
@@ -439,6 +445,97 @@ function New() {
 
   };
 
+  const handleRegisterBtn = () => {
+
+    const numberRegExp = /^[0-9]*$/;
+
+    if (!productInfo.uploadImg || !productInfo.name || !productInfo.price || !productInfo.unit || !productInfo.unitInfo || !productInfo.weight || !productInfo.weightInfo || !productInfo.origin) {
+      return setErrMessage("필수 항목을 모두 입력해주세요");
+    }
+
+    if (!numberRegExp.test(productInfo.price)) {
+      return setErrMessage("판매 가격은 숫자만 입력해주세요");
+    }
+    
+    if (openUI.sale) {
+      if (!productInfo.salePrice) {
+        return setErrMessage("할인 적용가를 입력해주세요")
+      }
+
+      if (!numberRegExp.test(productInfo.salePrice)) {
+        return setErrMessage("할인 적용가는 숫자만 입력해주세요");
+      }
+    }
+
+    if (!numberRegExp.test(productInfo.unit)) {
+      return setErrMessage("판매 단위는 숫자만 입력해주세요");
+    }
+
+    if (!numberRegExp.test(productInfo.weight)) {
+      return setErrMessage("중량/용량은 숫자만 입력해주세요");
+    }
+
+    const formData = new FormData();
+    const data = {
+      name: productInfo.name,
+      price: productInfo.price,
+      salePrice: productInfo.salePrice,
+      salePct: productInfo.salePct,
+      unit: `${productInfo.unit}${productInfo.unitInfo}`,
+      weight: `${productInfo.weight}${productInfo.weightInfo}`,
+      origin: productInfo.origin,
+      category: sortboxList.category,
+      content: editorRef.current.getInstance().getHTML(),
+      userID: props
+    };
+    
+    formData.append("img", productInfo.uploadImg);
+    formData.append("data", JSON.stringify(data));
+
+    axios.post(`${process.env.REACT_APP_URL}/product/new`, formData, {
+      header: {
+        'content-type': 'multipart/form-data'
+      }
+    }).then( (res) => {
+      if (res.data.message === "상품 등록 성공") {
+        setErrMessage("");
+
+        if (sortboxList.category === "야채") {
+          return navigate("/category/vegetable");
+        }
+
+        if (sortboxList.category === "과일") {
+          return navigate("/category/fruit");
+        }
+
+        return navigate("/category/seafood");
+      }
+    }).catch( (err) => {
+      if (err.response.data.message === "상품 등록 실패") {
+        setErrMessage("상품 등록에 실패하였습니다");
+      }
+    });
+
+  };
+
+  const onUploadImage = async (blob, cb) => {
+
+    const formData = new FormData();
+
+    formData.append("img", blob);
+
+    axios.post(`${process.env.REACT_APP_URL}/product/editor`, formData, {
+      header: {
+        'content-type': 'multipart/form-data'
+      }
+    }).then( (res) => {
+      if (res.data.message === "업로드 성공") {
+        cb(`${process.env.REACT_APP_URL}/${res.data.data}`, res.data.data);
+      }
+    });
+
+  };
+
   return (
     <main>
       <section className="container">
@@ -614,9 +711,14 @@ function New() {
           initialEditType="wysiwyg"
           useCommandShortcut={true}
           hideModeSwitch={true}
+          ref={editorRef}
+          hooks={{
+            addImageBlobHook: onUploadImage
+          }}
         />
+        {errMessage ? <div className="new_product-info__err-msg">{errMessage}</div> : null}
         <div className="new_product-info__editor-btn">
-          <button>등록하기</button>
+          <button onClick={handleRegisterBtn}>등록하기</button>
         </div>
       </section>
     </main>
