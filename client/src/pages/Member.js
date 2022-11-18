@@ -1,5 +1,6 @@
+import { useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import TopBar from "../components/common/TopBar";
 import SearchBar from "../components/common/SearchBar";
 import NavBar from "../components/common/NavBar";
@@ -8,12 +9,22 @@ import Signup from "../components/member/Signup";
 import SignupSeller from "../components/member/SignupSeller";
 import Check from "../components/modal/Check";
 import NotFound from "../components/common/NotFound";
+import { isAuthenticated } from "../function";
 
 function Member() {
 
   const params = useParams();
   const isLogin = useSelector( (state) => state.isLogIn );
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  useEffect( () => {
+
+    if (isLogin) {
+      isAuthenticated(dispatch);
+    }
+
+  }, []);
 
   const handleNavigate = () => {
     navigate("/");
