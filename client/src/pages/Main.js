@@ -1,16 +1,18 @@
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import TopBar from "../components/common/TopBar";
 import SearchBar from "../components/common/SearchBar";
 import NavBar from "../components/common/NavBar";
 import Banner from "../components/main/Banner";
 import ProductRecommend from "../components/main/ProductRecommend";
 import { setIsLogin } from "../redux/action";
+import { isAuthenticated } from "../function";
 
 function Main() {
 
   const location = useLocation();
+  const isLogin = useSelector( (state) => state.isLogIn );
   const dispatch = useDispatch();
 
   useEffect( () => {
@@ -21,6 +23,10 @@ function Main() {
       }
     }
 
+    if (isLogin) {
+      isAuthenticated(dispatch);
+    }
+ 
   }, []);
 
   return (
