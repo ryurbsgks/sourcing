@@ -16,7 +16,7 @@ module.exports = (req, res) => {
     if (err) {
       return res.status(500).send({ message: "업로드 오류" });
     }
-    // res.req.file.filename
+
     res.status(200).send({ data: res.req.file.path, message: "업로드 성공" });
   });
 
