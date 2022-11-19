@@ -14,16 +14,17 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   product.init({
-    category: DataTypes.INTEGER,
-    pic: DataTypes.STRING,
+    img: DataTypes.STRING,
     name: DataTypes.STRING,
     price: DataTypes.INTEGER,
-    saleInfo: DataTypes.INTEGER,
     salePrice: DataTypes.INTEGER,
+    salePct: DataTypes.INTEGER,
     unit: DataTypes.STRING,
     weight: DataTypes.STRING,
     origin: DataTypes.STRING,
-    info: DataTypes.STRING
+    category: DataTypes.STRING,
+    content: DataTypes.STRING,
+    userID: DataTypes.INTEGER
   }, {
     sequelize,
     freezeTableName: true,
