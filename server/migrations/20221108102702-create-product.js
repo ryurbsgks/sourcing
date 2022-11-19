@@ -9,11 +9,7 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      category: {
-        allowNull: false,
-        type: Sequelize.INTEGER
-      },
-      pic: {
+      img: {
         allowNull: false,
         type: Sequelize.STRING
       },
@@ -25,10 +21,10 @@ module.exports = {
         allowNull: false,
         type: Sequelize.INTEGER
       },
-      saleInfo: {
+      salePrice: {
         type: Sequelize.INTEGER
       },
-      salePrice: {
+      salePct: {
         type: Sequelize.INTEGER
       },
       unit: {
@@ -43,8 +39,17 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING
       },
-      info: {
+      category: {
+        allowNull: false,
         type: Sequelize.STRING
+      },
+      content: {
+        allowNull: false,
+        type: Sequelize.STRING
+      },
+      userID: {
+        allowNull: false,
+        type: Sequelize.INTEGER
       }
     });
   },
