@@ -5,7 +5,7 @@ module.exports = (req, res) => {
 
   let storage = multer.diskStorage({
     destination: (req, file, cb) => {
-      cb(null, "img/");
+      cb(null, "img/product/");
     },
     filename: (req, file, cb) => {
       cb(null, `${Date.now()}_${file.originalname}`);
@@ -19,32 +19,42 @@ module.exports = (req, res) => {
     }
 
     const data = JSON.parse(req.body.data);
-    const category = data.category;
-    const pic = res.req.file.path;
+    const img = res.req.file.path;
     const name = data.name;
     const price = data.price;
-    const saleInfo = data.saleInfo;
-    const salePrice = data.salePrice;
+    let salePrice = data.salePrice;
+    let salePct = data.salePct;
     const unit = data.unit;
     const weight = data.weight;
     const origin = data.origin;
-    const info = data.info;
+    const category = data.category;
+    const content = data.content;
+    const userID = data.userID;
 
-    if (!category || !pic || !name || !price || !unit || !weight || !origin) {
+    if (!salePrice) {
+      salePrice = 0;
+    }
+
+    if (!salePct) {
+      salePct = 0;
+    }
+
+    if (!img || !name || !price || !unit || !weight || !origin || !category || !content || !userID) {
       return res.status(400).send({ message: "잘못된 요청입니다" }); 
     }
 
     product.create({
-      category: category,
-      pic: pic,
+      img: img,
       name: name,
       price: price,
-      saleInfo: saleInfo,
       salePrice: salePrice,
+      salePct: salePct,
       unit: unit,
       weight: weight,
       origin: origin,
-      info: info
+      category: category,
+      content: content,
+      userID: userID
     }).then( (result) => {
       if (!result) {
         return res.status(400).send({ message: "상품 등록 실패" });
