@@ -53,7 +53,8 @@ module.exports = {
         references: {
           model: "user",
           key: "id"
-        }
+        },
+        onDelete: "CASCADE"
       }
     });
   },
