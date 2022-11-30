@@ -16,6 +16,7 @@
 .new__product-info__img > img {
   width: 450px;
   height: 450px;
+  object-fit: cover;
 }
 
 .new__product-info__img__img-select {
