@@ -24,6 +24,7 @@ app.post("/user/signup/verify", controllers.verify);
 app.post("/user/signup/email", controllers.signupEmail);
 app.post("/user/find/id", controllers.findID);
 app.post("/user/find/pw", controllers.findPW);
+app.get("/product/list", controllers.list);
 app.post("/product/new", controllers.new);
 app.post("/product/editor", controllers.editor);
 
