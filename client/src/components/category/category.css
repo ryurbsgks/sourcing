@@ -38,6 +38,7 @@
 
 .header__menu__sortbox-list {
   width: 104px;
+  background-color: white;
   border: #ebebeb 2px solid ;
   box-shadow: 0 4px 5px rgba(0, 0, 0, 0.3);
   position: absolute;
@@ -48,4 +49,59 @@
 
 .header__menu__sortbox-list li {
   cursor: pointer;
+}
+
+/* ---------- List.js ---------- */
+
+.list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0px 26.5px;
+}
+
+/* ---------- Goods.js ---------- */
+
+.goods {
+  width: 280px;
+  cursor: pointer;
+  margin-top: 30px;
+}
+
+.goods > img {
+  width: 100%;
+  height: 280px;
+  object-fit: cover;
+}
+
+.goods > div {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.goods__title {
+  font-size: 20px;
+}
+
+.goods__price-info {
+  line-height: 110%;
+}
+
+.goods__price-info__salePct {
+  color: red;
+  font-size: 20px;
+  margin-right: 6px;
+}
+
+.goods__price-info__price {
+  margin-right: 6px;
+}
+
+.goods__price-info__price > b {
+  font-size: 20px;
+}
+
+.goods__price-info__origin-price {
+  text-decoration: line-through;
+  color: gray;
 }
