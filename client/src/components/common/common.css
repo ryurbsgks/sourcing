@@ -194,3 +194,14 @@
   cursor: pointer;
   margin: 20px auto 0;
 }
+
+/* ---------- Loading.js ---------- */
+
+.loading {
+  margin: 30px auto;
+}
+
+.loading > img {
+  width: 100px;
+  height: 100px;
+}
