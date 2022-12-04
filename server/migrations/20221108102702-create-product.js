@@ -27,6 +27,9 @@ module.exports = {
       salePct: {
         type: Sequelize.INTEGER
       },
+      sortPrice: {
+        type: Sequelize.INTEGER
+      },
       unit: {
         allowNull: false,
         type: Sequelize.STRING
