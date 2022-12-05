@@ -13,6 +13,7 @@ app.use(cors({
   credentials: true
 }));
 app.use('/img/editor', express.static(path.join(__dirname, './img/editor/')));
+app.use('/img/product', express.static(path.join(__dirname, './img/product/')));
 
 app.post("/user/signup", controllers.signup);
 app.post("/user/login", controllers.login);
