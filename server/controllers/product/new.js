@@ -24,12 +24,17 @@ module.exports = (req, res) => {
     const price = data.price;
     let salePrice = data.salePrice;
     let salePct = data.salePct;
+    let sortPrice = data.price;
     const unit = data.unit;
     const weight = data.weight;
     const origin = data.origin;
     const category = data.category;
     const content = data.content;
     const userID = data.userID;
+
+    if (salePrice) {
+      sortPrice = salePrice
+    }
 
     if (!salePrice) {
       salePrice = 0;
@@ -49,6 +54,7 @@ module.exports = (req, res) => {
       price: price,
       salePrice: salePrice,
       salePct: salePct,
+      sortPrice: sortPrice,
       unit: unit,
       weight: weight,
       origin: origin,
@@ -57,7 +63,7 @@ module.exports = (req, res) => {
       userID: userID
     }).then( (result) => {
       if (!result) {
-        return res.status(400).send({ message: "상품 등록 실패" });
+        return res.status(503).send({ message: "상품 등록 실패" });
       }
   
       return res.status(200).send({ message: "상품 등록 성공" });
