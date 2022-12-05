@@ -27,8 +27,8 @@ function Goods({ img, name, price, salePrice, salePct }) {
       {salePrice 
       ? <div className="goods__price-info">
           <span className="goods__price-info__salePct">{salePct}%</span>
-          <span className="goods__price-info__price"><b>{KRW.price}</b>원</span>
-          <span className="goods__price-info__origin-price">{KRW.salePrice}원</span>
+          <span className="goods__price-info__price"><b>{KRW.salePrice}</b>원</span>
+          <span className="goods__price-info__origin-price">{KRW.price}원</span>
         </div>
       : <div className="goods__price-info">
           <span className="goods__price-info__price"><b>{KRW.price}</b>원</span>
