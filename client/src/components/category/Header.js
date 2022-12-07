@@ -5,12 +5,12 @@ import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretDown } from "@fortawesome/free-solid-svg-icons";
 
-function Header({ params, auth }) {
+function Header({ params, auth, handleChangeSort }) {
 
   const [category, setCategory] = useState("");
   const [sortbox, setSortbox] = useState({
     status: false,
-    content: "베스트순"
+    content: "신상품순"
   });
   
   useEffect( () => {
@@ -57,6 +57,7 @@ function Header({ params, auth }) {
     }
 
     if (e.target.value === 1) {
+      handleChangeSort("id", "desc");
       return setSortbox({
         status: false,
         content: "신상품순"
@@ -64,6 +65,7 @@ function Header({ params, auth }) {
     }
 
     if (e.target.value === 2) {
+      handleChangeSort("sortPrice", "asc");
       return setSortbox({
         status: false,
         content: "낮은 가격순"
@@ -71,6 +73,7 @@ function Header({ params, auth }) {
     }
 
     if (e.target.value === 3) {
+      handleChangeSort("sortPrice", "desc");
       return setSortbox({
         status: false,
         content: "높은 가격순"
@@ -80,7 +83,7 @@ function Header({ params, auth }) {
   };
 
   return (
-    <>
+    <header>
       <h2 className="header__title">{category}</h2>
       <div className="header__menu">
         {auth === 2 ? <Link to="/product/new"><button>상품 등록</button></Link> : null}
@@ -101,7 +104,7 @@ function Header({ params, auth }) {
           </div>
         : null}
       </div>
-    </>
+    </header>
   );
 }
 
