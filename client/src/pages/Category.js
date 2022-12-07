@@ -5,12 +5,17 @@ import TopBar from "../components/common/TopBar";
 import SearchBar from "../components/common/SearchBar";
 import NavBar from "../components/common/NavBar";
 import Header from "../components/category/Header";
+import List from "../components/category/List";
 import NotFound from "../components/common/NotFound";
 import { isAuthenticated } from "../function";
 
 function Category() {
 
   const [auth, setAuth] = useState(1);
+  const [sort, setSort] = useState({
+    target: "id",
+    option: "desc"
+  });
 
   const params = useParams();
   const isLogin = useSelector( (state) => state.isLogIn );
@@ -30,6 +35,13 @@ function Category() {
     
   }, []);
 
+  const handleChangeSort = (target, option) => {
+    setSort({
+      target: target,
+      option: option
+    });
+  };
+
   return (
     <>
       {params.category === "vegetable" || params.category === "fruit" || params.category === "seafood"
@@ -41,7 +53,8 @@ function Category() {
           </header>
           <main>
             <section className="container">
-              <Header params={params.category} auth={auth} />
+              <Header params={params.category} auth={auth} handleChangeSort={handleChangeSort} />
+              <List params={params.category} sort={sort} />
             </section>
           </main>
         </>
