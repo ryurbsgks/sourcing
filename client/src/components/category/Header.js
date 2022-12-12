@@ -15,6 +15,12 @@ function Header({ params, auth, handleChangeSort }) {
   
   useEffect( () => {
 
+    setSortbox({
+      status: false,
+      content: "신상품순"
+    });
+    handleChangeSort("id", "desc");
+
     if (params === "vegetable") {
       return setCategory("야채");
     }
