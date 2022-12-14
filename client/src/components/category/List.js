@@ -97,7 +97,7 @@ function List({ params, sort }) {
       <section className="list">
         {data 
         ? data.map( (el) => {
-            return <Goods key={el.id} img={el.img} name={el.name} price={el.price} salePrice={el.salePrice} salePct={el.salePct} />
+            return <Goods key={el.id} id={el.id} img={el.img} name={el.name} price={el.price} salePrice={el.salePrice} salePct={el.salePct} />
           })
         : <Loading />}
       </section>
