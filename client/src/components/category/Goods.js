@@ -1,13 +1,15 @@
 import "../../App.css";
 import "./category.css";
 import { useState, useLayoutEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
-function Goods({ img, name, price, salePrice, salePct }) {
+function Goods({ id, img, name, price, salePrice, salePct }) {
 
   const [KRW, setKRW] = useState({
     price: price.toLocaleString("ko-KR"),
     salePrice
   });
+  const navigate = useNavigate();
 
   useLayoutEffect( () => {
 
@@ -20,8 +22,12 @@ function Goods({ img, name, price, salePrice, salePct }) {
 
   }, []);
 
+  const handleNavigate = () => {
+    navigate(`/goods/${id}`);
+  };
+
   return (
-    <article className="goods">
+    <article className="goods" onClick={handleNavigate}>
       <img src={`${process.env.REACT_APP_URL}/${img}`} alt="img" />
       <div className="goods__title">{name}</div>
       {salePrice 
