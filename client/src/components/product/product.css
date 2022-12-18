@@ -158,3 +158,128 @@
   margin-top: 20px;
   margin-bottom: -10px;
 }
+
+/* ---------- Detail.js ---------- */
+
+.detail__info {
+  display: flex;
+  margin: 50px 0;
+}
+
+.detail__info__img {
+  width: 45%;
+}
+
+.detail__info__img > img {
+  width: 450px;
+  height: 450px;
+  object-fit: cover;
+}
+
+.detail__info__content {
+  width: 40%;
+}
+
+.detail__info__content__title {
+  font-size: 34px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.detail__info__content__price {
+  font-size: 28px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.detail__info__content__sale-price {
+  display: flex;
+}
+
+.detail__info__content__sale-price__salePct {
+  color: red;
+  font-size: 28px;
+  margin-right: 6px;
+}
+
+.detail__info__content__origin-price {
+  text-decoration: line-through;
+  color: gray;
+  font-size: 18px;
+  border-bottom: rgb(204, 204, 204) 1px solid;
+}
+
+.detail__info__content__box {
+  width: 100%;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  border-bottom: rgb(204, 204, 204) 1px solid;
+}
+
+.detail__info__content__box__space-01 {
+  width: 25%;
+}
+
+.detail__info__content__box__space-02 {
+  width: 75%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.detail__info__content__box__count-box {
+  width: 100px;
+  display: flex;
+  border: rgb(204, 204, 204) 1px solid;
+}
+
+.detail__info__content__box__count-box__icon {
+  width: 30px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.detail__info__content__box__count-box__count {
+  width: 40px;
+  text-align: center;
+}
+
+.detail__info__content__total-price {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  margin-top: 20px;
+}
+
+.detail__info__content__total-price > span {
+  margin: 0px 12px 6px 0px;
+}
+
+.detail__info__content__btn-area {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+}
+
+.detail__info__content__btn-area__icon-btn {
+  width: 55px;
+  height: 55px;
+  background-color: rgb(255, 255, 255);
+  border: 1px solid rgb(221, 221, 221);
+  border-radius: 3px;
+  cursor: pointer;
+  margin-right: 8px;
+}
+
+.detail__info__content__btn-area__btn {
+  flex: 1;
+  height: 55px;
+  color: green;
+  background-color: white;
+  border: green 1px solid;
+  border-radius: 3px;
+  cursor: pointer;
+}
