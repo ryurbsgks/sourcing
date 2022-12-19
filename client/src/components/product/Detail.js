@@ -4,6 +4,8 @@ import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus, faMinus, faCartShopping } from "@fortawesome/free-solid-svg-icons";
 import { faHeart } from "@fortawesome/free-regular-svg-icons";
+import { Viewer } from "@toast-ui/react-editor";
+import "@toast-ui/editor/dist/toastui-editor-viewer.css";
 
 function Detail({ params }) {
 
@@ -70,6 +72,17 @@ function Detail({ params }) {
               <button className="detail__info__content__btn-area__btn">구매하기</button> 
             </div>
           </div>
+        </section>
+        <section className="detail__viewer">
+          <nav>
+            <ul>
+              <li>상품설명</li>
+              <li>후기</li>
+            </ul>
+          </nav>
+          <section>
+            <Viewer initialValue="" />
+          </section>
         </section>
       </main>
     </>
