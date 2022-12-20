@@ -28,6 +28,7 @@ app.post("/user/find/pw", controllers.findPW);
 app.get("/product/list", controllers.list);
 app.post("/product/new", controllers.new);
 app.post("/product/editor", controllers.editor);
+app.get("/product/detail", controllers.detail);
 
 server.listen(80, () => {
   console.log("HTTP Server running on port 80")
