@@ -12,6 +12,7 @@ module.exports = {
   findPW: require("./user/findPW"),
   list: require("./product/list"),
   new: require("./product/new"),
-  editor: require("./product/editor")
+  editor: require("./product/editor"),
+  detail: require("./product/detail")
   
 };
