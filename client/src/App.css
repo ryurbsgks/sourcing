@@ -40,7 +40,7 @@ p {
   margin: 0 auto;
 }
 
-/* ---------- fontawesome icon size ---------- */
+/* ---------- fontawesome icon ---------- */
 
 .icon__size14 {
   font-size: 14px;
@@ -56,4 +56,8 @@ p {
 
 .icon__size150 {
   font-size: 150px;
+}
+
+.icon__color-red {
+  color: red;
 }
