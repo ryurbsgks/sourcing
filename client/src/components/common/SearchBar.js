@@ -29,7 +29,7 @@ function SearchBar() {
         </div>
       </div>
       <ul className="searchbar__menu">
-        <li><Link to="/"><FontAwesomeIcon className="icon__size28" icon={faHeart} /></Link></li>
+        <li><Link to="/"><FontAwesomeIcon className="icon__size28 icon__color-red" icon={faHeart} /></Link></li>
         <li><Link to="/"><FontAwesomeIcon className="icon__size28" icon={faCartShopping} /></Link></li>
       </ul>
     </div>
