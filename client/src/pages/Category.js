@@ -13,8 +13,8 @@ function Category() {
 
   const [auth, setAuth] = useState(1);
   const [sort, setSort] = useState({
-    target: "id",
-    option: "desc"
+    target: JSON.parse(sessionStorage.getItem("sort")) ? JSON.parse(sessionStorage.getItem("sort")).target : "id",
+    option: JSON.parse(sessionStorage.getItem("sort")) ? JSON.parse(sessionStorage.getItem("sort")).option : "desc"
   });
 
   const params = useParams();
