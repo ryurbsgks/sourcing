@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useSearchParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux"
 import TopBar from "../components/common/TopBar";
 import SearchBar from "../components/common/SearchBar";
@@ -16,6 +16,7 @@ function Category() {
     target: JSON.parse(sessionStorage.getItem("sort")) ? JSON.parse(sessionStorage.getItem("sort")).target : "id",
     option: JSON.parse(sessionStorage.getItem("sort")) ? JSON.parse(sessionStorage.getItem("sort")).option : "desc"
   });
+  const [searchParams, setSearchParams] = useSearchParams();
 
   const params = useParams();
   const isLogin = useSelector( (state) => state.isLogIn );
@@ -54,7 +55,7 @@ function Category() {
           <main>
             <section className="container">
               <Header params={params.category} auth={auth} handleChangeSort={handleChangeSort} />
-              <List params={params.category} sort={sort} />
+              <List params={params.category} page={searchParams.get("page")} sort={sort} />
             </section>
           </main>
         </>
