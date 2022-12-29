@@ -1,26 +1,30 @@
 import { useState, useEffect } from "react";
-import { useParams, useSearchParams } from "react-router-dom";
+import { useParams, useSearchParams, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux"
 import TopBar from "../components/common/TopBar";
 import SearchBar from "../components/common/SearchBar";
 import NavBar from "../components/common/NavBar";
 import Header from "../components/category/Header";
 import List from "../components/category/List";
-import NotFound from "../components/common/NotFound";
 import { isAuthenticated } from "../function";
 
 function Category() {
 
   const [auth, setAuth] = useState(1);
-  const [sort, setSort] = useState({
-    target: JSON.parse(sessionStorage.getItem("sort")) ? JSON.parse(sessionStorage.getItem("sort")).target : "id",
-    option: JSON.parse(sessionStorage.getItem("sort")) ? JSON.parse(sessionStorage.getItem("sort")).option : "desc"
-  });
   const [searchParams, setSearchParams] = useSearchParams();
 
   const params = useParams();
   const isLogin = useSelector( (state) => state.isLogIn );
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  useEffect( () => {
+
+    if (params.category !== "vegetable" && params.category !== "fruit" && params.category !== "seafood") {
+      return navigate("/404-page-not-found");
+    }
+
+  }, [params.category]);
 
   useEffect( () => {
 
@@ -36,30 +40,19 @@ function Category() {
     
   }, []);
 
-  const handleChangeSort = (target, option) => {
-    setSort({
-      target: target,
-      option: option
-    });
-  };
-
   return (
     <>
-      {params.category === "vegetable" || params.category === "fruit" || params.category === "seafood"
-      ? <>
-          <TopBar />
-          <header>
-            <SearchBar />
-            <NavBar />
-          </header>
-          <main>
-            <section className="container">
-              <Header params={params.category} auth={auth} handleChangeSort={handleChangeSort} />
-              <List params={params.category} page={searchParams.get("page")} sort={sort} />
-            </section>
-          </main>
-        </>
-      : <NotFound />}
+      <TopBar />
+      <header>
+        <SearchBar />
+        <NavBar />
+      </header>
+      <main>
+        <section className="container">
+          <Header params={params.category} auth={auth} sort={searchParams.get("sort")} />
+          <List params={params.category} sort={searchParams.get("sort")} page={searchParams.get("page")} />
+        </section>
+      </main>
     </>
   );
 }
