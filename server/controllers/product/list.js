@@ -3,11 +3,10 @@ const { product } = require("../../models");
 module.exports = (req, res) => {
 
   const params = req.query.category;
-  const sortTarget = req.query.sortTarget;
-  const sortOption = req.query.sortOption;
+  const sort = req.query.sort;
   const currentPage = req.query.currentPage;
   const offset = (currentPage - 1) * 16;
-  let category = "";
+  let category, sortTarget, sortOption;
   let data = [];
 
   switch (params) {
@@ -19,6 +18,29 @@ module.exports = (req, res) => {
       break;
     case "seafood":
       category = "수산물"
+      break;
+  };
+
+  switch (sort) {
+    case "best":
+      sortTarget = "id";
+      sortOption = "desc";
+      break;
+    case "new":
+      sortTarget = "id";
+      sortOption = "desc";
+      break;
+    case "lowprice":
+      sortTarget = "sortPrice";
+      sortOption = "asc";
+      break;
+    case "heighprice":
+      sortTarget = "sortPrice";
+      sortOption = "desc";
+      break;
+    case undefined:
+      sortTarget = "id";
+      sortOption = "desc";
       break;
   };
 
