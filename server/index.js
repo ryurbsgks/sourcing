@@ -9,7 +9,7 @@ const server = http.createServer(app);
 app.use(express.json());
 app.use(cors({
   origin: ["http://localhost:3000"],
-  methods: ["GET", "POST"],
+  methods: ["GET", "POST", "DELETE"],
   credentials: true
 }));
 app.use('/img/editor', express.static(path.join(__dirname, './img/editor/')));
@@ -29,6 +29,8 @@ app.get("/product/list", controllers.list);
 app.post("/product/new", controllers.new);
 app.post("/product/editor", controllers.editor);
 app.get("/product/detail", controllers.detail);
+app.post("/product/like", controllers.insertLike);
+app.delete("/product/like", controllers.deleteLike);
 
 server.listen(80, () => {
   console.log("HTTP Server running on port 80")
