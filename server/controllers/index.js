@@ -13,6 +13,8 @@ module.exports = {
   list: require("./product/list"),
   new: require("./product/new"),
   editor: require("./product/editor"),
-  detail: require("./product/detail")
+  detail: require("./product/detail"),
+  insertLike: require("./product/insertLike"),
+  deleteLike: require("./product/deleteLike")
   
 };
