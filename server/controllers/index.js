@@ -14,6 +14,7 @@ module.exports = {
   new: require("./product/new"),
   editor: require("./product/editor"),
   detail: require("./product/detail"),
+  getLike: require("./product/getLike"),
   insertLike: require("./product/insertLike"),
   deleteLike: require("./product/deleteLike")
   

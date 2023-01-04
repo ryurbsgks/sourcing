@@ -29,6 +29,7 @@ app.get("/product/list", controllers.list);
 app.post("/product/new", controllers.new);
 app.post("/product/editor", controllers.editor);
 app.get("/product/detail", controllers.detail);
+app.get("/product/like", controllers.getLike);
 app.post("/product/like", controllers.insertLike);
 app.delete("/product/like", controllers.deleteLike);
 
