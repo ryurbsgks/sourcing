@@ -1,17 +1,36 @@
 import axios from "axios";
 import { useState, useLayoutEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 import TopBar from "../components/common/TopBar";
 import SearchBar from "../components/common/SearchBar";
 import NavBar from "../components/common/NavBar";
 import Detail from "../components/product/Detail";
+import { isAuthenticated } from "../function";
 
 function Goods() {
 
   const [data, setData] = useState();
+  const [userID, setUserID] = useState();
 
   const params = useParams();
+  const isLogin = useSelector( (state) => state.isLogIn );
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  useLayoutEffect( () => {
+
+    if (isLogin) {
+
+      const cb = (res) => {
+        setUserID(res.data.data.userInfo.id);
+      };
+
+      isAuthenticated(dispatch, cb);
+
+    }
+
+  }, []);
 
   useLayoutEffect( () => {
 
@@ -38,7 +57,7 @@ function Goods() {
         <SearchBar />
         <NavBar />
       </header>
-      {data ? <Detail data={data} /> : null}
+      {data ? <Detail data={data} userID={userID} /> : null}
     </>
   );
 }
