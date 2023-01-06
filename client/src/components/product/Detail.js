@@ -1,13 +1,17 @@
 import "../../App.css";
 import "./product.css";
+import axios from "axios";
 import { useState, useLayoutEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlus, faMinus, faCartShopping } from "@fortawesome/free-solid-svg-icons";
+import { faPlus, faMinus, faCartShopping, faHeart as faHearts } from "@fortawesome/free-solid-svg-icons";
 import { faHeart } from "@fortawesome/free-regular-svg-icons";
 import { Viewer } from "@toast-ui/react-editor";
 import "@toast-ui/editor/dist/toastui-editor-viewer.css";
+import Check from "../modal/Check";
 
-function Detail({ data }) {
+function Detail({ data, userID }) {
 
   const [count, setCount] = useState(1);
   const [price, setPrice] = useState({
@@ -15,6 +19,32 @@ function Detail({ data }) {
     salePrice: data.salePrice.toLocaleString("ko-KR"),
     totalPrice: ""
   });
+  const [modal, setModal] = useState({
+    like: false
+  });
+  const [likeStatus, setLikeStatus] = useState(false);
+
+  const isLogin = useSelector( (state) => state.isLogIn );
+  const navigate = useNavigate();
+
+  useLayoutEffect( () => {
+
+    if (userID) {
+      axios.get(`${process.env.REACT_APP_URL}/product/like`, {
+        params: {
+          userID: userID,
+          productID: data.id
+        }
+      }).then( (res) => {
+        if (res.data.message === "찜 상태입니다") {
+          return setLikeStatus(true);
+        }
+  
+        return setLikeStatus(false);
+      });
+    }
+
+  }, []);
 
   useLayoutEffect( () => {
 
@@ -44,6 +74,39 @@ function Detail({ data }) {
       }
     }
 
+  };
+
+  const handleNavigate = () => {
+    navigate("/member/login");
+  };
+
+  const handleClickLike = () => {
+
+    if (isLogin) {
+      if (likeStatus) {
+
+        axios.delete(`${process.env.REACT_APP_URL}/product/like`, {
+          data: {
+            userID: userID,
+            productID: data.id
+          }
+        });
+
+        return setLikeStatus(false);
+      }
+
+      axios.post(`${process.env.REACT_APP_URL}/product/like`, {
+        userID: userID,
+        productID: data.id
+      });
+      
+      return setLikeStatus(true);
+    }
+
+    setModal({
+      ...modal,
+      like: true
+    });
   };
 
   return (
@@ -97,9 +160,10 @@ function Detail({ data }) {
               <div className="detail__info__content__price">{price.totalPrice}<span>원</span></div>
             </div>
             <div className="detail__info__content__btn-area">
-              <button className="detail__info__content__btn-area__icon-btn">
-                <FontAwesomeIcon className="icon__size28 icon__color-red" icon={faHeart} />
+              <button className="detail__info__content__btn-area__icon-btn" onClick={handleClickLike}>
+                {likeStatus ? <FontAwesomeIcon className="icon__size28 icon__color-red" icon={faHearts} /> : <FontAwesomeIcon className="icon__size28 icon__color-red" icon={faHeart} />}
               </button>
+              {modal.like ? <Check content={"로그인 후 이용할 수 있습니다"} handler={handleNavigate} /> : null}
               <button className="detail__info__content__btn-area__icon-btn">
                 <FontAwesomeIcon className="icon__size28" icon={faCartShopping} />
               </button>
