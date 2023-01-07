@@ -32,7 +32,8 @@ module.exports = (sequelize, DataTypes) => {
     origin: DataTypes.STRING,
     category: DataTypes.STRING,
     content: DataTypes.STRING,
-    userID: DataTypes.INTEGER
+    userID: DataTypes.INTEGER,
+    likeCount: DataTypes.INTEGER
   }, {
     sequelize,
     freezeTableName: true,

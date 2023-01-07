@@ -58,6 +58,10 @@ module.exports = {
           key: "id"
         },
         onDelete: "CASCADE"
+      },
+      likeCount: {
+        type: Sequelize.INTEGER,
+        defaultValue: 0
       }
     });
   },
