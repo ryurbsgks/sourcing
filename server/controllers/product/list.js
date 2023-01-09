@@ -45,7 +45,7 @@ module.exports = (req, res) => {
   };
 
   product.findAndCountAll({
-    attributes: ["id", "img", "name", "price", "salePrice", "salePct"],
+    attributes: ["id", "img", "name", "price", "salePrice", "salePct", "likeCount"],
     where: {category: category},
     limit: 16,
     offset: offset,
