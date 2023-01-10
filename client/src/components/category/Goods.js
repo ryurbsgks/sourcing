@@ -2,8 +2,10 @@ import "../../App.css";
 import "./category.css";
 import { useState, useLayoutEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHeart } from "@fortawesome/free-solid-svg-icons";
 
-function Goods({ id, img, name, price, salePrice, salePct }) {
+function Goods({ id, img, name, price, salePrice, salePct, likeCount }) {
 
   const [KRW, setKRW] = useState({
     price: price.toLocaleString("ko-KR"),
@@ -39,6 +41,12 @@ function Goods({ id, img, name, price, salePrice, salePct }) {
       : <div className="goods__price-info">
           <span className="goods__price-info__price"><b>{KRW.price}</b>원</span>
         </div>}
+      {likeCount 
+      ? <div className="goods__like">
+          <FontAwesomeIcon className="icon__size14 icon__color-red" icon={faHeart} />
+          <div>{likeCount}</div>
+        </div>
+      : null}
     </article>
   );
 }
