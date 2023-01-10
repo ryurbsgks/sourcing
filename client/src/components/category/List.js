@@ -102,7 +102,7 @@ function List({ params, sort, page }) {
       <section className="list">
         {data 
         ? data.map( (el) => {
-            return <Goods key={el.id} id={el.id} img={el.img} name={el.name} price={el.price} salePrice={el.salePrice} salePct={el.salePct} />
+            return <Goods key={el.id} id={el.id} img={el.img} name={el.name} price={el.price} salePrice={el.salePrice} salePct={el.salePct} likeCount={el.likeCount} />
           })
         : <Loading />}
       </section>
