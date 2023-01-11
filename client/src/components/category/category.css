@@ -145,3 +145,13 @@
   text-decoration: line-through;
   color: gray;
 }
+
+.goods__like {
+  display: flex;
+  align-items: center;
+}
+
+.goods__like > div {
+  font-size: 14px;
+  margin: 0px 5px;
+}
