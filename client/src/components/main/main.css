@@ -97,71 +97,70 @@
   margin-right: 5px;
 }
 
-/* ---------- ProductGroup ---------- */
+/* ---------- GoodsGroup ---------- */
 
-.product-group {
+.goods-group {
   margin-bottom: 30px;
 }
 
-.product-group__title {
+.goods-group__title--color-green {
   text-align: center;
+  color: #7fad39;
+  border-top: #7fad39 2px solid;
   letter-spacing: 10px;
   font-size: 30px;
   margin-top: 10px;
 }
 
-.product-group__title--color-green {
-  color: #7fad39;
-  border-top: #7fad39 2px solid;
-}
-
-.product-group__title--color-red {
+.goods-group__title--color-red {
+  text-align: center;
   color: red;
   border-top: red 2px solid;
+  letter-spacing: 10px;
+  font-size: 30px;
+  margin-top: 10px;
 }
 
-.product-group__title--color-blue {
+.goods-group__title--color-blue {
+  text-align: center;
   color: blue;
   border-top: blue 2px solid;
+  letter-spacing: 10px;
+  font-size: 30px;
+  margin-top: 10px;
 }
 
-.product-group__product-more {
+.goods-group__goods-more {
   text-align: end;
 }
 
-.product-group__product-more > a {
+.goods-group__goods-more > a {
   color: gray;
   font-size: 14px;
 }
 
-.product-group__product-more svg {
+.goods-group__goods-more svg {
   font-size: 14px;
 }
 
-.product-group__product-list {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-}
+/* ---------- GoodsRecommend ---------- */
 
-/* ---------- ProductRecommend ---------- */
-
-.product-recommend {
+.goods-recommend {
   margin-top: 40px;
 }
 
-.product-recommend__subtitle {
+.goods-recommend__subtitle {
   color: #7fad39;
   font-size: 20px;
 }
 
-.product-recommend__title {
+.goods-recommend__title {
   font-size: 30px;
   line-height: 100%;
   margin-bottom: 10px;
 }
 
-.product-recommend__title > span{
+.goods-recommend__title > span{
   color: red;
   font-size: 30px;
 }
