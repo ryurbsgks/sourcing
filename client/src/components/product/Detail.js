@@ -11,7 +11,7 @@ import { Viewer } from "@toast-ui/react-editor";
 import "@toast-ui/editor/dist/toastui-editor-viewer.css";
 import Check from "../modal/Check";
 
-function Detail({ data, userID }) {
+function Detail({ data, userInfo }) {
 
   const [count, setCount] = useState(1);
   const [price, setPrice] = useState({
@@ -29,10 +29,10 @@ function Detail({ data, userID }) {
 
   useLayoutEffect( () => {
 
-    if (userID) {
+    if (userInfo.id) {
       axios.get(`${process.env.REACT_APP_URL}/product/like`, {
         params: {
-          userID: userID,
+          userID: userInfo.id,
           productID: data.id
         }
       }).then( (res) => {
@@ -87,7 +87,7 @@ function Detail({ data, userID }) {
 
         axios.delete(`${process.env.REACT_APP_URL}/product/like`, {
           data: {
-            userID: userID,
+            userID: userInfo.id,
             productID: data.id
           }
         });
@@ -96,7 +96,7 @@ function Detail({ data, userID }) {
       }
 
       axios.post(`${process.env.REACT_APP_URL}/product/like`, {
-        userID: userID,
+        userID: userInfo.id,
         productID: data.id
       });
       
@@ -169,6 +169,12 @@ function Detail({ data, userID }) {
               </button>
               <button className="detail__info__content__btn-area__btn">구매하기</button> 
             </div>
+            {data.nickname === userInfo.nickname 
+            ? <div className="detail__info__content__btn-area">
+                <button className="detail__info__content__btn-area__edit-btn">수정</button>
+                <button className="detail__info__content__btn-area__edit-btn">삭제</button>
+              </div>
+            : null}
           </div>
         </section>
         <section className="detail__viewer">
