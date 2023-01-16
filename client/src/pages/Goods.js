@@ -11,7 +11,10 @@ import { isAuthenticated } from "../function";
 function Goods() {
 
   const [data, setData] = useState();
-  const [userID, setUserID] = useState();
+  const [userInfo, setUserInfo] = useState({
+    id: "",
+    nickname: ""
+  });
 
   const params = useParams();
   const isLogin = useSelector( (state) => state.isLogIn );
@@ -23,7 +26,10 @@ function Goods() {
     if (isLogin) {
 
       const cb = (res) => {
-        setUserID(res.data.data.userInfo.id);
+        setUserInfo({
+          id: res.data.data.userInfo.id,
+          nickname: res.data.data.userInfo.nickname
+        });
       };
 
       isAuthenticated(dispatch, cb);
@@ -57,7 +63,7 @@ function Goods() {
         <SearchBar />
         <NavBar />
       </header>
-      {data ? <Detail data={data} userID={userID} /> : null}
+      {data ? <Detail data={data} userInfo={userInfo} /> : null}
     </>
   );
 }
