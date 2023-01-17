@@ -32,6 +32,7 @@ app.get("/product/detail", controllers.detail);
 app.get("/product/like", controllers.getLike);
 app.post("/product/like", controllers.insertLike);
 app.delete("/product/like", controllers.deleteLike);
+app.get("/product/recommend", controllers.recommend);
 
 server.listen(80, () => {
   console.log("HTTP Server running on port 80")
