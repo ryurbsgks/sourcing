@@ -109,6 +109,20 @@ function Detail({ data, userInfo }) {
     });
   };
 
+  const handleClickDelete = () => {
+
+    axios.delete(`${process.env.REACT_APP_URL}/product/goods`, {
+      data: {
+        id: data.id
+      }
+    }).then( (res) => {
+      if (res.data.message === "상품 삭제 성공") {
+        navigate(-1);
+      }
+    });
+
+  };
+
   return (
     <>
       <main className="container">
@@ -172,7 +186,7 @@ function Detail({ data, userInfo }) {
             {data.nickname === userInfo.nickname 
             ? <div className="detail__info__content__btn-area">
                 <button className="detail__info__content__btn-area__edit-btn">수정</button>
-                <button className="detail__info__content__btn-area__edit-btn">삭제</button>
+                <button className="detail__info__content__btn-area__edit-btn" onClick={handleClickDelete}>삭제</button>
               </div>
             : null}
           </div>
