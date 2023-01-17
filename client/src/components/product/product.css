@@ -284,6 +284,19 @@
   cursor: pointer;
 }
 
+.detail__info__content__btn-area__edit-btn {
+  width: 45px;
+  color: gray;
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin: 0 5px;
+}
+
+.detail__info__content__btn-area__edit-btn:hover {
+  color: green;
+}
+
 .detail__viewer {
   width: 85%;
 }
