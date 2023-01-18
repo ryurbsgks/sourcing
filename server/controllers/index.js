@@ -17,6 +17,7 @@ module.exports = {
   getLike: require("./product/getLike"),
   insertLike: require("./product/insertLike"),
   deleteLike: require("./product/deleteLike"),
-  recommend: require("./product/recommend")
+  recommend: require("./product/recommend"),
+  deleteGoods: require("./product/deleteGoods")
   
 };
