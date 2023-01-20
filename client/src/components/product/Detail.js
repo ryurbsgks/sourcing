@@ -109,6 +109,14 @@ function Detail({ data, userInfo }) {
     });
   };
 
+  const handleClickEdit = () => {
+
+    navigate(`/product/edit?id=${data.id}`, {
+      state: data
+    });
+
+  };
+
   const handleClickDelete = () => {
 
     axios.delete(`${process.env.REACT_APP_URL}/product/goods`, {
@@ -185,7 +193,7 @@ function Detail({ data, userInfo }) {
             </div>
             {data.nickname === userInfo.nickname 
             ? <div className="detail__info__content__btn-area">
-                <button className="detail__info__content__btn-area__edit-btn">수정</button>
+                <button className="detail__info__content__btn-area__edit-btn" onClick={handleClickEdit}>수정</button>
                 <button className="detail__info__content__btn-area__edit-btn" onClick={handleClickDelete}>삭제</button>
               </div>
             : null}
