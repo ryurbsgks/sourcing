@@ -128,7 +128,7 @@ function Header({ params, auth , sort }) {
     <header>
       <h2 className="header__title">{category}</h2>
       <div className="header__menu">
-        {auth === 2 ? <Link to="/product/new"><button>상품 등록</button></Link> : null}
+        {auth === 1 ? null : <Link to="/product/new"><button>상품 등록</button></Link>}
         <div className="header__menu__sortbox" onClick={handleClickSortbox}>
           <span>{sortbox.content}</span>
           <div className="header__menu__sortbox__icon">
