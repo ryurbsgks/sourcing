@@ -32,9 +32,17 @@ module.exports = {
       },
       unit: {
         allowNull: false,
+        type: Sequelize.INTEGER
+      },
+      saleUnit: {
+        allowNull: false,
         type: Sequelize.STRING
       },
       weight: {
+        allowNull: false,
+        type: Sequelize.INTEGER
+      },
+      weightUnit: {
         allowNull: false,
         type: Sequelize.STRING
       },
