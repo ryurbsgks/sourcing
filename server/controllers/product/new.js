@@ -26,12 +26,15 @@ module.exports = (req, res) => {
     let salePct = data.salePct;
     let sortPrice = data.price;
     const unit = data.unit;
+    const unitInfo = data.unitInfo;
     const weight = data.weight;
+    const weightInfo = data.weightInfo;
     const origin = data.origin;
     const category = data.category;
     const content = data.content;
     const userID = data.userID;
-
+    console.log("-------unitInfo--------", unitInfo)
+    console.log("-------weightInfo--------", weightInfo)
     if (salePrice) {
       sortPrice = salePrice
     }
@@ -56,7 +59,9 @@ module.exports = (req, res) => {
       salePct: salePct,
       sortPrice: sortPrice,
       unit: unit,
+      saleUnit: unitInfo,
       weight: weight,
+      weightUnit: weightInfo,
       origin: origin,
       category: category,
       content: content,
