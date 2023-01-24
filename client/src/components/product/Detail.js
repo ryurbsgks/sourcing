@@ -155,11 +155,11 @@ function Detail({ data, userInfo }) {
             </div>
             <div className="detail__info__content__box">
               <div className="detail__info__content__box__space-01">판매 단위</div>
-              <div className="detail__info__content__box__space-02">{data.unit}</div>
+              <div className="detail__info__content__box__space-02">{data.unit}{data.saleUnit}</div>
             </div>
             <div className="detail__info__content__box">
               <div className="detail__info__content__box__space-01">중량/용량</div>
-              <div className="detail__info__content__box__space-02">{data.weight}</div>
+              <div className="detail__info__content__box__space-02">{data.weight}{data.weightUnit}</div>
             </div>
             <div className="detail__info__content__box">
               <div className="detail__info__content__box__space-01">원산지</div>
