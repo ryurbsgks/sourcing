@@ -33,8 +33,7 @@ module.exports = (req, res) => {
     const category = data.category;
     const content = data.content;
     const userID = data.userID;
-    console.log("-------unitInfo--------", unitInfo)
-    console.log("-------weightInfo--------", weightInfo)
+
     if (salePrice) {
       sortPrice = salePrice
     }
