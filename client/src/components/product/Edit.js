@@ -2,6 +2,7 @@ import "../../App.css";
 import "./product.css";
 import axios from "axios";
 import { useState, useEffect, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import "@toast-ui/editor/dist/toastui-editor.css";
 import { Editor } from "@toast-ui/react-editor";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -10,7 +11,7 @@ import { faCaretDown } from "@fortawesome/free-solid-svg-icons";
 function Edit ({ props }) {
 
   const [productInfo, setProductInfo] = useState({
-    img: props.img,
+    img: `${process.env.REACT_APP_URL}/${props.img}`,
     uploadImg: "",
     name: props.name,
     price: props.price,
@@ -43,12 +44,12 @@ function Edit ({ props }) {
   const [errMessage, setErrMessage] = useState("");
 
   const editorRef = useRef();
+  const navigate = useNavigate();
 
   useEffect( () => {
 
     if (productInfo.price && productInfo.salePrice) {
       if (Number(productInfo.price) > Number(productInfo.salePrice)) {
-        console.log("-----test--------")
         return setProductInfo({
           ...productInfo,
           salePct: Math.floor((Number(productInfo.price) - Number(productInfo.salePrice)) / Number(productInfo.price) * 100)
@@ -443,6 +444,71 @@ function Edit ({ props }) {
 
   };
 
+  const handleRegisterBtn = () => {
+
+    const numberRegExp = /^[0-9]*$/;
+
+    if (!productInfo.img || !productInfo.name || !productInfo.price || !productInfo.unit || !productInfo.unitInfo || !productInfo.weight || !productInfo.weightInfo || !productInfo.origin) {
+      return setErrMessage("필수 항목을 모두 입력해주세요");
+    }
+
+    if (!numberRegExp.test(productInfo.price)) {
+      return setErrMessage("판매 가격은 숫자만 입력해주세요");
+    }
+
+    if (openUI.sale) {
+      if (!productInfo.salePrice) {
+        return setErrMessage("할인 적용가를 입력해주세요")
+      }
+
+      if (!numberRegExp.test(productInfo.salePrice)) {
+        return setErrMessage("할인 적용가는 숫자만 입력해주세요");
+      }
+    }
+
+    if (!numberRegExp.test(productInfo.unit)) {
+      return setErrMessage("판매 단위는 숫자만 입력해주세요");
+    }
+
+    if (!numberRegExp.test(productInfo.weight)) {
+      return setErrMessage("중량/용량은 숫자만 입력해주세요");
+    }
+
+    const formData = new FormData();
+    const data = {
+      id: props.id,
+      name: productInfo.name,
+      price: productInfo.price,
+      salePrice: productInfo.salePrice,
+      salePct: productInfo.salePct,
+      unit: productInfo.unit,
+      unitInfo: productInfo.unitInfo,
+      weight: productInfo.weight,
+      weightInfo: productInfo.weightInfo,
+      origin: productInfo.origin,
+      category: sortboxList.category,
+      content: editorRef.current.getInstance().getHTML()
+    };
+    
+    formData.append("data", JSON.stringify(data));
+
+    if (productInfo.uploadImg) {
+      formData.append("img", productInfo.uploadImg);
+    }
+
+    axios.patch(`${process.env.REACT_APP_URL}/product/goods`, formData, {
+      header: {
+        'content-type': 'multipart/form-data'
+      }
+    }).then( (res) => {
+      if (res.data.message === "상품 수정 성공") {
+        setErrMessage("");
+        return navigate(`/goods/${props.id}`);
+      }
+    });
+
+  }
+
   const onUploadImage = async (blob, cb) => {
 
     const formData = new FormData();
@@ -466,7 +532,7 @@ function Edit ({ props }) {
       <section className="container">
         <div className="new__product-info">
           <div className="new__product-info__img">
-            <img src={`${process.env.REACT_APP_URL}/${productInfo.img}`} alt="ProductImage" />
+            <img src={productInfo.img} alt="ProductImage" />
             <div className="new__product-info__img__img-select">
               <label htmlFor="productImg">상품 사진 선택하기</label>
               <input id="productImg" type="file" accept="image/*" onChange={handleChangeFile} />
@@ -644,7 +710,7 @@ function Edit ({ props }) {
         />
         {errMessage ? <div className="new_product-info__err-msg">{errMessage}</div> : null}
         <div className="new_product-info__editor-btn">
-          <button>등록하기</button>
+          <button onClick={handleRegisterBtn}>등록하기</button>
         </div>
       </section>
     </main>
