@@ -33,6 +33,7 @@ app.get("/product/like", controllers.getLike);
 app.post("/product/like", controllers.insertLike);
 app.delete("/product/like", controllers.deleteLike);
 app.get("/product/recommend", controllers.recommend);
+app.patch("/product/goods", controllers.editGoods);
 app.delete("/product/goods", controllers.deleteGoods);
 
 server.listen(80, () => {
