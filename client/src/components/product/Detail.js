@@ -121,7 +121,8 @@ function Detail({ data, userInfo }) {
 
     axios.delete(`${process.env.REACT_APP_URL}/product/goods`, {
       data: {
-        id: data.id
+        id: data.id,
+        img: data.img
       }
     }).then( (res) => {
       if (res.data.message === "상품 삭제 성공") {
