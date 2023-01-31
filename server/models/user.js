@@ -17,6 +17,9 @@ module.exports = (sequelize, DataTypes) => {
       user.hasMany(models.productLike, {
         foreignKey: "userID"
       });
+      user.hasMany(models.productcart, {
+        foreignKey: "userID"
+      });
     }
   }
   user.init({
