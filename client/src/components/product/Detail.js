@@ -20,9 +20,13 @@ function Detail({ data, userInfo }) {
     totalPrice: ""
   });
   const [modal, setModal] = useState({
-    like: false
+    like: false,
+    cartCheck: false,
+    addCart: false,
+    removeCart: false
   });
   const [likeStatus, setLikeStatus] = useState(false);
+  const [cartStatus, setCartStatus] = useState(false);
 
   const isLogin = useSelector( (state) => state.isLogIn );
   const navigate = useNavigate();
@@ -41,6 +45,19 @@ function Detail({ data, userInfo }) {
         }
   
         return setLikeStatus(false);
+      });
+
+      axios.get(`${process.env.REACT_APP_URL}/product/cart`, {
+        params: {
+          userID: userInfo.id,
+          productID: data.id
+        }
+      }).then( (res) => {
+        if (res.data.message === "장바구니에 담긴 상품입니다") {
+          return setCartStatus(true);
+        }
+
+        return setCartStatus(false);
       });
     }
 
@@ -80,6 +97,20 @@ function Detail({ data, userInfo }) {
     navigate("/member/login");
   };
 
+  const handleNavigateAddCart = () => {
+    setModal({
+      ...modal,
+      addCart: false
+    });
+  };
+
+  const handleNavigateRemoveCart = () => {
+    setModal({
+      ...modal,
+      removeCart: false
+    });
+  };
+
   const handleClickLike = () => {
 
     if (isLogin) {
@@ -106,6 +137,43 @@ function Detail({ data, userInfo }) {
     setModal({
       ...modal,
       like: true
+    });
+  };
+
+  const handleClickCart = () => {
+
+    if (isLogin) {
+      if (cartStatus) {
+
+        axios.delete(`${process.env.REACT_APP_URL}/product/cart`, {
+          data: {
+            userID: userInfo.id,
+            productID: data.id
+          }
+        });
+
+        setModal({
+          ...modal,
+          removeCart: true
+        });
+        return setCartStatus(false);
+      }
+
+      axios.post(`${process.env.REACT_APP_URL}/product/cart`, {
+        userID: userInfo.id,
+        productID: data.id
+      });
+      
+      setModal({
+        ...modal,
+        addCart: true
+      });
+      return setCartStatus(true);
+    }
+
+    setModal({
+      ...modal,
+      cartCheck: true
     });
   };
 
@@ -187,9 +255,12 @@ function Detail({ data, userInfo }) {
                 {likeStatus ? <FontAwesomeIcon className="icon__size28 icon__color-red" icon={faHearts} /> : <FontAwesomeIcon className="icon__size28 icon__color-red" icon={faHeart} />}
               </button>
               {modal.like ? <Check content={"로그인 후 이용할 수 있습니다"} handler={handleNavigate} /> : null}
-              <button className="detail__info__content__btn-area__icon-btn">
+              <button className="detail__info__content__btn-area__icon-btn" onClick={handleClickCart}>
                 <FontAwesomeIcon className="icon__size28" icon={faCartShopping} />
               </button>
+              {modal.addCart ? <Check content={"상품이 장바구니에 추가되었습니다"} handler={handleNavigateAddCart} /> : null}
+              {modal.removeCart ? <Check content={"상품이 장바구니에서 제거되었습니다"} handler={handleNavigateRemoveCart} /> : null}
+              {modal.cartCheck ? <Check content={"로그인 후 이용할 수 있습니다"} handler={handleNavigate} /> : null}
               <button className="detail__info__content__btn-area__btn">구매하기</button> 
             </div>
             {data.nickname === userInfo.nickname 
