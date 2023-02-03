@@ -27,6 +27,7 @@ function Detail({ data, userInfo }) {
   });
   const [likeStatus, setLikeStatus] = useState(false);
   const [cartStatus, setCartStatus] = useState(false);
+  const [cartColor, setCartColor] = useState("detail__info__content__btn-area__icon-btn");
 
   const isLogin = useSelector( (state) => state.isLogIn );
   const navigate = useNavigate();
@@ -54,9 +55,11 @@ function Detail({ data, userInfo }) {
         }
       }).then( (res) => {
         if (res.data.message === "장바구니에 담긴 상품입니다") {
+          setCartColor("detail__info__content__btn-area__icon-btn--green")
           return setCartStatus(true);
         }
 
+        setCartColor("detail__info__content__btn-area__icon-btn");
         return setCartStatus(false);
       });
     }
@@ -152,6 +155,7 @@ function Detail({ data, userInfo }) {
           }
         });
 
+        setCartColor("detail__info__content__btn-area__icon-btn");
         setModal({
           ...modal,
           removeCart: true
@@ -164,6 +168,7 @@ function Detail({ data, userInfo }) {
         productID: data.id
       });
       
+      setCartColor("detail__info__content__btn-area__icon-btn--green");
       setModal({
         ...modal,
         addCart: true
@@ -255,7 +260,7 @@ function Detail({ data, userInfo }) {
                 {likeStatus ? <FontAwesomeIcon className="icon__size28 icon__color-red" icon={faHearts} /> : <FontAwesomeIcon className="icon__size28 icon__color-red" icon={faHeart} />}
               </button>
               {modal.like ? <Check content={"로그인 후 이용할 수 있습니다"} handler={handleNavigate} /> : null}
-              <button className="detail__info__content__btn-area__icon-btn" onClick={handleClickCart}>
+              <button className={cartColor} onClick={handleClickCart}>
                 <FontAwesomeIcon className="icon__size28" icon={faCartShopping} />
               </button>
               {modal.addCart ? <Check content={"상품이 장바구니에 추가되었습니다"} handler={handleNavigateAddCart} /> : null}
