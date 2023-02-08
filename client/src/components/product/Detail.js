@@ -23,7 +23,8 @@ function Detail({ data, userInfo }) {
     like: false,
     cartCheck: false,
     addCart: false,
-    removeCart: false
+    removeCart: false,
+    buy: false
   });
   const [likeStatus, setLikeStatus] = useState(false);
   const [cartStatus, setCartStatus] = useState(false);
@@ -205,6 +206,18 @@ function Detail({ data, userInfo }) {
 
   };
 
+  const handleClickBuy = () => {
+    
+    if (isLogin) {
+      return navigate("/checkout");
+    }
+
+    setModal({
+      ...modal,
+      buy: true
+    });
+  };
+
   return (
     <>
       <main className="container">
@@ -266,7 +279,8 @@ function Detail({ data, userInfo }) {
               {modal.addCart ? <Check content={"상품이 장바구니에 추가되었습니다"} handler={handleNavigateAddCart} /> : null}
               {modal.removeCart ? <Check content={"상품이 장바구니에서 제거되었습니다"} handler={handleNavigateRemoveCart} /> : null}
               {modal.cartCheck ? <Check content={"로그인 후 이용할 수 있습니다"} handler={handleNavigate} /> : null}
-              <button className="detail__info__content__btn-area__btn">구매하기</button> 
+              <button className="detail__info__content__btn-area__btn" onClick={handleClickBuy}>구매하기</button> 
+              {modal.buy ? <Check content={"로그인 후 이용할 수 있습니다"} handler={handleNavigate} /> : null}
             </div>
             {data.nickname === userInfo.nickname 
             ? <div className="detail__info__content__btn-area">
