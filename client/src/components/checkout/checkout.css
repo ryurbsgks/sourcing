@@ -1,0 +1,92 @@
+/* --------------------
+  checkout css
+-------------------- */
+
+/* ---------- Info.js ---------- */
+
+.info__header {
+  height: 100px;
+  border-bottom: 1px solid #e7e7e7;
+}
+
+.info__header__logo {
+  line-height: 100px;
+}
+
+.info__header__logo img {
+  vertical-align: middle;
+}
+
+.info__main__header {
+  border-bottom: 2px solid black;
+}
+
+.info__main__header__title {
+  font-size: 30px;
+  margin: 20px 0 10px 0;
+}
+
+.info__main__customer-info {
+  margin-top: 30px;
+}
+
+.info__main__goods-info {
+  margin-top: 30px;
+}
+
+.info__main__payment-info {
+  margin-top: 30px;
+}
+
+.info__main__payment-info__btn {
+  width: 250px;
+  height: 55px;
+  display: block;
+  color: green;
+  background-color: white;
+  border: green 1px solid;
+  border-radius: 3px;
+  cursor: pointer;
+  margin: 40px auto 0 auto;
+}
+
+.info__main__info__title {
+  font-size: 20px;
+}
+
+.info__main__table {
+  width: 100%;
+  border-top: 2px solid #cecece;
+  border-collapse: collapse;
+}
+
+.info__main__table > th {
+  height: 40px;
+  text-align: left;
+  vertical-align: middle;
+  border-bottom: 1px solid #e7e7e7;
+  padding-left: 15px;
+}
+
+.info__main__table > tr {
+  height: 40px;
+}
+
+.info__main__table td {
+  border-bottom: 1px solid #e7e7e7;
+  padding-left: 15px;
+}
+
+.info__main__table td > button {
+  color: green;
+  background-color: white;
+  border: green 1px solid;
+  border-radius: 3px;
+  cursor: pointer;
+  margin-left: 15px;
+}
+
+.info__main__table td:first-child {
+  width: 150px;
+  background-color: #f4f4f4;
+}
