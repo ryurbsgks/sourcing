@@ -209,7 +209,19 @@ function Detail({ data, userInfo }) {
   const handleClickBuy = () => {
     
     if (isLogin) {
-      return navigate("/checkout");
+
+      const dataInfo = {
+        name: data.name,
+        count: count,
+        pice: price.totalPrice
+      }
+
+      return navigate("/checkout", {
+        state: {
+          userInfo: userInfo,
+          dataInfo: dataInfo
+        }
+      });
     }
 
     setModal({
