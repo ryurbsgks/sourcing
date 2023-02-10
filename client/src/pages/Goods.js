@@ -13,7 +13,11 @@ function Goods() {
   const [data, setData] = useState();
   const [userInfo, setUserInfo] = useState({
     id: "",
-    nickname: ""
+    nickname: "",
+    userID: "",
+    email: "",
+    tel: "",
+    address: ""
   });
 
   const params = useParams();
@@ -28,7 +32,11 @@ function Goods() {
       const cb = (res) => {
         setUserInfo({
           id: res.data.data.userInfo.id,
-          nickname: res.data.data.userInfo.nickname
+          nickname: res.data.data.userInfo.nickname,
+          userID: res.data.data.userInfo.userID,
+          email: res.data.data.userInfo.email,
+          tel: res.data.data.userInfo.tel,
+          address: res.data.data.userInfo.address,
         });
       };
 
