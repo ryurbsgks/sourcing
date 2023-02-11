@@ -60,7 +60,25 @@
   border-collapse: collapse;
 }
 
-.info__main__table > th {
+.info__main__table__input--email {
+  width: 300px;
+  height: 100%;
+  margin-left: -15px;
+  padding: 0 15px;
+}
+
+.info__main__table__input--address {
+  width: 220px;
+  height: 100%;
+  margin-left: 15px;
+  padding: 0 10px;
+}
+
+.info__main__table__warning {
+  color: red;
+}
+
+.info__main__table th {
   height: 40px;
   text-align: left;
   vertical-align: middle;
@@ -68,16 +86,14 @@
   padding-left: 15px;
 }
 
-.info__main__table > tr {
-  height: 40px;
-}
-
 .info__main__table td {
+  height: 40px;
   border-bottom: 1px solid #e7e7e7;
   padding-left: 15px;
 }
 
 .info__main__table td > button {
+  height: 100%;
   color: green;
   background-color: white;
   border: green 1px solid;
