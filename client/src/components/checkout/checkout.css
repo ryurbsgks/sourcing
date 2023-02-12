@@ -50,6 +50,12 @@
   margin: 40px auto 0 auto;
 }
 
+.info__main__payment-info__err-msg {
+  text-align: center;
+  color: red;
+  margin-top: 10px;
+}
+
 .info__main__info__title {
   font-size: 20px;
 }
