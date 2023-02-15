@@ -32,3 +32,48 @@
 .sidenavbar__menu a:hover {
   color: green;
 }
+
+/* ---------- Like.js ---------- */
+
+.like {
+  display: flex;
+  border-bottom: 1px solid #e7e7e7;
+  cursor: pointer;
+  padding: 20px 20px;
+}
+
+.like > img {
+  width: 100px;
+  height: 100px;
+}
+
+.like__info {
+  width: 600px;
+  margin: auto 20px;
+}
+
+.like__info > div {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.like__btn {
+  margin: auto 0;
+}
+
+.like__btn > button {
+  width: 120px;
+  height: 35px;
+  display: block;
+  color: green;
+  background-color: white;
+  border: green 1px solid;
+  border-radius: 3px;
+  cursor: pointer;
+  margin: 10px 0;
+}
+
+.like__btn svg {
+  margin-right: 10px;
+}
