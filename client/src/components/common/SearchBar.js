@@ -86,8 +86,8 @@ function SearchBar() {
         : null}
       </div>
       <ul className="searchbar__menu">
-        <li><Link to="/"><FontAwesomeIcon className="icon__size28 icon__color-red" icon={faHeart} /></Link></li>
-        <li><Link to="/"><FontAwesomeIcon className="icon__size28" icon={faCartShopping} /></Link></li>
+        <li><Link to="/mypage/like"><FontAwesomeIcon className="icon__size28 icon__color-red" icon={faHeart} /></Link></li>
+        <li><Link to="/mypage/cart"><FontAwesomeIcon className="icon__size28" icon={faCartShopping} /></Link></li>
       </ul>
     </div>
   );
