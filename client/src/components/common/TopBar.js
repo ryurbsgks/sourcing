@@ -22,7 +22,7 @@ function TopBar() {
       <div className="container">
         {isLogin 
         ? <ul className="topbar__menu">
-            <li><Link to="/">마이페이지</Link></li>
+            <li><Link to="/mypage/order">마이페이지</Link></li>
             <li><Link to="/" onClick={handleLogoutBtn}>로그아웃</Link></li>
           </ul>
         : <ul className="topbar__menu">
