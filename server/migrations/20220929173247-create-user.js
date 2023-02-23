@@ -33,6 +33,10 @@ module.exports = {
       },
       auth: {
         type: Sequelize.INTEGER
+      },
+      salt: {
+        allowNull: false,
+        type: Sequelize.STRING
       }
     });
   },
