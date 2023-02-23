@@ -29,7 +29,8 @@ module.exports = (sequelize, DataTypes) => {
     tel: DataTypes.STRING,
     email: DataTypes.STRING,
     address: DataTypes.STRING,
-    auth: DataTypes.INTEGER
+    auth: DataTypes.INTEGER,
+    salt: DataTypes.STRING
   }, {
     sequelize,
     freezeTableName: true,
