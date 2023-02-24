@@ -1,4 +1,5 @@
 const { user } = require("../../models");
+const crypto = require("crypto");
 
 module.exports = (req, res) => {
 
@@ -15,17 +16,21 @@ module.exports = (req, res) => {
     return res.status(400).send({ message: "잘못된 요청입니다" }); 
   }
 
+  const salt = crypto.randomBytes(64).toString("base64");
+  const password = crypto.pbkdf2Sync(pw, salt, 9877, 64, "sha512").toString("base64");
+
   user.findOrCreate({
     where: {
       userID: userID
     },
     defaults: {
-      pw: pw,
+      pw: password,
       nickname: nickname,
       tel: tel,
       email: email,
       address: `${address}-${addressDetail}`,
-      auth: auth
+      auth: auth,
+      salt: salt
     }
   }).then( ([user, created]) => {
     if (!created) {
