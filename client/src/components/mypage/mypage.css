@@ -160,7 +160,7 @@
 
 .modify__container button {
   width: 100%;
-  height: 100%;
+  height: 45px;
   color: green;
   background-color: white;
   border: green 1px solid;
@@ -176,6 +176,11 @@
 .modify__container__space-02 {
   height: 45px;
   flex: 5.5;
+  line-height: 45px;
+}
+
+.modify__container__space-address {
+  flex: 5.5;
 }
 
 .modify__container__space-02 > input {
@@ -187,7 +192,12 @@
 
 .modify__container__space-03 {
   flex: 2;
+  display: flex;
   margin-left: 10px;
+}
+
+.modify__container__space-03 > button {
+  margin: auto 0;
 }
 
 .modify__area-btn {
@@ -209,6 +219,13 @@
 .modify__area-btn > button:last-child {
   background-color: green;
   color: white;
+}
+
+.modify__err-msg {
+  text-align: center;
+  color: red;
+  margin-top: 10px;
+  margin-bottom: -20px;
 }
 
 /* ---------- Order.js ---------- */
