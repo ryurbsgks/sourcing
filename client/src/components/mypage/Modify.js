@@ -20,6 +20,7 @@ function Modify({ userInfo }) {
   });
   const [message, setMessage] = useState({
     nickname: "",
+    pw: "",
     newPw: "",
     newPwCheck: "",
     email: "",
@@ -36,7 +37,8 @@ function Modify({ userInfo }) {
     nickname: false,
     pw: false,
     email: false,
-    verifyEmail: false
+    verifyEmail: false,
+    modify: false
   });
   const [status, setStatus] = useState({
     email: userInfo.email ? true : false,
@@ -347,10 +349,20 @@ function Modify({ userInfo }) {
         verifyEmail: false
       });
     }
+
+    if (id === "modify") {
+      setModalOpen({
+        ...modalOpen,
+        modify: false
+      });
+      window.location.reload();
+    }
     
   };
 
   const handleClickModify = () => {
+
+    let nickname, password, newPassword, email, address;
 
     if (inputValue.nickname !== userInfo.nickname) {
       if (inputValue.nickname !== check.nickname) {
@@ -359,7 +371,8 @@ function Modify({ userInfo }) {
           modify: "닉네임 중복확인을 해주세요"
         });
       }
-
+      
+      nickname = check.nickname;
       setMessage({
         ...message,
         modify: ""
@@ -373,6 +386,19 @@ function Modify({ userInfo }) {
           pw: true
         });
       }
+      if (!check.newPwCheck) {
+        return setMessage({
+          ...message,
+          modify: "비밀번호가 일치하지 않습니다"
+        });
+      }
+      
+      password = inputValue.pw;
+      newPassword = inputValue.newPw;
+      setMessage({
+        ...message,
+        modify: ""
+      });
     }
 
     if (inputValue.email) {
@@ -383,6 +409,7 @@ function Modify({ userInfo }) {
         });
       }
 
+      email = check.email;
       setMessage({
         ...message,
         modify: ""
@@ -396,10 +423,45 @@ function Modify({ userInfo }) {
           modify: "상세 주소를 입력해주세요"
         });
       }
-      
+
+      address = `${inputValue.address}-${inputValue.addressDetail}`;
       setMessage({
         ...message,
         modify: ""
+      });
+    }
+
+    if (nickname || newPassword || email || address) {
+      axios.patch(`${process.env.REACT_APP_URL}/user/modify`, {
+        id: userInfo.id,
+        nickname: nickname,
+        password: password,
+        newPassword: newPassword,
+        email: email,
+        address: address
+      }).then( (res) => {
+        if (res.data.message === "회원 정보 수정 성공") {
+          setMessage({
+            nickname: "",
+            pw: "",
+            newPw: "",
+            newPwCheck: "",
+            email: "",
+            verifyEmail: "",
+            modify: ""
+          });
+          setModalOpen({
+            ...modalOpen,
+            modify: true
+          });
+        }
+      }).catch( (err) => {
+        if (err.response.data.message === "비밀번호가 일치하지 않습니다") {
+          setMessage({
+            ...message,
+            pw: "비밀번호가 일치하지 않습니다"
+          });
+        }
       });
     }
 
@@ -426,6 +488,7 @@ function Modify({ userInfo }) {
         </div>
         <div className="modify__container__space-03"></div>
       </div>
+      {message.pw ? <div className="modify__err-msg">{message.pw}</div> : null}
       {modalOpen.pw ? <Check content={"기존 비밀번호를 입력해 주세요"} handler={() => handleModalClose("pw")} /> : null}
       <div className="modify__container">
         <div className="modify__container__space-01">새 비밀번호</div>
@@ -508,6 +571,7 @@ function Modify({ userInfo }) {
         <button>회원 탈퇴</button>
         <button onClick={handleClickModify}>정보 수정</button>
       </div>
+      {modalOpen.modify ? <Check content={"회원 정보가 수정되었습니다"} handler={() => handleModalClose("modify")} /> : null}
     </>
   );
 };
