@@ -10,6 +10,7 @@ module.exports = {
   signupEmail: require("./user/signupEmail"),
   findID: require("./user/findID"),
   findPW: require("./user/findPW"),
+  modify: require("./user/modify"),
   list: require("./product/list"),
   new: require("./product/new"),
   editor: require("./product/editor"),
