@@ -29,6 +29,7 @@ module.exports = (req, res) => {
 
     delete result.dataValues.pw;
     delete result.dataValues.salt;
+    result.dataValues.auto = auto;
 
     const payload = { userInfo: result.dataValues };
     const accessToken = accessTokenSign(payload, auto);
