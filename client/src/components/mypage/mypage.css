@@ -181,6 +181,7 @@
 
 .modify__container__space-address {
   flex: 5.5;
+  margin: auto 0;
 }
 
 .modify__container__space-02 > input {
