@@ -12,6 +12,10 @@ export const removeCookie = (name) => {
   return cookie.remove(name, { path: "/" });
 };
 
+export const setCookie = (name, value) => {
+  return cookie.set(name, value);
+};
+
 export const isAuthenticated = (dispatch, cb) => {
 
   axios.get(`${process.env.REACT_APP_URL}/user/auth`, {

@@ -4,7 +4,7 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { useDaumPostcodePopup } from "react-daum-postcode";
 import Check from "../modal/Check";
-import { getCookie, removeCookie } from "../../function";
+import { getCookie, removeCookie, setCookie } from "../../function";
 
 function Modify({ userInfo }) {
 
@@ -438,7 +438,8 @@ function Modify({ userInfo }) {
         password: password,
         newPassword: newPassword,
         email: email,
-        address: address
+        address: address,
+        auto: userInfo.auto
       }).then( (res) => {
         if (res.data.message === "회원 정보 수정 성공") {
           setMessage({
@@ -450,6 +451,8 @@ function Modify({ userInfo }) {
             verifyEmail: "",
             modify: ""
           });
+          removeCookie("sourcingAccess");
+          setCookie("sourcingAccess", res.data.accessToken)
           setModalOpen({
             ...modalOpen,
             modify: true
