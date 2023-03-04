@@ -2,8 +2,12 @@ import "../../App.css";
 import "./mypage.css";
 import axios from "axios";
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import { useDaumPostcodePopup } from "react-daum-postcode";
+import { setIsLogin } from "../../redux/action";
 import Check from "../modal/Check";
+import CheckTwoBtn from "../modal/CheckTwoBtn";
 import { getCookie, removeCookie, setCookie } from "../../function";
 
 function Modify({ userInfo }) {
@@ -38,7 +42,8 @@ function Modify({ userInfo }) {
     pw: false,
     email: false,
     verifyEmail: false,
-    modify: false
+    modify: false,
+    withdrawal: false
   });
   const [status, setStatus] = useState({
     email: userInfo.email ? true : false,
@@ -50,6 +55,8 @@ function Modify({ userInfo }) {
   });
   const [disable, setDisable] = useState(false);
 
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const scriptUrl = "https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js";
   const open = useDaumPostcodePopup(scriptUrl);
   const nicknameRegExp = /^[a-zA-Z가-힣0-9]{4,16}$/;
@@ -357,6 +364,27 @@ function Modify({ userInfo }) {
       });
       window.location.reload();
     }
+
+    if (id === "leftHandler") {
+
+      axios.delete(`${process.env.REACT_APP_URL}/user/withdrawal`, {
+        data: {
+          id: userInfo.id
+        }
+      }).then( (res) => {
+        dispatch(setIsLogin(false));
+        removeCookie("sourcingAccess");
+        return navigate("/");
+      });
+
+    }
+
+    if (id === "rightHandler") {
+      setModalOpen({
+        ...modalOpen,
+        withdrawal: false
+      });
+    }
     
   };
 
@@ -470,6 +498,13 @@ function Modify({ userInfo }) {
 
   };
 
+  const handleWithdrawal = () => {
+    setModalOpen({
+      ...modalOpen,
+      withdrawal: true
+    });
+  };
+
   return (
     <>
       <h3>개인 정보 수정</h3>
@@ -571,9 +606,10 @@ function Modify({ userInfo }) {
       : null}
       {message.modify ? <div className="modify__err-msg">{message.modify}</div> : null}
       <div className="modify__area-btn">
-        <button>회원 탈퇴</button>
+        <button onClick={handleWithdrawal}>회원 탈퇴</button>
         <button onClick={handleClickModify}>정보 수정</button>
       </div>
+      {modalOpen.withdrawal ? <CheckTwoBtn content={"회원 탈퇴를 하시겠습니까?"} leftHandler={() => handleModalClose("leftHandler")} rightHandler={() => handleModalClose("rightHandler")} leftBtn={"네"} rightBtn={"아니요"} /> : null}
       {modalOpen.modify ? <Check content={"회원 정보가 수정되었습니다"} handler={() => handleModalClose("modify")} /> : null}
     </>
   );
