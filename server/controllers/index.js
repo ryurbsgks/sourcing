@@ -11,6 +11,7 @@ module.exports = {
   findID: require("./user/findID"),
   findPW: require("./user/findPW"),
   modify: require("./user/modify"),
+  withdrawal: require("./user/withdrawal"),
   list: require("./product/list"),
   new: require("./product/new"),
   editor: require("./product/editor"),
