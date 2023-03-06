@@ -28,6 +28,19 @@
   justify-content: center;
 }
 
+.check__area-btn > button {
+  width: 50%;
+  height: 50px;
+  color: #7fad39;
+  background-color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.check__area-btn > button:first-child {
+  border-right: 1px solid #7fad39;
+}
+
 .check-background {
   display: flex;
   background-color: rgba(0, 0, 0, 0.6);
