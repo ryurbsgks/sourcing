@@ -9,7 +9,7 @@ module.exports = (req, res) => {
       id: id
     }
   }).then( () => {
-    return res.status(204).send({ message: "회원 탈퇴 성공" });
+    return res.status(204).send();
   }).catch( (err) => {
     return res.status(500).send({ message: err });
   });
