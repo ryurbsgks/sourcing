@@ -150,6 +150,20 @@
   margin-right: 10px;
 }
 
+.like__data-none {
+  width: 100%;
+  height: 500px;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: center;
+}
+
+.like__data-none > span {
+  color: rgb(181, 181, 181);
+  margin-top: 10px;
+}
+
 /* ---------- Modify.js ---------- */
 
 .modify__container {
