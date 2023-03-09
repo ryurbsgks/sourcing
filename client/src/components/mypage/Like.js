@@ -27,24 +27,45 @@ function Like({ userInfo }) {
 
   }, [userInfo]);
 
-  const test = (id) => {
+  const handleNavigate = (id) => {
     navigate(`/goods/${id}`);
+  };
+
+  const handleDelete = (e, index, id) => {
+    e.stopPropagation();
+
+    axios.delete(`${process.env.REACT_APP_URL}/product/like`, {
+      data: {
+        userID: userInfo,
+        productID: id
+      }
+    });
+
+    let newData = data.slice();
+
+    newData.splice(index, 1);
+
+    if (newData.length === 0) {
+      return setData(null);
+    }
+
+    setData(newData);
   };
 
   return (
     <>
       <h3>찜한 상품</h3>
       {data 
-      ? data.map( (el) => {
+      ? data.map( (el, index) => {
           const price = el.sortPrice.toLocaleString("ko-KR")
-          return  <div className="like" key={el.id} onClick={() => test(el.id)}>
+          return  <div className="like" key={el.id} onClick={() => handleNavigate(el.id)}>
                     <img src={`${process.env.REACT_APP_URL}/${el.img}`} alt="img" />
                     <div className="like__info">
                       <div>{el.name}</div>
                       <div>{price}원</div>
                     </div>
                     <div className="like__btn">
-                      <button>삭제</button>
+                      <button onClick={(e) => handleDelete(e, index, el.id)}>삭제</button>
                       <button><FontAwesomeIcon className="icon__size14" icon={faCartShopping} />담기</button>
                     </div>
                   </div>
