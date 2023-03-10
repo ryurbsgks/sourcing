@@ -6,10 +6,12 @@ import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
 import { faHeart } from "@fortawesome/free-regular-svg-icons";
+import Check from "../modal/Check";
 
 function Like({ userInfo }) {
 
   const [data, setData] = useState();
+  const [modal, setModal] = useState(false);
 
   const navigate = useNavigate();
 
@@ -52,24 +54,45 @@ function Like({ userInfo }) {
     setData(newData);
   };
 
+  const handleCart = (e, id) => {
+    e.stopPropagation();
+
+    axios.post(`${process.env.REACT_APP_URL}/product/cart`, {
+      userID: userInfo,
+      productID: id
+    }).then( (result) => {
+      if (result.data.message === "장바구니 추가 성공") {
+        setModal(true);
+      }
+    });
+
+  };
+
+  const handleCheckHandler = () => {
+    setModal(false);
+  };
+
   return (
     <>
       <h3>찜한 상품</h3>
       {data 
-      ? data.map( (el, index) => {
-          const price = el.sortPrice.toLocaleString("ko-KR")
-          return  <div className="like" key={el.id} onClick={() => handleNavigate(el.id)}>
-                    <img src={`${process.env.REACT_APP_URL}/${el.img}`} alt="img" />
-                    <div className="like__info">
-                      <div>{el.name}</div>
-                      <div>{price}원</div>
+      ? <>
+          {data.map( (el, index) => {
+            const price = el.sortPrice.toLocaleString("ko-KR")
+            return  <div className="like" key={el.id} onClick={() => handleNavigate(el.id)}>
+                      <img src={`${process.env.REACT_APP_URL}/${el.img}`} alt="img" />
+                      <div className="like__info">
+                        <div>{el.name}</div>
+                        <div>{price}원</div>
+                      </div>
+                      <div className="like__btn">
+                        <button onClick={(e) => handleDelete(e, index, el.id)}>삭제</button>
+                        <button onClick={(e) => handleCart(e, el.id)}><FontAwesomeIcon className="icon__size14" icon={faCartShopping} />담기</button>
+                      </div>
                     </div>
-                    <div className="like__btn">
-                      <button onClick={(e) => handleDelete(e, index, el.id)}>삭제</button>
-                      <button><FontAwesomeIcon className="icon__size14" icon={faCartShopping} />담기</button>
-                    </div>
-                  </div>
-        })
+          })}
+          {modal ? <Check content={"상품이 장바구니에 담겼습니다"} handler={handleCheckHandler} /> : null}
+        </>
       : <div className="like__data-none">
           <div>
             <FontAwesomeIcon className="icon__size100 icon__color-gray" icon={faHeart} />
