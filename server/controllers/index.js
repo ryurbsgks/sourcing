@@ -11,6 +11,7 @@ module.exports = {
   findID: require("./user/findID"),
   findPW: require("./user/findPW"),
   modify: require("./user/modify"),
+  mypageCart: require("./user/mypageCart"),
   mypageLike: require("./user/mypageLike"),
   withdrawal: require("./user/withdrawal"),
   list: require("./product/list"),
