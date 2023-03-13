@@ -23,7 +23,8 @@ module.exports = (sequelize, DataTypes) => {
   }
   productcart.init({
     userID: DataTypes.INTEGER,
-    productID: DataTypes.INTEGER
+    productID: DataTypes.INTEGER,
+    count: DataTypes.INTEGER
   }, {
     sequelize,
     freezeTableName: true,
