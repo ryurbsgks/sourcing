@@ -26,6 +26,10 @@ module.exports = {
           key: "id"
         },
         onDelete: "CASCADE"
+      },
+      count: {
+        allowNull: false,
+        type: Sequelize.INTEGER,
       }
     });
   },
