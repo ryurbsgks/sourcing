@@ -166,7 +166,8 @@ function Detail({ data, userInfo }) {
 
       axios.post(`${process.env.REACT_APP_URL}/product/cart`, {
         userID: userInfo.id,
-        productID: data.id
+        productID: data.id,
+        count: count
       });
       
       setCartColor("detail__info__content__btn-area__icon-btn--green");
