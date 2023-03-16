@@ -88,6 +88,22 @@ function Cart({ userInfo }) {
     return setCheckbox(checkbox.filter( (el) => el.id !== id));
   };
 
+  const handleDeleteCart = (id) => {
+
+    axios.delete(`${process.env.REACT_APP_URL}/product/cart`, {
+      data: {
+        userID: userInfo,
+        productID: id
+      }
+    }).then( (result) => {
+      if (result.status === 204) {
+        setData(data.filter( (el) => el.id !== id));
+        setCheckbox(checkbox.filter( (el) => el.id !== id));
+      }
+    });
+
+  };
+
   return (
     <>
       <h3>장바구니</h3>
@@ -109,7 +125,7 @@ function Cart({ userInfo }) {
                         <div>{el.count}{el.saleUnit}</div>
                         <div>{price}원</div>
                       </div>
-                      <button>
+                      <button onClick={() => handleDeleteCart(el.id)}>
                         <FontAwesomeIcon className="icon__size28" icon={faXmark} />
                       </button>
                     </div>
