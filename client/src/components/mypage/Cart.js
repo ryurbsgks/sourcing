@@ -2,6 +2,7 @@ import "../../App.css";
 import "./mypage.css";
 import axios from "axios";
 import { useState, useLayoutEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 
@@ -11,11 +12,13 @@ function Cart({ userInfo }) {
   const [price, setPrice] = useState();
   const [checkbox, setCheckbox] = useState([]);
 
+  const navigate = useNavigate();
+
   useLayoutEffect( () => {
 
     axios.get(`${process.env.REACT_APP_URL}/user/mypageCart`, {
       params: {
-        userID: userInfo
+        userID: userInfo.id
       }
     }).then( (result) => {
       if (result.data.message === "장바구니 리스트 조회 성공") {
@@ -26,7 +29,8 @@ function Cart({ userInfo }) {
           const obj = {
             id: el.id,
             sortPrice: el.sortPrice,
-            count: el.count
+            count: el.count,
+            name: el.name
           };
           arr.push(obj);
         });
@@ -61,7 +65,8 @@ function Cart({ userInfo }) {
         const obj = {
           id: el.id,
           sortPrice: el.sortPrice,
-          count: el.count
+          count: el.count,
+          name: el.name
         };
         arr.push(obj);
       });
@@ -79,7 +84,8 @@ function Cart({ userInfo }) {
       const obj = {
         id: checkData.id,
         sortPrice: checkData.sortPrice,
-        count: checkData.count
+        count: checkData.count,
+        name: checkData.name
       };
 
       return setCheckbox( (el) => [...el, obj]);
@@ -92,13 +98,27 @@ function Cart({ userInfo }) {
 
     axios.delete(`${process.env.REACT_APP_URL}/product/cart`, {
       data: {
-        userID: userInfo,
+        userID: userInfo.id,
         productID: id
       }
     }).then( (result) => {
       if (result.status === 204) {
         setData(data.filter( (el) => el.id !== id));
         setCheckbox(checkbox.filter( (el) => el.id !== id));
+      }
+    });
+
+  };
+
+  const handleClickBuy = () => {
+
+    delete userInfo.nickname;
+    delete userInfo.auto;
+
+    navigate("/checkout", {
+      state: {
+        userInfo: userInfo,
+        dataInfo: checkbox
       }
     });
 
@@ -133,7 +153,7 @@ function Cart({ userInfo }) {
           <div className="cart__total-price">
             <div>총 주문 금액 <span>{price}원</span></div>
           </div>
-          <button className="cart__buy-btn">구매하기</button>
+          <button className="cart__buy-btn" onClick={handleClickBuy}>구매하기</button>
         </>
       : <div className="like__data-none">
           <span>장바구니에 담긴 상품이 없습니다</span>
