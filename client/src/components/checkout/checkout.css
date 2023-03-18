@@ -58,11 +58,11 @@
 
 .info__main__info__title {
   font-size: 20px;
+  border-bottom: 2px solid #cecece;
 }
 
 .info__main__table {
   width: 100%;
-  border-top: 2px solid #cecece;
   border-collapse: collapse;
 }
 
