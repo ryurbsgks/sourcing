@@ -18,6 +18,10 @@ function Info() {
     email: "",
     address: ""
   });
+  const [price, setPrice] = useState({
+    price: 0,
+    priceKR: 0
+  });
   const [inputStatus, setInputStatus] = useState(false);
   const [modal, setModal] = useState(false);
   const [message, setMessage] = useState();
@@ -29,12 +33,24 @@ function Info() {
 
   useLayoutEffect( () => {
 
-    if (location.state) {
+    if (location.state.userInfo) {
       setUserInfo({
         userID: location.state.userInfo.userID,
         email: location.state.userInfo.email,
         tel: location.state.userInfo.tel,
         address: location.state.userInfo.address
+      });
+    }
+
+    if (location.state.dataInfo !== 0) {
+
+      const arrPirce = location.state.dataInfo.map( (el) => el.sortPrice * el.count);
+      const totalPrice = arrPirce.reduce( (acc, cur) => acc + cur, 0);
+      const totalPriceKR = totalPrice.toLocaleString("ko-KR");
+      
+      setPrice({
+        price: totalPrice,
+        priceKR: totalPriceKR
       });
     }
 
@@ -128,12 +144,11 @@ function Info() {
       setMessage();
     }
 
-    let price = location.state.dataInfo.pice.replaceAll(",", "");
     const data = {
       pg: "html5_inicis",
       pay_method: "card",
       merchant_uid: `mid_${new Date().getTime()}`,
-      amount: Number(price),
+      amount: price.price,
       name: "오늘의 장",
       buyer_name: userInfo.userID,
       buyer_tel: userInfo.tel,
@@ -148,7 +163,7 @@ function Info() {
   };
 
   const handleNavigate = () => {
-    navigate("/mypage/orderlist");
+    navigate("/mypage/order");
   };
 
   return (
@@ -193,19 +208,21 @@ function Info() {
         </section>
         <section className="info__main__goods-info">
           <h3 className="info__main__info__title">상품 정보</h3>
-          <table className="info__main__table">
-            <thead>
-              <tr>
-                <th colSpan={2}>{location.state.dataInfo.name}</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>{location.state.dataInfo.count}개</td>
-                <td>{location.state.dataInfo.pice}원</td>
-              </tr>
-            </tbody>
-          </table>
+          {location.state.dataInfo.map( (el, index) => {
+            return  <table className="info__main__table" key={index}>
+                      <thead>
+                        <tr>
+                          <th colSpan={2}>{el.name}</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>{el.count}개</td>
+                          <td>{(el.sortPrice * el.count).toLocaleString("ko-KR")}원</td>
+                        </tr>
+                      </tbody>
+                    </table>
+          })}
         </section>
         <section className="info__main__payment-info">
           <h3 className="info__main__info__title">결제 정보</h3>
@@ -213,7 +230,7 @@ function Info() {
             <tbody>
               <tr>
                 <td>총 결제 금액</td>
-                <td><b>{location.state.dataInfo.pice}</b>원</td>
+                <td><b>{price.priceKR}</b>원</td>
               </tr>
             </tbody>
           </table>
