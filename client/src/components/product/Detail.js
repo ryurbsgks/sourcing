@@ -211,11 +211,11 @@ function Detail({ data, userInfo }) {
     
     if (isLogin) {
 
-      const dataInfo = {
+      const dataInfo = [{
         name: data.name,
         count: count,
-        pice: price.totalPrice
-      }
+        sortPrice: price.totalPrice.replaceAll(",", "")
+      }];
 
       return navigate("/checkout", {
         state: {
