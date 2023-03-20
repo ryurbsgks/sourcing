@@ -11,7 +11,10 @@ import Check from "../modal/Check";
 function Like({ userInfo }) {
 
   const [data, setData] = useState();
-  const [modal, setModal] = useState(false);
+  const [modal, setModal] = useState({
+    success: false,
+    fail: false
+  });
 
   const navigate = useNavigate();
 
@@ -62,14 +65,41 @@ function Like({ userInfo }) {
       productID: id
     }).then( (result) => {
       if (result.data.message === "장바구니 추가 성공") {
-        setModal(true);
+        return setModal({
+          ...modal,
+          success: true
+        });
       }
+
+      setModal({
+        ...modal,
+        fail: true
+      });
+    }).catch( () => {
+      setModal({
+        ...modal,
+        fail: true
+      });
     });
 
   };
 
-  const handleCheckHandler = () => {
-    setModal(false);
+  const handleCheckHandler = (id) => {
+    
+    if (id === "success") {
+      return setModal({
+        ...modal,
+        success: false
+      });
+    }
+
+    if (id === "fail") {
+      return setModal({
+        ...modal,
+        fail: false
+      });
+    }
+
   };
 
   return (
@@ -91,7 +121,8 @@ function Like({ userInfo }) {
                       </div>
                     </div>
           })}
-          {modal ? <Check content={"상품이 장바구니에 담겼습니다"} handler={handleCheckHandler} /> : null}
+          {modal.success ? <Check content={"상품이 장바구니에 담겼습니다"} handler={() => handleCheckHandler("success")} /> : null}
+          {modal.fail ? <Check content={"이미 장바구니에 담긴 상품입니다"} handler={() => handleCheckHandler("fail")} /> : null}
         </>
       : <div className="like__data-none">
           <div>
