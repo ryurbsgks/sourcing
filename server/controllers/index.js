@@ -14,6 +14,7 @@ module.exports = {
   mypageCart: require("./user/mypageCart"),
   mypageLike: require("./user/mypageLike"),
   withdrawal: require("./user/withdrawal"),
+  orderhistory: require("./user/orderhistory"),
   list: require("./product/list"),
   new: require("./product/new"),
   editor: require("./product/editor"),
