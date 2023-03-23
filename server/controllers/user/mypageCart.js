@@ -23,7 +23,7 @@ module.exports = (req, res) => {
 
     Promise.all(arr.map( async (el) => {
       const productInfo = await product.findOne({
-        attributes: ["id", "img", "name", "sortPrice", "saleUnit"],
+        attributes: ["id", "img", "name", "sortPrice", "saleUnit", "userID"],
         where: {
           id: el.productID
         }
