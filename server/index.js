@@ -29,6 +29,7 @@ app.patch("/user/modify", controllers.modify);
 app.get("/user/mypageCart", controllers.mypageCart);
 app.get("/user/mypageLike", controllers.mypageLike);
 app.delete("/user/withdrawal", controllers.withdrawal);
+app.post("/user/orderhistory", controllers.orderhistory);
 app.get("/product/list", controllers.list);
 app.post("/product/new", controllers.new);
 app.post("/product/editor", controllers.editor);
