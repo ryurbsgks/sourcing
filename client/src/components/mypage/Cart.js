@@ -5,12 +5,14 @@ import { useState, useLayoutEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
+import Check from "../modal/Check";
 
 function Cart({ userInfo }) {
 
   const [data, setData] = useState([]);
   const [price, setPrice] = useState();
   const [checkbox, setCheckbox] = useState([]);
+  const [modal, setModal] = useState(false);
 
   const navigate = useNavigate();
 
@@ -28,6 +30,8 @@ function Cart({ userInfo }) {
         result.data.data.map( (el) => {
           const obj = {
             id: el.id,
+            img: el.img,
+            seller: el.userID,
             sortPrice: el.sortPrice,
             count: el.count,
             name: el.name
@@ -64,6 +68,8 @@ function Cart({ userInfo }) {
       data.map( (el) => {
         const obj = {
           id: el.id,
+          img: el.img,
+          seller: el.userID,
           sortPrice: el.sortPrice,
           count: el.count,
           name: el.name
@@ -83,6 +89,8 @@ function Cart({ userInfo }) {
       const checkData = data.find( (el) => el.id === id);
       const obj = {
         id: checkData.id,
+        img: checkData.img,
+        seller: checkData.userID,
         sortPrice: checkData.sortPrice,
         count: checkData.count,
         name: checkData.name
@@ -112,6 +120,10 @@ function Cart({ userInfo }) {
 
   const handleClickBuy = () => {
 
+    if (checkbox.length === 0) {
+      return setModal(true);
+    }
+
     delete userInfo.nickname;
     delete userInfo.auto;
 
@@ -122,6 +134,14 @@ function Cart({ userInfo }) {
       }
     });
 
+  };
+
+  const handleNavigate = (id) => {
+    navigate(`/goods/${id}`);
+  };
+
+  const handleCheckHandler = () => {
+    setModal(false);
   };
 
   return (
@@ -139,8 +159,8 @@ function Cart({ userInfo }) {
             const price = (el.sortPrice * el.count).toLocaleString("ko-KR")
             return  <div className="cart__good" key={index}>
                       <input type="checkbox" onChange={(e) =>handleCheckSingle(e, el.id)} checked={checkbox.find(element => element.id === el.id) ? true : false} />
-                      <img src={`${process.env.REACT_APP_URL}/${el.img}`} alt="img" />
-                      <div className="cart__good__info">
+                      <img src={`${process.env.REACT_APP_URL}/${el.img}`} alt="img" onClick={() => handleNavigate(el.id)} />
+                      <div className="cart__good__info" onClick={() => handleNavigate(el.id)}>
                         <div>{el.name}</div>
                         <div>{el.count}{el.saleUnit}</div>
                         <div>{price}원</div>
@@ -154,6 +174,7 @@ function Cart({ userInfo }) {
             <div>총 주문 금액 <span>{price}원</span></div>
           </div>
           <button className="cart__buy-btn" onClick={handleClickBuy}>구매하기</button>
+          {modal ? <Check content={"구매할 상품을 선택해 주세요"} handler={handleCheckHandler} /> : null}
         </>
       : <div className="like__data-none">
           <span>장바구니에 담긴 상품이 없습니다</span>
