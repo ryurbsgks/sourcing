@@ -1,5 +1,6 @@
 import "../../App.css";
 import "./checkout.css";
+import axios from "axios";
 import { useState, useEffect, useLayoutEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useDaumPostcodePopup } from "react-daum-postcode";
@@ -115,7 +116,45 @@ function Info() {
   const callback = (rsp) => {
 
     if (rsp.success) {
-      setModal(true);
+
+      const productDataOrder = [];
+      const productDataSale = [];
+
+      location.state.dataInfo.map( (el) => {
+
+        const objOrder = {
+          id: el.id,
+          img: el.img,
+          name: el.name,
+          count: el.count,
+          price: el.sortPrice * el.count
+        };
+        const objSale = {
+          productID: el.id,
+          seller: el.seller,
+          count: el.count,
+          price: el.sortPrice * el.count,
+          merchant_uid: rsp.merchant_uid,
+          status: 1
+        };
+
+        productDataOrder.push(objOrder);
+        productDataSale.push(objSale);
+      });
+
+      axios.post(`${process.env.REACT_APP_URL}/user/orderhistory`, {
+        userID: location.state.userInfo.id,
+        merchant_uid: rsp.merchant_uid,
+        imp_uid: rsp.imp_uid,
+        productData: productDataOrder,
+        productDataSale: productDataSale,
+        status: 1
+      }).then( (result) => {
+        if (result.data.message === "상품 주문 등록 성공") {
+          setModal(true);
+        }
+      });
+
     } else {
       setModal(false);
     }
@@ -147,7 +186,7 @@ function Info() {
     const data = {
       pg: "html5_inicis",
       pay_method: "card",
-      merchant_uid: `mid_${new Date().getTime()}`,
+      merchant_uid: `${new Date().getTime()}`,
       amount: price.price,
       name: "오늘의 장",
       buyer_name: userInfo.userID,
