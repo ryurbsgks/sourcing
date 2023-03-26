@@ -1,8 +1,8 @@
-const { orderHistory } = require("../../models");
+const { orderHistory, saleHistory } = require("../../models");
 
 module.exports = (req, res) => {
 
-  const { userID, merchant_uid, imp_uid, productData, status } = req.body;
+  const { userID, merchant_uid, imp_uid, productData, productDataSale, status } = req.body;
   const stringifyProductData = JSON.stringify(productData);
 
   orderHistory.create({
@@ -16,9 +16,22 @@ module.exports = (req, res) => {
       return res.status(400).send({ message: "상품 주문 등록 실패" });
     }
 
+    Promise.all(productDataSale.map( async (el) => {
+      await saleHistory.create({
+        productID: el.productID,
+        seller: el.seller,
+        count: el.count,
+        price: el.price,
+        merchant_uid: el.merchant_uid,
+        status: el.status
+      })
+    })).catch( (err) => {
+      return res.status(500).send({ message: err });
+    });
+
     return res.status(201).send({ message: "상품 주문 등록 성공" });
   }).catch( (err) => {
-    res.status(500).send({ message: err });
+    return res.status(500).send({ message: err });
   });
 
 };
