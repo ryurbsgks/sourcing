@@ -15,6 +15,7 @@ module.exports = {
   mypageLike: require("./user/mypageLike"),
   withdrawal: require("./user/withdrawal"),
   orderhistory: require("./user/orderhistory"),
+  mypageOrderHistory: require("./user/mypageOrderHistory"),
   list: require("./product/list"),
   new: require("./product/new"),
   editor: require("./product/editor"),
