@@ -212,6 +212,9 @@ function Detail({ data, userInfo }) {
     if (isLogin) {
 
       const dataInfo = [{
+        id: data.id,
+        img: data.img,
+        seller: data.userID,
         name: data.name,
         count: count,
         sortPrice: price.totalPrice.replaceAll(",", "")
@@ -220,7 +223,8 @@ function Detail({ data, userInfo }) {
       return navigate("/checkout", {
         state: {
           userInfo: userInfo,
-          dataInfo: dataInfo
+          dataInfo: dataInfo,
+          status: false
         }
       });
     }

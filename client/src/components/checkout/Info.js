@@ -23,6 +23,7 @@ function Info() {
     price: 0,
     priceKR: 0
   });
+  const [status, setStatus] = useState();
   const [inputStatus, setInputStatus] = useState(false);
   const [modal, setModal] = useState(false);
   const [message, setMessage] = useState();
@@ -53,6 +54,12 @@ function Info() {
         price: totalPrice,
         priceKR: totalPriceKR
       });
+    }
+
+    if (location.state.status) {
+      setStatus(location.state.status);
+    } else {
+      setStatus(location.state.status);
     }
 
   }, []);
@@ -148,7 +155,8 @@ function Info() {
         imp_uid: rsp.imp_uid,
         productData: productDataOrder,
         productDataSale: productDataSale,
-        status: 1
+        status: 1,
+        where: status
       }).then( (result) => {
         if (result.data.message === "상품 주문 등록 성공") {
           setModal(true);
