@@ -130,7 +130,8 @@ function Cart({ userInfo }) {
     navigate("/checkout", {
       state: {
         userInfo: userInfo,
-        dataInfo: checkbox
+        dataInfo: checkbox,
+        status: true
       }
     });
 
