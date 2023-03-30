@@ -1,8 +1,8 @@
-const { orderHistory, saleHistory } = require("../../models");
+const { orderHistory, saleHistory, productcart } = require("../../models");
 
 module.exports = (req, res) => {
 
-  const { userID, merchant_uid, imp_uid, productData, productDataSale, status } = req.body;
+  const { userID, merchant_uid, imp_uid, productData, productDataSale, status, where } = req.body;
   const stringifyProductData = JSON.stringify(productData);
 
   orderHistory.create({
@@ -25,7 +25,21 @@ module.exports = (req, res) => {
         merchant_uid: el.merchant_uid,
         status: el.status
       })
-    })).catch( (err) => {
+    })).then( () => {
+      if (where) {
+        Promise.all(productDataSale.map( async (el) => {
+          await productcart.destroy({
+            where: {
+              userID: userID,
+              productID: el.productID
+            }
+          })
+        })).catch( (err) => {
+          return res.status(500).send({ message: err });
+        });
+      }
+      
+    }).catch( (err) => {
       return res.status(500).send({ message: err });
     });
 
