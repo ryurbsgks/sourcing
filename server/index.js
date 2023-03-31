@@ -31,6 +31,7 @@ app.get("/user/mypageLike", controllers.mypageLike);
 app.delete("/user/withdrawal", controllers.withdrawal);
 app.post("/user/orderhistory", controllers.orderhistory);
 app.get("/user/orderhistory", controllers.mypageOrderHistory);
+app.patch("/user/orderhistory", controllers.orderhistoryCancel);
 app.get("/product/list", controllers.list);
 app.post("/product/new", controllers.new);
 app.post("/product/editor", controllers.editor);
