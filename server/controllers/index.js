@@ -16,6 +16,7 @@ module.exports = {
   withdrawal: require("./user/withdrawal"),
   orderhistory: require("./user/orderhistory"),
   mypageOrderHistory: require("./user/mypageOrderHistory"),
+  orderhistoryCancel: require("./user/orderhistoryCancel"),
   list: require("./product/list"),
   new: require("./product/new"),
   editor: require("./product/editor"),
