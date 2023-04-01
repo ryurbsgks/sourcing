@@ -59,6 +59,7 @@
 .cart__good > img {
   width: 100px;
   height: 100px;
+  cursor: pointer;
   margin-left: 15px;
 }
 
@@ -73,6 +74,7 @@
 
 .cart__good__info {
   flex: 1;
+  cursor: pointer;
   margin: auto 20px;
   white-space: nowrap;
   overflow: hidden;
@@ -278,14 +280,19 @@
   font-size: 24px;
 }
 
-.order__status {
+.order__status--blue {
   color: blue;
+}
+
+.order__status--red {
+  color: red;
 }
 
 .order__good {
   display: flex;
   border-radius: 10px;
   box-shadow: 2px 2px 4px 2px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
   margin-top: 20px;
   padding: 20px;
 }
