@@ -2,7 +2,7 @@ const { orderHistory, saleHistory, productcart } = require("../../models");
 
 module.exports = (req, res) => {
 
-  const { userID, merchant_uid, imp_uid, productData, productDataSale, status, where } = req.body;
+  const { userID, merchant_uid, imp_uid, productData, productDataSale, status, where, amount } = req.body;
   const stringifyProductData = JSON.stringify(productData);
 
   orderHistory.create({
@@ -10,7 +10,8 @@ module.exports = (req, res) => {
     merchant_uid: merchant_uid,
     imp_uid: imp_uid,
     productData: stringifyProductData,
-    status: status
+    status: status,
+    amount: amount
   }).then( (result) => {
     if (!result) {
       return res.status(400).send({ message: "상품 주문 등록 실패" });
