@@ -156,7 +156,8 @@ function Info() {
         productData: productDataOrder,
         productDataSale: productDataSale,
         status: 1,
-        where: status
+        where: status,
+        amount: price.price
       }).then( (result) => {
         if (result.data.message === "상품 주문 등록 성공") {
           setModal(true);
