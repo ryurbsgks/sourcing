@@ -27,6 +27,15 @@ module.exports = {
       },
       status: {
         type: Sequelize.INTEGER
+      },
+      amount: {
+        allowNull: false,
+        type: Sequelize.INTEGER
+      },
+      cancel_amount: {
+        allowNull: false,
+        type: Sequelize.INTEGER,
+        defaultValue: 0
       }
     });
   },

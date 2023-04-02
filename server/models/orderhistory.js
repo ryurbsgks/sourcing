@@ -18,7 +18,9 @@ module.exports = (sequelize, DataTypes) => {
     merchant_uid: DataTypes.STRING,
     imp_uid: DataTypes.STRING,
     productData: DataTypes.STRING,
-    status: DataTypes.INTEGER
+    status: DataTypes.INTEGER,
+    amount: DataTypes.INTEGER,
+    cancel_amount: DataTypes.INTEGER
   }, {
     sequelize,
     freezeTableName: true,
