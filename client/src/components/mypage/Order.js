@@ -12,6 +12,7 @@ function Order({ userInfo }) {
   const [data, setData] = useState([]);
   const [modal, setModal] = useState(false);
   const [targetID, setTargetID] = useState();
+  const [amount, setAmount] = useState();
 
   const navigate = useNavigate();
 
@@ -33,16 +34,23 @@ function Order({ userInfo }) {
     navigate(`/goods/${id}`);
   };
 
-  const handleClickCancel = (e) => {
-    setTargetID(e.target.id);
+  const handleClickCancel = (id, amount) => {
+    setTargetID(id);
+    setAmount(amount);
     setModal(true);
   };
 
   const handleCheckHandler = () => {
 
-    axios.patch(`${process.env.REACT_APP_URL}/user/orderhistory`, {
+    axios.post(`${process.env.REACT_APP_URL}/user/orderhistoryCancel`, {
       merchant_uid: targetID,
-      status: 4
+      status: 4,
+      cancel_request_amount: amount,
+      reason: "테스트 결제 환불"
+    }, {
+      header: {
+        "Content-Type": "application/json"
+      }
     }).then( (result) => {
       if (result.data.message === "구매 취소 성공") {
         setTargetID(null);
@@ -66,7 +74,7 @@ function Order({ userInfo }) {
                       : <div className="order__status--blue">
                           {el.status === 1 ? "상품 준비 중" : el.status === 2 ? "배송 중" : "배송 완료"}
                         </div>}
-                      {el.status === 1 ? <button id={el.merchant_uid} onClick={handleClickCancel}>구매 취소</button> : null}
+                      {el.status === 1 ? <button onClick={() => handleClickCancel(el.merchant_uid, el.amount)}>구매 취소</button> : null}
                       {el.productData.map( (el, index) => {
                         const price = (el.price * el.count).toLocaleString("ko-KR")
                         return  <div className="order__good" key={index} onClick={() => handleNavigate(el.id)}>
