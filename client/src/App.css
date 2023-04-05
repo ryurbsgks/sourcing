@@ -61,3 +61,7 @@ p {
 .icon__color-red {
   color: red;
 }
+
+.icon__color-gray {
+  color: rgb(181, 181, 181);
+}
