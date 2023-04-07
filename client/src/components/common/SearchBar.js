@@ -1,11 +1,12 @@
 import "../../App.css";
 import "./common.css";
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useLayoutEffect, useState } from "react";
+import { Link, useNavigate, useLocation, useSearchParams } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretDown, faMagnifyingGlass, faCartShopping } from "@fortawesome/free-solid-svg-icons";
 import { faHeart } from "@fortawesome/free-regular-svg-icons";
 import logo from "../../images/logo.PNG";
+import Check from "../modal/Check";
 
 function SearchBar() {
 
@@ -13,6 +14,50 @@ function SearchBar() {
     status: false,
     content: "전체"
   });
+  const [inputValue, setInputValue] = useState();
+  const [modal, setModal] = useState(false);
+  const [defaultValue, setDefaultValue] = useState();
+  const [searchParams, setSearchParams] = useSearchParams();
+ 
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  useLayoutEffect( () => {
+
+    if (location.pathname === "/search") {
+
+      const category = searchParams.get("category");
+      const goods = searchParams.get("goods");
+      
+      switch (category) {
+        case "vegetable": 
+          setMenuBox({
+            ...menuBox,
+            content: "야채"
+          });
+          break;
+        case "fruit": 
+          setMenuBox({
+            ...menuBox,
+            content: "과일"
+          });
+          break;
+        case "seafood": 
+          setMenuBox({
+            ...menuBox,
+            content: "수산"
+          });
+          break;
+      };
+
+      if (goods) {
+        setInputValue(goods);
+        setDefaultValue(goods);
+      }
+      
+    }
+
+  }, [location]);
 
   const handleClickMenuBox = () => {
 
@@ -62,6 +107,49 @@ function SearchBar() {
 
   };
 
+  const handleInputValue = (e) => {
+    setInputValue(e.target.value);
+  };
+
+  const handleEnterKey = (e) => {
+
+    if (e.key === "Enter") {
+      handleClickSearch();
+    }
+
+  };
+
+  const handleClickSearch = () => {
+
+    if (!inputValue) {
+      return setModal(true);
+    }
+
+    if (menuBox.content === "전체") {
+      return navigate(`/search?goods=${inputValue}`);
+    }
+
+    let category;
+
+    switch (menuBox.content) {
+      case "야채":
+        category = "vegetable";
+        break;
+      case "과일": 
+        category = "fruit";
+        break;
+      case "수산": 
+        category = "seafood";
+        break;
+    };
+
+    return navigate(`/search?category=${category}&goods=${inputValue}`);
+  };
+
+  const handleCheckHandler = () => {
+    setModal(false);
+  };
+
   return (
     <div className="searchbar">
       <div className="searchbar__logo">
@@ -72,8 +160,8 @@ function SearchBar() {
           <div className="searchbar__searchbox__menu__text">{menuBox.content}</div>
           <div className="searchbar__searchbox__menu__icon"><FontAwesomeIcon icon={faCaretDown} /></div>
         </div>
-        <input placeholder="검색어를 입력해주세요" />
-        <button type="button"><FontAwesomeIcon className="icon__size14" icon={faMagnifyingGlass} />SEARCH</button>
+        <input onChange={handleInputValue} onKeyDown={handleEnterKey} placeholder="검색어를 입력해주세요" defaultValue={defaultValue} />
+        <button type="button" onClick={handleClickSearch}><FontAwesomeIcon className="icon__size14" icon={faMagnifyingGlass} />SEARCH</button>
         {menuBox.status
         ? <div className="searchbar__searchbox__menu-list">
             <ul onClick={handleClickMenuBoxList}>
@@ -89,6 +177,7 @@ function SearchBar() {
         <li><Link to="/mypage/like"><FontAwesomeIcon className="icon__size28 icon__color-red" icon={faHeart} /></Link></li>
         <li><Link to="/mypage/cart"><FontAwesomeIcon className="icon__size28" icon={faCartShopping} /></Link></li>
       </ul>
+      {modal ? <Check content={"검색어를 입력해주세요"} handler={handleCheckHandler} /> : null}
     </div>
   );
 }
