@@ -1,0 +1,25 @@
+/* --------------------
+  pages css
+-------------------- */
+
+/* ---------- Mypage.js ---------- */
+
+.mypage__main {
+  width: 1200px;
+  display: flex;
+  margin: 50px auto;
+}
+
+.mypage__main__section {
+  width: 900px;
+  margin-left: 30px;
+}
+
+.mypage__main__section > h3 {
+  font-size: 26px;
+  border-bottom: 2px solid black;
+}
+
+.mypage__main__section input {
+  width: 15px;
+}
