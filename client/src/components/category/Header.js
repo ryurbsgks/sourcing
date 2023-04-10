@@ -1,7 +1,7 @@
 import "../../App.css";
 import "./category.css";
 import { useState, useLayoutEffect, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation, useSearchParams } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretDown } from "@fortawesome/free-solid-svg-icons";
 
@@ -12,9 +12,11 @@ function Header({ params, auth , sort }) {
     status: false,
     content: ""
   });
+  const [searchParams, setSearchParams] = useSearchParams();
 
   const navigate = useNavigate();
-
+  const location = useLocation();
+  
   useLayoutEffect( () => {
 
     if (params === "vegetable") {
@@ -28,6 +30,8 @@ function Header({ params, auth , sort }) {
     if (params === "seafood") {
       return setCategory("수산물");
     }
+
+    return setCategory(`'${params}'에 대한 검색결과`);
 
   }, [params]);
 
@@ -90,6 +94,46 @@ function Header({ params, auth , sort }) {
 
   const handleClickSortboxList = (e) => {
 
+    if (location.pathname === "/search") {
+
+      if (e.target.value === 0) {
+        setSortbox({
+          status: false,
+          content: "베스트순"
+        });
+        searchParams.set("sort", "best");
+        return setSearchParams(searchParams);
+      }
+
+      if (e.target.value === 1) {
+        setSortbox({
+          status: false,
+          content: "신상품순"
+        });
+        searchParams.set("sort", "new");
+        return setSearchParams(searchParams);
+      }
+
+      if (e.target.value === 2) {
+        setSortbox({
+          status: false,
+          content: "낮은 가격순"
+        });
+        searchParams.set("sort", "lowprice");
+        return setSearchParams(searchParams);
+      }
+
+      if (e.target.value === 3) {
+        setSortbox({
+          status: false,
+          content: "높은 가격순"
+        });
+        searchParams.set("sort", "heighprice");
+        return setSearchParams(searchParams);
+      }
+
+    }
+    
     if (e.target.value === 0) {
       setSortbox({
         status: false,
