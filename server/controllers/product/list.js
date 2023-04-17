@@ -1,12 +1,14 @@
 const { product } = require("../../models");
+const { Op } = require("sequelize");
 
 module.exports = (req, res) => {
 
   const params = req.query.category;
   const sort = req.query.sort;
   const currentPage = req.query.currentPage;
+  const goods = req.query.goods;
   const offset = (currentPage - 1) * 16;
-  let category, sortTarget, sortOption;
+  let category, sortTarget, sortOption, name;
   let data = [];
 
   switch (params) {
@@ -14,10 +16,13 @@ module.exports = (req, res) => {
       category = "야채";
       break;
     case "fruit":
-      category = "과일"
+      category = "과일";
       break;
     case "seafood":
-      category = "수산물"
+      category = "수산물";
+      break;
+    case undefined:
+      category = { [Op.ne]: null };
       break;
   };
 
@@ -44,9 +49,20 @@ module.exports = (req, res) => {
       break;
   };
 
+  if (goods === undefined) {
+    name = { [Op.ne]: null };
+  } else if (goods === "") {
+    return res.status(200).send({ message: "검색어를 입력해주세요" });
+  } else {
+    name = { [Op.like]: `%${goods}%` };
+  }
+
   product.findAndCountAll({
     attributes: ["id", "img", "name", "price", "salePrice", "salePct", "likeCount"],
-    where: {category: category},
+    where: { 
+      category: category,
+      name: name
+    },
     limit: 16,
     offset: offset,
     order: [[sortTarget, sortOption]]
