@@ -9,6 +9,7 @@ import Goods from "./pages/Goods";
 import Checkout from "./pages/Checkout";
 import Mypage from "./pages/Mypage";
 import Search from "./pages/Search";
+import Pirce from "./pages/Price";
 import NotFound from "./components/common/NotFound";
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
         <Route path="/checkout" element={<Checkout />} />
         <Route path="/mypage/:mypage" element={<Mypage />} />
         <Route path="/search" element={<Search />} />
+        <Route path="/price" element={<Pirce />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
