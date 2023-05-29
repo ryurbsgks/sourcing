@@ -1,0 +1,117 @@
+/* --------------------
+  reservation css
+-------------------- */
+
+/* ---------- Reservation.js ---------- */
+
+.reservationForm {
+  width: 650px;
+  margin: 100px auto;
+}
+
+.reservationForm span {
+  color: red;
+}
+
+.reservationForm__title {
+  text-align: center;
+  font-size: 30px;
+}
+
+.reservationForm__require {
+  text-align: end;
+  color: gray;
+  border-bottom: black 2px solid;
+  font-size: 12px;
+}
+
+.reservationForm__container {
+  display: flex;
+  margin: 30px 30px 0;
+}
+
+.reservationForm__container__space-01 {
+  width: 150px;
+  margin: auto 0;
+}
+
+.reservationForm__container__space-02 {
+  width: auto;
+  height: 45px;
+}
+
+.reservationForm__container__space-02 > input {
+  width: 330px;
+  height: 45px;
+  font-size: 18px;
+  padding: 0 10px;
+}
+
+.reservationForm__container__space-02 > button {
+  width: 330px;
+  height: 100%;
+  color: green;
+  background-color: white;
+  border: green 1px solid;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.reservationForm__container__space-02 svg {
+  margin-right: 6px;
+}
+
+.reservationForm__container__seller {
+  width: 270px;
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  cursor: pointer;
+  margin: 0 30px;
+}
+
+.reservationForm__container__seller > span {
+  color: black;
+}
+
+.reservationForm__container__seller-list {
+  width: 274px;
+  background-color: white;
+  border: #ebebeb 2px solid;
+  box-shadow: 0 4px 5px rgba(0, 0, 0, 0.3);
+  position: absolute;
+  top: 30px;
+  right: -2px;
+  z-index: 1;
+}
+
+.reservationForm__detail {
+  width: 590px;
+  margin: 0 30px;
+}
+
+.reservationForm__detail > div {
+  color: rgb(181, 181, 181);
+}
+
+.reservationForm__detail > textarea {
+  width: 100%;
+  height: 130px;
+  padding: 10px 10px;
+}
+
+.reservationForm__btn {
+  width: 200px;
+  height: 50px;
+  margin: 30px auto 0;
+}
+
+.reservationForm__btn > button {
+  width: 100%;
+  height: 100%;
+  color: green;
+  background-color: white;
+  border: green 1px solid;
+  border-radius: 3px;
+  cursor: pointer;
+}
