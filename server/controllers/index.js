@@ -29,6 +29,7 @@ module.exports = {
   deleteCart: require("./product/deleteCart"),
   recommend: require("./product/recommend"),
   editGoods: require("./product/editGoods"),
-  deleteGoods: require("./product/deleteGoods")
+  deleteGoods: require("./product/deleteGoods"),
+  sellerList: require("./seller/sellerList")
   
 };
