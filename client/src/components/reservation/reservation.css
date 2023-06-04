@@ -115,3 +115,10 @@
   border-radius: 3px;
   cursor: pointer;
 }
+
+.reservationForm__err-msg {
+  text-align: center;
+  color: red;
+  margin-top: 10px;
+  margin-bottom: -20px;
+}
