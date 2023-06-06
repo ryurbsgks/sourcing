@@ -30,6 +30,7 @@ module.exports = {
   recommend: require("./product/recommend"),
   editGoods: require("./product/editGoods"),
   deleteGoods: require("./product/deleteGoods"),
-  sellerList: require("./seller/sellerList")
+  sellerList: require("./seller/sellerList"),
+  insertReservationList: require("./seller/insertReservationList")
   
 };

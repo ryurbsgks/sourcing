@@ -46,6 +46,7 @@ app.get("/product/recommend", controllers.recommend);
 app.patch("/product/goods", controllers.editGoods);
 app.delete("/product/goods", controllers.deleteGoods);
 app.get("/seller/sellerList", controllers.sellerList);
+app.post("/seller/reservationList", controllers.insertReservationList);
 
 server.listen(80, () => {
   console.log("HTTP Server running on port 80")
