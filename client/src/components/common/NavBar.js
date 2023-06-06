@@ -10,8 +10,8 @@ function NavBar() {
           <li><NavLink to="/category/vegetable" style={({ isActive }) => ({ color: isActive ? "green" : "" })}>야채</NavLink></li>
           <li><NavLink to="/category/fruit" style={({ isActive }) => ({ color: isActive ? "green" : "" })}>과일</NavLink></li>
           <li><NavLink to="/category/seafood" style={({ isActive }) => ({ color: isActive ? "green" : "" })}>수산물</NavLink></li>
-          <li><NavLink to="/" style={({ isActive }) => ({ color: isActive ? "green" : "" })}>오늘의 시세</NavLink></li>
-          <li><NavLink to="/" style={({ isActive }) => ({ color: isActive ? "green" : "" })}>예약</NavLink></li>
+          <li><NavLink to="/price" style={({ isActive }) => ({ color: isActive ? "green" : "" })}>오늘의 시세</NavLink></li>
+          <li><NavLink to="/reservation" style={({ isActive }) => ({ color: isActive ? "green" : "" })}>예약</NavLink></li>
         </ul>
       </div>
     </nav>
