@@ -10,6 +10,7 @@ import Order from "../components/mypage/Order";
 import Cart from "../components/mypage/Cart";
 import Like from "../components/mypage/Like";
 import Modify from "../components/mypage/Modify";
+import Reservation from "../components/mypage/Reservation";
 import Check from "../components/modal/Check";
 import { isAuthenticated } from "../function";
 
@@ -35,7 +36,8 @@ function Mypage() {
           email: res.data.data.userInfo.email,
           tel: res.data.data.userInfo.tel,
           address: res.data.data.userInfo.address,
-          auto: res.data.data.userInfo.auto
+          auto: res.data.data.userInfo.auto,
+          auth: res.data.data.userInfo.auth
         });
       };
 
@@ -47,7 +49,7 @@ function Mypage() {
   
   useEffect( () => {
 
-    if (params.mypage !== "order" && params.mypage !== "cart" && params.mypage !== "like" && params.mypage !== "modify") {
+    if (params.mypage !== "order" && params.mypage !== "cart" && params.mypage !== "like" && params.mypage !== "modify" && params.mypage !== "reservation" && params.mypage !== "sale" && params.mypage !== "booking") {
       return navigate("/404-page-not-found");
     }
 
@@ -67,7 +69,9 @@ function Mypage() {
             <NavBar />
           </header>
           <main className="mypage__main">
-            <SideNavBar />
+            {userInfo 
+            ? <SideNavBar userInfo={userInfo.auth} />
+            : null}
             <section className="mypage__main__section">
               {userInfo 
               ? params.mypage === "order"
@@ -78,6 +82,8 @@ function Mypage() {
               ? <Like userInfo={userInfo.id} /> 
               : params.mypage === "modify" 
               ? <Modify userInfo={userInfo} /> 
+              : params.mypage === "reservation" 
+              ? <Reservation userInfo={userInfo} />
               : null 
               : null}
             </section>
